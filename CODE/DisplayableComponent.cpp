@@ -4,7 +4,7 @@ Purpose: Definition of DisplayableComponent class. Defines the implementation th
 inherited by all concrete classes deriving from it.
 */
 #include "stdafx.h"
-#include "displayablecomponent.h"
+#include "DisplayableComponent.h"
 
 using namespace std;
 
@@ -24,6 +24,8 @@ shared_ptr<DisplayableComponent> DisplayableComponent::addComponent(shared_ptr<D
 	// Any composite classes that can contain components will override this
 	return nullptr;
 }
+
+// this method does not shrink the children vector, it simply nulls out the removed index in the vector
 shared_ptr<DisplayableComponent> DisplayableComponent::removeComponent(unsigned int index) {
 	// go ahead and define a default implementation here, this should be good enough for derived classes(leaf or composite).
 	if (index < children.size()) { // leaf objects will have size of 0

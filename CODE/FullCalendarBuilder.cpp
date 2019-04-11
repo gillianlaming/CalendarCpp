@@ -1,17 +1,20 @@
 /*
 Author: Jon Shidal
-Purpose: Define builder classes, responsible for building and managing the structure of the calendar
+Purpose: Define full calendar builder class, responsible for building and managing the structure of the calendar
 */
 #include "stdafx.h"
-#include "calendarbuilder.h"
-#include "calendarcomponents.h"
+#include "FullCalendarBuilder.h"
+#include "CalendarComponent.h"
+#include "DisplayableDay.h"
+#include "DisplayableMonth.h"
+#include "DisplayableYear.h"
 
 using namespace std;
 
 shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t years) {
 	currentCalendar = make_shared<Calendar>(name, years);
 	// construct each year in a recursive way, add each year as a child of the calendar
-	for (int i = 0; i < years; ++i) {
+	for (unsigned int i = 0; i < years; ++i) {
 		tm y = currentCalendar->dateInfo;
 		y.tm_year += i;
 		y.tm_wday = (y.tm_wday + CalendarComponent::DAYSINAYEAR * i) % CalendarComponent::DAYSINAWEEK; // calculate day of the week for first day of the year
@@ -48,7 +51,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildMonth(std::tm d, std:
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> y = make_shared<DisplayableYear>(d,p,false);
 	// construct each month and add it as a child of the year
-	for (int i = 0; i < CalendarComponent::MONTHS; ++i) {
+	for (unsigned int i = 0; i < CalendarComponent::MONTHS; ++i) {
 		d.tm_mon = i;
 		y->addComponent(buildMonth(d, y));
 		// set week day of first day of the next month

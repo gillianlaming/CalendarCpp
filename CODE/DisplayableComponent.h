@@ -17,7 +17,7 @@ class DisplayableComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
 public:
-	// defined by concrete base classes deriving from DisplayableComponent
+	// defined by concrete classes deriving from DisplayableComponent
 	virtual void display() = 0;
 protected:
 	// member variables

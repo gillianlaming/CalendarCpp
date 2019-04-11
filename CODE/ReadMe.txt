@@ -1,9 +1,8 @@
 Lab 5 Readme.
 
-// your typical readme here
+Group members:
 
 
-Lab 5 writeup:
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 
@@ -13,17 +12,10 @@ What class/classes is responsible for the user interface of the Calendar?
 What class/classes is responsible for managing the representation and construction of the Calendar?
 
 
-Which class should handle adding an event to the Calendar?
+Which class should handle collecting information from the user about an event?
 
 
-Briefly discuss your implementation as oppsoed to other possible implementations. 
-Please talk about flexibility and extensibility of your implementation choice.
-
-
-
-
-
-
+Which class should handle constructing and adding the event to the Calendar?
 
 
 
@@ -33,15 +25,18 @@ How did you decide to efficiently search for an event by name?
 
 
 
+Which object in the project understands the structure of the Calendar? Which object should be responsible for jumping to a specific object in the Calendar?
 
-How did you design saving/restoring the calendar to/from a file? 
+
+
+How did you design saving/restoring the calendar to/from a file? What information needs to be saved about a Calendar to successfully restore it?
 
 
 
 
 
 3. Part 2.3 Updating the display
-How a particular component in the calendar should be displayed depends on what the current view of the calendar is.
+How a particular component in the calendar should be displayed depends on what the current display of the calendar is.
 How did you implement this functionality? 
 
 
@@ -50,7 +45,7 @@ How did you implement this functionality?
 
 
 
-Did you make any changes to the interfaces provided? If so, how easy was it to 
+Did you make any changes to the interfaces provided in the starter code? If so, how easy was it to 
 refactor the code to match this change? 
 
 
@@ -86,7 +81,7 @@ considering flexibility and extensibility of the design?
 
 3.2 ToDo List
 Describe your implementation? How does it support easy extensibility of the project in the future?
-How is the singleton pattern used to enforce only a sigle TODO list instance per day?
+How is the singleton pattern used to enforce only a sigle TODO list instance?
 
 
 
