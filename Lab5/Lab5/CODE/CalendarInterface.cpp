@@ -2,6 +2,10 @@
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
 #include<iostream>
+#include <istream>
+#include <sstream>
+#include <iostream>
+
 
 using namespace std;
 
@@ -19,7 +23,7 @@ void CalendarInterface::run() {
 		// display the current display of the calendar
 		currentDisplay->display();
 		// display options to the user and respond to user input accordingly
-		cout << "zoom out: out, zoom in: in, quit: q" << endl;
+		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
 		string in;
 		cin >> in;
 		if (in == "in") {
@@ -35,6 +39,12 @@ void CalendarInterface::run() {
 		}
 		else if (in == "out") {
 			zoomOut();
+		}
+		else if (in == "add") {
+			string name;
+			cout << "Event Name, mm/dd/yyyy, hh:mm" << endl;
+			istringstream iss(name);
+
 		}
 		else if (in == "q") {
 			break;

@@ -147,7 +147,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="CODE\ReadMe.txt" />
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CODE\Calendar.h" />
@@ -174,7 +173,6 @@
     <ClCompile Include="CODE\FullCalendarBuilder.cpp" />
     <ClCompile Include="CODE\lab5_driver.cpp" />
     <ClCompile Include="CODE\utilityfunctions.cpp" />
-    <ClCompile Include="Lab5.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

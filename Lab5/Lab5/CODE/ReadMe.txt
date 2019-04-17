@@ -1,23 +1,25 @@
 Lab 5 Readme.
 
-Group members:
+Group members: Gillian Laming, Natalie Stollman
 
 
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 
 What class/classes is responsible for the user interface of the Calendar?
-
+calendar interface, displayable component
 
 What class/classes is responsible for managing the representation and construction of the Calendar?
-
+calendarBuilder, CalendarInterface, FullCalendarBuilder
 
 Which class should handle collecting information from the user about an event?
-
+calendarinterface.cpp
 
 Which class should handle constructing and adding the event to the Calendar?
+calendar builder
 
-
+//notes
+- displayable component is responsible for displaying days/months/years and cal itself
 
 
 2. Part 2.2 Make the calendar interactive
@@ -94,3 +96,6 @@ How is the singleton pattern used to enforce only a sigle TODO list instance?
 What challenges did you run into while implementing this? Were any changes to the builder interface required? 
 How does using the builder pattern contribute to easily being able to change how an object(calendar in this case)
 is represented?
+
+NOTES:
+- we are military time. deal w it
