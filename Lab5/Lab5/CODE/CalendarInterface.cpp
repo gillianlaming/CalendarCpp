@@ -42,7 +42,7 @@ void CalendarInterface::run() {
 		}
 		else if (in == "add") {
 			bool goodInput = true;
-			while (goodInput) {
+			//while (goodInput) {
 				cout << "Event Name, mm/dd/yyyy, hh:mm" << endl;
 				string line;
 				cin >> line;
@@ -57,13 +57,21 @@ void CalendarInterface::run() {
 				char colon;
 				int minute = 0;
 				//if (iss >> name >> comma >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute) {
-				if (iss >> name >> month) {
-					cout << name << month;
+				if (iss >> name) {
+					cout << name ;
 					cout << "yeet" << endl;
-					addEvent(name, month, day, year, hour, minute);
-					goodInput = false;
 				}
-			}
+				if (iss >> month) {
+					cout << month;
+					cout << "yeeet" << endl;
+				}
+				if (iss >> day) {
+					cout << day;
+					cout << "yeeet" << endl;
+				}
+
+
+			//}
 		}
 			else if (in == "q") {
 				break;
