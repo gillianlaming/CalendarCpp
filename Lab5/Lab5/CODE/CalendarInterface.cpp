@@ -4,7 +4,7 @@
 #include<iostream>
 #include <istream>
 #include <sstream>
-#include <iostream>
+#include <fstream>
 
 
 using namespace std;
@@ -21,7 +21,7 @@ void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
 		// display the current display of the calendar
-		currentDisplay->display();
+		//currentDisplay->display(); //change thisc
 		// display options to the user and respond to user input accordingly
 		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
 		string in;
@@ -41,16 +41,39 @@ void CalendarInterface::run() {
 			zoomOut();
 		}
 		else if (in == "add") {
-			string name;
-			cout << "Event Name, mm/dd/yyyy, hh:mm" << endl;
-			istringstream iss(name);
-
+			bool goodInput = true;
+			while (goodInput) {
+				cout << "Event Name, mm/dd/yyyy, hh:mm" << endl;
+				string line;
+				cin >> line;
+				istringstream iss(line);
+				string name;
+				int month = 0;
+				int day = 0;
+				int year = 0;
+				int hour = 0;
+				char comma;
+				char backslash;
+				char colon;
+				int minute = 0;
+				//if (iss >> name >> comma >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute) {
+				if (iss >> name >> month) {
+					cout << name << month;
+					cout << "yeet" << endl;
+					addEvent(name, month, day, year, hour, minute);
+					goodInput = false;
+				}
+			}
 		}
-		else if (in == "q") {
-			break;
+			else if (in == "q") {
+				break;
+			}
+			else {
+				cout << ";-)" << endl;
+			}
 		}
 	}
-}
+
 
 void CalendarInterface::zoomIn(unsigned int index) {
 	shared_ptr<DisplayableComponent> temp = currentDisplay->getChild(index);
@@ -66,4 +89,7 @@ void CalendarInterface::zoomOut() {
 		// create a shared_ptr from a weak_ptr, contributing to the objects reference count
 		currentDisplay = currentDisplay->getParent().lock();
 	}
+}
+void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
+	cout << "yeeted" << endl;
 }

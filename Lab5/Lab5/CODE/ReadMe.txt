@@ -3,6 +3,9 @@ Lab 5 Readme.
 Group members: Gillian Laming, Natalie Stollman
 
 
+NOTES:
+1. Our implementation of the calendar uses military time. All times are assumed to be military time.
+
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 
@@ -96,6 +99,3 @@ How is the singleton pattern used to enforce only a sigle TODO list instance?
 What challenges did you run into while implementing this? Were any changes to the builder interface required? 
 How does using the builder pattern contribute to easily being able to change how an object(calendar in this case)
 is represented?
-
-NOTES:
-- we are military time. deal w it

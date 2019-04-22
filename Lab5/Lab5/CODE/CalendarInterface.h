@@ -6,7 +6,9 @@ Purpose: declare the user interface for our calendar
 #include "CalendarBuilder.h"
 #include "CalendarComponent.h"
 #include<memory>
+#include <string>
 
+using namespace std;
 
 class CalendarInterface {
 	std::shared_ptr<Calendar> cal; // the calendar
@@ -20,5 +22,6 @@ public:
 	// calendar traversal functions
 	void zoomIn(unsigned int index); // zoom in on a child of the current_display
 	void zoomOut(); // zoom out to the parent of the current_display
+	void addEvent(string name, int& month,  int& day,  int& year,  int& hour,  int& minute );
 	void run(); // display the current view to the user and prompt for input
 };
