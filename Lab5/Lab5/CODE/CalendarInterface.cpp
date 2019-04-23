@@ -91,7 +91,7 @@ void CalendarInterface::zoomOut() {
 }
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
 
-	//Events may not be created in years prior to the current year.
+	//Events may not be created in years prior to the current year. information on the start of the date is contained in dateinfo variable
 	//need to figure out if it is a recurring event
 	//support reccurring events
 	//need to make a new event object
