@@ -42,8 +42,9 @@ void CalendarInterface::run() {
 		}
 		else if (in == "add") {
 			bool goodInput = true;
-			//while (goodInput) {
-				cout << "Event Name, mm/dd/yyyy, hh:mm" << endl;
+			while (goodInput) {
+				//cout << "Event Name,mm/dd/yyyy,hh:mm" << endl;
+			    cout << "mm/dd/yyyy,hh:mm,name" << endl;
 				string line;
 				cin >> line;
 				istringstream iss(line);
@@ -53,31 +54,21 @@ void CalendarInterface::run() {
 				int year = 0;
 				int hour = 0;
 				char comma;
+				
 				char backslash;
 				char colon;
 				int minute = 0;
-				//if (iss >> name >> comma >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute) {
-				if (iss >> name) {
-					cout << name ;
-					cout << "yeet" << endl;
+				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
+					addEvent(name, month, day, year, hour, minute);
+					goodInput = false;
 				}
-				if (iss >> month) {
-					cout << month;
-					cout << "yeeet" << endl;
+				else {
+					cout << "Incorrect input. Please note that you cannot include spaces. :-) " << endl;
 				}
-				if (iss >> day) {
-					cout << day;
-					cout << "yeeet" << endl;
-				}
-
-
-			//}
+			}
 		}
 			else if (in == "q") {
 				break;
-			}
-			else {
-				cout << ";-)" << endl;
 			}
 		}
 	}
@@ -99,5 +90,11 @@ void CalendarInterface::zoomOut() {
 	}
 }
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
-	cout << "yeeted" << endl;
+
+	//Events may not be created in years prior to the current year.
+	//need to figure out if it is a recurring event
+	//support reccurring events
+	//need to make a new event object
+	//need to add that event object to a day
+	//sort an event on a day by start time
 }
