@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CODE\ReadMe.txt" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -24,37 +24,37 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CODE\Calendar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\CalendarBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\CalendarComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\CalendarInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\DisplayableComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\DisplayableDay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\DisplayableMonth.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\DisplayableYear.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\FullCalendarBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CODE\utilityfunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DisplayableEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Calendar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalendarBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalendarComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalendarInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayableComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayableDay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayableMonth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayableYear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FullCalendarBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utilityfunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,34 +62,34 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\Calendar.cpp">
+    <ClCompile Include="Calendar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\CalendarComponent.cpp">
+    <ClCompile Include="CalendarComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\CalendarInterface.cpp">
+    <ClCompile Include="CalendarInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\DisplayableComponent.cpp">
+    <ClCompile Include="DisplayableComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\DisplayableDay.cpp">
+    <ClCompile Include="DisplayableDay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\DisplayableMonth.cpp">
+    <ClCompile Include="DisplayableMonth.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\DisplayableYear.cpp">
+    <ClCompile Include="DisplayableYear.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\FullCalendarBuilder.cpp">
+    <ClCompile Include="FullCalendarBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\lab5_driver.cpp">
+    <ClCompile Include="lab5_driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CODE\utilityfunctions.cpp">
+    <ClCompile Include="utilityfunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
