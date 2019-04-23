@@ -4,7 +4,7 @@ author: by Gillian and Natalie
 purpose: support functionality for adding events to the calendar
 */
 #include <string>
-#include "DisplayableDay.h"
+#include "CalendarComponent.h"
 
 
 class FullCalendarBuilder;
@@ -13,7 +13,7 @@ class DisplayableMonth;
 
 using namespace std;
 
-class DisplayableEvent : public DisplayableDay {
+class DisplayableEvent : public CalendarComponent {
 public:
 
 protected:
