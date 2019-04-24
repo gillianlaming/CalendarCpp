@@ -11,16 +11,23 @@ class FullCalendarBuilder;
 class CalendarInterface;
 class DisplayableMonth;
 
-using namespace std;
+//using namespace std;
 
 class DisplayableEvent : public CalendarComponent {
+	friend class DisplayableDay;
+	friend class DisplayableComponent;
+	friend FullCalendarBuilder;
+	friend CalendarInterface;
 public:
-	void Date(); //base constructor
+	DisplayableEvent(std::tm, std::shared_ptr<DisplayableComponent>);
+	virtual void display() override;
 	//needs to support reccurrence 
 
-protected:
-	string name;
-	std::tm day; //contains date/time of the event
+protected: //unclear if i need this part
+	std::string name;
+	std::tm when; //contains date/time of the event
+	unsigned int recurrEvery;
+	unsigned int recurrFor;
 
 };
 
