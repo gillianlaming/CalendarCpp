@@ -28,15 +28,21 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//for the recurrence we need to make different event objects
 
-	shared_ptr<DisplayableComponent> event = make_shared<DisplayableEvent>();
-	//taking serious inspiration from this
-	int index = d.tm_mon;
+	shared_ptr<DisplayableComponent> day = make_shared<DisplayableDay>(when, cal);
+	for (int i = 0; i < recurrFor; ++i) {
+		int index = i* recurrEvery;
+		tm newTime = when;
+		newTime.tm_mday += recurrEvery; //unclear how to do this so it carries over into next month
+		day->addComponent(buildEvent(cal, name, newTime, 0, 0)); //sus that this is recursive?
+	}
+	//taking serious inspiration from this: from build month
+	/*int index = d.tm_mon;
 	shared_ptr<DisplayableComponent> m = make_shared<DisplayableMonth>(d, p, CalendarComponent::months[index], CalendarComponent::days[index]);
 	for (int i = 0; i < CalendarComponent::days[index]; ++i) { // for each day in the month
 		m->addComponent(buildDay(d, m)); // construct day and add as a child of the month
 		++(d.tm_mday); // increment day of the month
 		d.tm_wday = (d.tm_wday + 1) % CalendarComponent::DAYSINAWEEK; // increment weekday, reset to 0 if needed
-	}
+	}*/
 	return nullptr;
 }
 
@@ -47,6 +53,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> day = make_shared<DisplayableDay>(d, p);
+
 	return day;
 }
 
