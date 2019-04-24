@@ -63,7 +63,7 @@ void CalendarInterface::run() {
 					goodInput = false;
 				}
 				else {
-					cout << "Incorrect input. Please note that you cannot include spaces. :-) " << endl;
+					cout << "Incorrect input. Please note that you cannot include spaces. :) " << endl;
 				}
 			}
 		}
@@ -90,11 +90,7 @@ void CalendarInterface::zoomOut() {
 	}
 }
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
-
-	//Events may not be created in years prior to the current year. information on the start of the date is contained in dateinfo variable
-	if (year < ) { //how to find the current year?
-		//return cannot add event
-	}
+	
 	//need to figure out if it is a recurring event
 	bool runLoop = true;
 	while (runLoop) {
@@ -114,11 +110,12 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 			cout << "Bad input. Please enter Y for a reccurring event and N for a one time event." << endl;
 		}
 	}
+
 	//initialize tm HERE and properly
 	//look for system function to add days and stuff, if u cant find, need to do manually
 
 	//support reccurring events, "recur every __ days, recur __ times"
 	//need to make a new event object
-	//need to add that event object to a day (look at tm_mday (dd), tm_mon (mm), tm_year (yyyy))
-	//sort an event on a day by start time
+	//need to call buildEvent
+	
 }

@@ -169,6 +169,7 @@
     <ClCompile Include="CalendarInterface.cpp" />
     <ClCompile Include="DisplayableComponent.cpp" />
     <ClCompile Include="DisplayableDay.cpp" />
+    <ClCompile Include="DisplayableEvent.cpp" />
     <ClCompile Include="DisplayableMonth.cpp" />
     <ClCompile Include="DisplayableYear.cpp" />
     <ClCompile Include="FullCalendarBuilder.cpp" />

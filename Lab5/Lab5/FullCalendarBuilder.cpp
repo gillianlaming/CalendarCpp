@@ -41,22 +41,25 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	if (day == NULL) {
 		//throw execption
 	}
+	
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
-
-		//need to make sure we are handling case when youre at the end of the month/end of the year so it carries over
+		//TODO: need to make sure we are handling case when youre at the end of the month/end of the year so it carries over
 		tm newTime = when;
-		//shidal wrote a function to add 
+		//shidal wrote a function to add a constant to a day but i dont think i want to deal w this rn
 		newTime.tm_mday += recurrEvery; //unclear how to do this so it carries over into next month
+
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
 		day->addComponent(newEvent); //add the event to the correct day
+		//return newEvent;
 	}
-	
 	return nullptr;
+	//return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
 }
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
+	//wut
 	return nullptr;
 }
 
