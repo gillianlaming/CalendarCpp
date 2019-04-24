@@ -15,12 +15,12 @@ using namespace std;
 
 class DisplayableEvent : public CalendarComponent {
 public:
+	void Date(); //base constructor
+	//needs to support reccurrence 
 
 protected:
 	string name;
-	int month;
-	int day;
-	int year;
+	std::tm day; //contains date/time of the event
 
 };
 

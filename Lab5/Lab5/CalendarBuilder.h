@@ -23,5 +23,6 @@ protected:
 	virtual std::shared_ptr<DisplayableComponent> buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 	virtual std::shared_ptr<DisplayableComponent> buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 	virtual std::shared_ptr<DisplayableComponent> buildMonth(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
+	virtual std::shared_ptr<DisplayableComponent> buildEvent(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 };
 

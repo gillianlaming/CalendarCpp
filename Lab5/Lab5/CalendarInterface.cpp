@@ -92,9 +92,31 @@ void CalendarInterface::zoomOut() {
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
 
 	//Events may not be created in years prior to the current year. information on the start of the date is contained in dateinfo variable
+	if (year < ) { //how to find the current year?
+		//return cannot add event
+	}
 	//need to figure out if it is a recurring event
-	//support reccurring events
+	bool runLoop = true;
+	while (runLoop) {
+		cout << "Is this a recurring event? (Y or N)" << endl;
+		string line;
+		cin >> line;
+		//istringstream isss(line);
+		if (line == "Y") {
+			//do something
+			runLoop = false;
+		}
+		if (line == "N") {
+			//do something
+			runLoop = false;
+		}
+		else {
+			cout << "Bad input. Please enter Y for a reccurring event and N for a one time event." << endl;
+		}
+	}
+
+	//support reccurring events, "recur every __ days, recur __ times"
 	//need to make a new event object
-	//need to add that event object to a day
+	//need to add that event object to a day (look at tm_mday (dd), tm_mon (mm), tm_year (yyyy))
 	//sort an event on a day by start time
 }
