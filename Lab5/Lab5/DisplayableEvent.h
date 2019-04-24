@@ -19,9 +19,9 @@ class DisplayableEvent : public CalendarComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
 public:
-	DisplayableEvent(std::tm, std::shared_ptr<DisplayableComponent>);
+	DisplayableEvent(std::tm, std::shared_ptr<DisplayableComponent>); // does this need more params?
 	virtual void display() override;
-	//needs to support reccurrence 
+	
 
 protected: //unclear if i need this part
 	std::string name;

@@ -26,23 +26,32 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
-	//for the recurrence we need to make different event objects
 
-	shared_ptr<DisplayableComponent> day = make_shared<DisplayableDay>(when, cal);
+	//for the recurrence we need to make different event objects
+	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
+	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year-a->dateInfo.tm_year); //index of the year of the event
+	if (year == NULL) {
+		//throw execption
+	}
+	shared_ptr <DisplayableComponent> month = cal->getChild(when.tm_mon - a->dateInfo.tm_mon); //index of the month of the event
+	if (month == NULL) {
+		//throw execption
+	}
+	shared_ptr <DisplayableComponent> day = cal->getChild(when.tm_mday - a->dateInfo.tm_mday); //index of the day of the event
+	if (day == NULL) {
+		//throw execption
+	}
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
+
+		//need to make sure we are handling case when youre at the end of the month/end of the year so it carries over
 		tm newTime = when;
+		//shidal wrote a function to add 
 		newTime.tm_mday += recurrEvery; //unclear how to do this so it carries over into next month
-		day->addComponent(buildEvent(cal, name, newTime, 0, 0)); //sus that this is recursive?
+		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
+		day->addComponent(newEvent); //add the event to the correct day
 	}
-	//taking serious inspiration from this: from build month
-	/*int index = d.tm_mon;
-	shared_ptr<DisplayableComponent> m = make_shared<DisplayableMonth>(d, p, CalendarComponent::months[index], CalendarComponent::days[index]);
-	for (int i = 0; i < CalendarComponent::days[index]; ++i) { // for each day in the month
-		m->addComponent(buildDay(d, m)); // construct day and add as a child of the month
-		++(d.tm_mday); // increment day of the month
-		d.tm_wday = (d.tm_wday + 1) % CalendarComponent::DAYSINAWEEK; // increment weekday, reset to 0 if needed
-	}*/
+	
 	return nullptr;
 }
 

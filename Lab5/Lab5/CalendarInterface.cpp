@@ -114,6 +114,8 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 			cout << "Bad input. Please enter Y for a reccurring event and N for a one time event." << endl;
 		}
 	}
+	//initialize tm HERE and properly
+	//look for system function to add days and stuff, if u cant find, need to do manually
 
 	//support reccurring events, "recur every __ days, recur __ times"
 	//need to make a new event object
