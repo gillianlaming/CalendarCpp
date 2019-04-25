@@ -3,9 +3,9 @@
 author: by Gillian and Natalie
 purpose: support functionality for adding events to the calendar
 */
-#include <string>
-#include "CalendarComponent.h"
 
+#include "CalendarComponent.h"
+#include <string>
 
 class FullCalendarBuilder;
 class CalendarInterface;
@@ -21,9 +21,12 @@ class DisplayableEvent : public CalendarComponent {
 public:
 	DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal); // does this need more params?
 	virtual void display() override;
-	
+	//virtual shared_ptr<DisplayableComponent> setName(string a);
+	void setName(char *a);
+
 
 protected: //unclear if i need this part
+	
 	std::string name;
 	std::tm when; //contains date/time of the event
 	unsigned int recurrEvery;

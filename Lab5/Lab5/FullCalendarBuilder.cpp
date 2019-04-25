@@ -10,6 +10,8 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include "DisplayableYear.h"
 #include "DisplayableEvent.h"
 
+#include <iostream>
+
 using namespace std;
 
 shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t years) {
@@ -31,14 +33,17 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
 	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year-a->dateInfo.tm_year); //index of the year of the event
 	if (year == NULL) {
-		//throw execption
+		cout << "invalid entry" << endl;
+		//RE PROMPT
 	}
 	shared_ptr <DisplayableComponent> month = cal->getChild(when.tm_mon - a->dateInfo.tm_mon); //index of the month of the event
 	if (month == NULL) {
+		cout << "invalid entry" << endl;
 		//throw execption
 	}
 	shared_ptr <DisplayableComponent> day = cal->getChild(when.tm_mday - a->dateInfo.tm_mday); //index of the day of the event
 	if (day == NULL) {
+		cout << "invalid entry" << endl;
 		//throw execption
 	}
 	
@@ -50,11 +55,11 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		newTime.tm_mday += recurrEvery; //unclear how to do this so it carries over into next month
 
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
+		//newEvent.name = name;
 		day->addComponent(newEvent); //add the event to the correct day
-		//return newEvent;
+		
 	}
-	return nullptr;
-	//return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
+	return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
 }
 
 // you may decide to define this.

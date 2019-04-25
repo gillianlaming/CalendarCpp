@@ -9,4 +9,13 @@ DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> 
 void DisplayableDay::display() {
 	cout << "\t\t\t" << daysoftheweek[dateInfo.tm_wday] << " ";
 	cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
+	//add to this to display events 
+	//int i = children.size();
+	for (int i = 0; i < children.size(); ++i) {
+		//USE SORTING Algorthm
+		//look at studio 9
+		
+	}
+
+
 }
