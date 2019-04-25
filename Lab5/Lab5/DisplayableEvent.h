@@ -19,7 +19,7 @@ class DisplayableEvent : public CalendarComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
 public:
-	DisplayableEvent(std::tm, std::shared_ptr<DisplayableComponent>); // does this need more params?
+	DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal); // does this need more params?
 	virtual void display() override;
 	
 

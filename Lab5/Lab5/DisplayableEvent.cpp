@@ -4,7 +4,7 @@
 
 using namespace std;
 
-DisplayableEvent::DisplayableEvent(std::tm, std::shared_ptr<DisplayableComponent>) {} // does this need more params?
+DisplayableEvent::DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal) : CalendarComponent(now, cal) {} // does this need more params?
 
 void DisplayableEvent::display() {
 	//change this it is copy and pasted from DisplayableDay
