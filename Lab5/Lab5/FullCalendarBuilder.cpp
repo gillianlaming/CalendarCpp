@@ -30,12 +30,14 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
-	
+	//TOFO:FIX DATE OF RECURRING EVENTS
 	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
-
+	int index = 0;
 	tm newTime = addDays(when, 0);
 	for (int i = 0; i < recurrFor; ++i) {
-		int index = i* recurrEvery;
+		//int index = i * recurrEvery;
+		 index += recurrEvery;
+		cout << "Index: " << index;
 		newTime = addDays(when, index); //is this correct
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal, name); //make a new displayable event
 		newEvent->display();
@@ -51,7 +53,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
 }
 
-
+//warning not all paths return. What should we return if improper so it doesn't break
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
