@@ -67,7 +67,19 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
-	//wut
+
+	if (granularity == "day") {
+		//need to find the object that is associated with that day
+		
+		buildDay(d, cal)->display();
+	}
+	if (granularity == "month") {
+		buildMonth(d, cal)->display();
+	}
+	if (granularity == "year") {
+		buildYear(d, cal)->display();
+	}
+
 	return nullptr;
 }
 
