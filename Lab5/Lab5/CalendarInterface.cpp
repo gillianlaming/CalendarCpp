@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
+#include "CalendarComponent.h"
 #include<iostream>
 #include <istream>
 #include <sstream>
@@ -21,7 +22,8 @@ void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
 		// display the current display of the calendar
-		//currentDisplay->display(); //change thisc
+		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
+
 		// display options to the user and respond to user input accordingly
 		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
 		string in;
@@ -43,28 +45,18 @@ void CalendarInterface::run() {
 		else if (in == "add") {
 			bool goodInput = true;
 			while (goodInput) {
-				//cout << "Event Name,mm/dd/yyyy,hh:mm" << endl;
 			    cout << "mm/dd/yyyy,hh:mm,name" << endl;
 				string line;
 				cin >> line;
 				istringstream iss(line);
-				string name;
-				int month = 0;
-				int day = 0;
-				int year = 0;
-				int hour = 0;
-				char comma;
-				
-				char backslash;
-				char colon;
-				int minute = 0;
+				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
 					month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
 					addEvent(name, month, day, year, hour, minute);
 					goodInput = false;
 				}
 				else {
-					cout << "Incorrect input. Please note that you cannot include spaces. :) " << endl;
+					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
 				}
 			}
 		}
@@ -90,9 +82,7 @@ void CalendarInterface::zoomOut() {
 		currentDisplay = currentDisplay->getParent().lock();
 	}
 }
-void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
-	
-	//need to figure out if it is a recurring event
+void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) { //helper function
 	int recurrFor;
 	int recurrEvery;
 	bool runLoop = true;
@@ -104,7 +94,6 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 		if (line == "Y") {
 			cout << "Recur every how many days? " << endl;
 			cin >> recurrEvery;
-
 			cout << "Recur for how many times?" << endl;
 			cin >> recurrFor;
 			runLoop = false;
@@ -124,16 +113,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_min = minute;
 	time.tm_mday = day;
 	time.tm_mon = month;
-	time.tm_year = year;
-
-	//shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor
+	time.tm_year = year - CalendarComponent::BASEYEAR;
+	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
-
-	//initialize tm HERE and properly
-	//look for system function to add days and stuff, if u cant find, need to do manually
-
-	//support reccurring events, "recur every __ days, recur __ times"
-	//need to make a new event object
-	//need to call buildEvent
-	
 }
