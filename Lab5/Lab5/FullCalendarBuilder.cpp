@@ -9,6 +9,7 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include "DisplayableMonth.h"
 #include "DisplayableYear.h"
 #include "DisplayableEvent.h"
+#include "utilityfunctions.h"
 
 #include <iostream>
 
@@ -49,35 +50,43 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		cout << "invalid entry 3" << endl;
 		//throw execption
 	}
-	
+	tm newTime = addDays(when, 0);
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
-		//TODO: need to make sure we are handling case when youre at the end of the month/end of the year so it carries over
-		tm newTime = when;
-		//shidal wrote a function to add a constant to a day but i dont think i want to deal w this rn
-		newTime.tm_mday += recurrEvery; //unclear how to do this so it carries over into next month
-
+		newTime = addDays(newTime, index); //is this correct
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
-		//newEvent.name = name;
+		DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
 		
 	}
+
+	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
+		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal);
+		DisplayableEvent(when, newEvent).name = name;
+		day->addComponent(newEvent); //add the event to the correct day
+	}
+	
 	return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
 }
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
+	shared_ptr<DisplayableComponent> yr = currentCalendar->getChild(d.tm_year-CalendarComponent::BASEYEAR);//need to find the DAY
+	shared_ptr<DisplayableComponent> mth = yr ->getChild(d.tm_mon);
+	shared_ptr<DisplayableComponent> day = mth->getChild(d.tm_mday);
+	DisplayableDay(d, day); //construct the day
+	//TODO: do I actually want to build the month/day/year? like builder
+	//update the display to display the granularity containing that day
+	//find day -> zoom out to parent (month) -> zoom out again to parent (year)
 
 	if (granularity == "day") {
-		//need to find the object that is associated with that day
-		
-		buildDay(d, cal)->display();
+		currentCalendar->display();//how do I overload function to display the day
 	}
 	if (granularity == "month") {
-		buildMonth(d, cal)->display();
+		
 	}
 	if (granularity == "year") {
-		buildYear(d, cal)->display();
+		
 	}
 
 	return nullptr;
