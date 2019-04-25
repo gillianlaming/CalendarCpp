@@ -30,29 +30,30 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 
-	//i could call getComponentByDate w granularity set to day, yes??
 
-	//for the recurrence we need to make different event objects
+	//TODO: move everything between dotted lines to getComponentByDate (??)
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
 
 	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year - a->dateInfo.tm_year); //index of the year of the event
-	cout << "year index " << year << endl;
 	if (year == NULL) {
 		cout << "Year doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> month = year->getChild(when.tm_mon /*- a->dateInfo.tm_mon*/); //index of the month of the event
-	cout << "month index " << month << endl;
 	if (month == NULL) {
 		cout << "Month doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(when.tm_mday /*- a->dateInfo.tm_mday*/); //index of the day of the event
-	cout << "day index " << day << endl;
 	if (day == NULL) {
 		cout << "Day doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
+
+	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	//shared_ptr <DisplayableComponent> day1 =getComponentByDate(cal, when, "Day"); //USE THIS to call getComponentbyDate
 	tm newTime = addDays(when, 0);
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
@@ -74,29 +75,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 
 
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
-	shared_ptr<DisplayableComponent> yr = currentCalendar->getChild(d.tm_year-CalendarComponent::BASEYEAR);//need to find the DAY
-	shared_ptr<DisplayableComponent> mth = yr ->getChild(d.tm_mon);
-	shared_ptr<DisplayableComponent> day = mth->getChild(d.tm_mday);
-	/*
-	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
-	shared_ptr <DisplayableComponent> year = cal->getChild(d.tm_year - a->dateInfo.tm_year); //index of the year of the event
-	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon ); //index of the month of the event
-	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday); //index of the day of the event
-
-	if (year == NULL) {
-		cout << "invalid entry 1" << endl;
-	}
-
-	cout << "month index " << month << endl;
-	if (month == NULL) {
-		cout << "invalid entry 2" << endl;
-	}
-
-	cout << "day index " << day << endl;
-	if (day == NULL) {
-		cout << "invalid entry 3" << endl;
-	}
-	*/
+	
 	
 	//TODO: do I actually want to build the month/day/year? like builder
 
