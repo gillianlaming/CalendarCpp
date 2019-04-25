@@ -69,7 +69,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
 }
 
-// you may decide to define this.
+
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 	shared_ptr<DisplayableComponent> yr = currentCalendar->getChild(d.tm_year-CalendarComponent::BASEYEAR);//need to find the DAY
 	shared_ptr<DisplayableComponent> mth = yr ->getChild(d.tm_mon);
@@ -111,13 +111,13 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 	}
 	if (granularity == "month") {
 		shared_ptr<DisplayableComponent> a = buildMonth(d, cal);
-		a->display();//how do I overload function to display the day
+		a->display();
 		return a;
 		
 	}
 	if (granularity == "year") {
 		shared_ptr<DisplayableComponent> a = buildYear(d, cal);
-		a->display();//how do I overload function to display the day
+		a->display();
 		return a;
 	}
 

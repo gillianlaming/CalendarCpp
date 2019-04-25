@@ -93,18 +93,25 @@ void CalendarInterface::zoomOut() {
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) {
 	
 	//need to figure out if it is a recurring event
+	int recurrFor;
+	int recurrEvery;
 	bool runLoop = true;
 	while (runLoop) {
 		cout << "Is this a recurring event? (Y or N)" << endl;
 		string line;
 		cin >> line;
-		//istringstream isss(line);
+		
 		if (line == "Y") {
-			//do something
+			cout << "Recur every how many days? " << endl;
+			cin >> recurrEvery;
+
+			cout << "Recur for how many times?" << endl;
+			cin >> recurrFor;
 			runLoop = false;
 		}
-		if (line == "N") {
-			//do something
+		else if (line == "N"){
+			recurrFor = 0;
+			recurrEvery = 0;
 			runLoop = false;
 		}
 		else {
@@ -120,7 +127,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_year = year;
 
 	//shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor
-	builder->buildEvent(currentDisplay, name, time, 0, 0);
+	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
 
 	//initialize tm HERE and properly
 	//look for system function to add days and stuff, if u cant find, need to do manually
