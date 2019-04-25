@@ -74,19 +74,51 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 	shared_ptr<DisplayableComponent> yr = currentCalendar->getChild(d.tm_year-CalendarComponent::BASEYEAR);//need to find the DAY
 	shared_ptr<DisplayableComponent> mth = yr ->getChild(d.tm_mon);
 	shared_ptr<DisplayableComponent> day = mth->getChild(d.tm_mday);
-	DisplayableDay(d, day); //construct the day
+	/*
+	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
+	shared_ptr <DisplayableComponent> year = cal->getChild(d.tm_year - a->dateInfo.tm_year); //index of the year of the event
+	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon ); //index of the month of the event
+	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday); //index of the day of the event
+
+	if (year == NULL) {
+		cout << "invalid entry 1" << endl;
+	}
+
+	cout << "month index " << month << endl;
+	if (month == NULL) {
+		cout << "invalid entry 2" << endl;
+	}
+
+	cout << "day index " << day << endl;
+	if (day == NULL) {
+		cout << "invalid entry 3" << endl;
+	}
+	*/
+	
 	//TODO: do I actually want to build the month/day/year? like builder
-	//update the display to display the granularity containing that day
-	//find day -> zoom out to parent (month) -> zoom out again to parent (year)
 
 	if (granularity == "day") {
-		currentCalendar->display();//how do I overload function to display the day
+		//from calendarInterface
+		//cal = builder->buildCalendar(calendarName, years);
+		//currentDisplay = cal;
+		//currentDisplay->display();
+
+		shared_ptr<DisplayableComponent> a = buildDay(d, cal); //a is a displayable day yeeeeet
+		//OR
+		//shared_ptr<DisplayableComponent> a = buildDay(day, cal);
+		a->display();
+		return a;
 	}
 	if (granularity == "month") {
+		shared_ptr<DisplayableComponent> a = buildMonth(d, cal);
+		a->display();//how do I overload function to display the day
+		return a;
 		
 	}
 	if (granularity == "year") {
-		
+		shared_ptr<DisplayableComponent> a = buildYear(d, cal);
+		a->display();//how do I overload function to display the day
+		return a;
 	}
 
 	return nullptr;

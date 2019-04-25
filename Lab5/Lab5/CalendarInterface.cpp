@@ -21,7 +21,7 @@ void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
 		// display the current display of the calendar
-		currentDisplay->display(); //change thisc
+		//currentDisplay->display(); //change thisc
 		// display options to the user and respond to user input accordingly
 		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
 		string in;
