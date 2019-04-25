@@ -5,11 +5,12 @@
 
 using namespace std;
 
-DisplayableEvent::DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal) : CalendarComponent(now, cal) {} // does this need more params?
+DisplayableEvent::DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal, string name) : CalendarComponent(now, cal), name(name), when(now) {} // does this need more params?
 
 void DisplayableEvent::display() {
-	cout << "yeet" << endl;
-	cout << name << " " << when.tm_hour << endl;
+	int yr = when.tm_year + 1900;
+	int mon = when.tm_mon + 1;
+	cout << name << " " << "date: " << mon << "/" << when.tm_mday << "/" << yr << endl;
 }
 
 //shared_ptr<DisplayableComponent> DisplayableEvent::setName(string a) {}

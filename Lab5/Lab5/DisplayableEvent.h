@@ -11,7 +11,7 @@ class FullCalendarBuilder;
 class CalendarInterface;
 class DisplayableMonth;
 
-//using namespace std;
+using namespace std;
 
 class DisplayableEvent : public CalendarComponent {
 	friend class DisplayableDay;
@@ -19,16 +19,17 @@ class DisplayableEvent : public CalendarComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
 public:
-	DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal); // does this need more params?
+	DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal, string name); // does this need more params?
 	virtual void display() override;
 	//virtual shared_ptr<DisplayableComponent> setName(string a);
 	void setName(char *a);
-
+	std::string name;
+	std::tm when; //contains date/time of the event
 
 protected: //unclear if i need this part
 	
-	std::string name;
-	std::tm when; //contains date/time of the event
+	
+	
 	unsigned int recurrEvery;
 	unsigned int recurrFor;
 

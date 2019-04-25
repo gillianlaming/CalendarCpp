@@ -12,6 +12,7 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include "utilityfunctions.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -29,23 +30,44 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
+	
+	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
+
+	tm newTime = addDays(when, 0);
+	for (int i = 0; i < recurrFor; ++i) {
+		int index = i* recurrEvery;
+		newTime = addDays(when, index); //is this correct
+		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal, name); //make a new displayable event
+		newEvent->display();
+		//DisplayableEvent(newTime, newEvent).name = name;
+		day->addComponent(newEvent); //add the event to the correct day
+	}
+	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
+		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
+		//DisplayableEvent(when, newEvent).name = name;
+		newEvent->display();
+		day->addComponent(newEvent); //add the event to the correct day
+	}
+	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
+}
 
 
-	//TODO: move everything between dotted lines to getComponentByDate (??)
+shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
+	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
 
-	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year - a->dateInfo.tm_year); //index of the year of the event
+	shared_ptr <DisplayableComponent> year = cal->getChild(d.tm_year - a->dateInfo.tm_year); //index of the year of the event
 	if (year == NULL) {
-		cout << "Year doesn't exist in this cal, sry dude" << endl;
-		return nullptr; //return null pointer so code does break later
+	cout << "Year doesn't exist in this cal, sry dude" << endl;
+	return nullptr; //return null pointer so code does break later
 	}
-	shared_ptr <DisplayableComponent> month = year->getChild(when.tm_mon /*- a->dateInfo.tm_mon*/); //index of the month of the event
+	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon ); //index of the month of the event
 	if (month == NULL) {
 		cout << "Month doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
-	shared_ptr <DisplayableComponent> day = month->getChild(when.tm_mday /*- a->dateInfo.tm_mday*/); //index of the day of the event
+	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday ); //index of the day of the event
 	if (day == NULL) {
 		cout << "Day doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
@@ -53,57 +75,22 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	//shared_ptr <DisplayableComponent> day1 =getComponentByDate(cal, when, "Day"); //USE THIS to call getComponentbyDate
-	tm newTime = addDays(when, 0);
-	for (int i = 0; i < recurrFor; ++i) {
-		int index = i* recurrEvery;
-		newTime = addDays(when, index); //is this correct
-		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
-		DisplayableEvent(newTime, newEvent).name = name;
-		day->addComponent(newEvent); //add the event to the correct day
-		
-	}
-
-	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
-		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal);
-		DisplayableEvent(when, newEvent).name = name;
-		day->addComponent(newEvent); //add the event to the correct day
-	}
-	
-	return make_shared<DisplayableEvent>(when, cal);; //do we need to return the new event thing we made
-}
-
-
-shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
-	
-	
-	//TODO: do I actually want to build the month/day/year? like builder
-
 	if (granularity == "day") {
-		//from calendarInterface
-		//cal = builder->buildCalendar(calendarName, years);
-		//currentDisplay = cal;
-		//currentDisplay->display();
-
-		shared_ptr<DisplayableComponent> a = buildDay(d, cal); //a is a displayable day yeeeeet
-		//OR
-		//shared_ptr<DisplayableComponent> a = buildDay(day, cal);
-		a->display();
-		return a;
+		return day;
 	}
 	if (granularity == "month") {
-		shared_ptr<DisplayableComponent> a = buildMonth(d, cal);
-		a->display();
-		return a;
+		//shared_ptr<DisplayableComponent> a = buildMonth(d, month);
+		//a->display();
+		return month;
 		
 	}
 	if (granularity == "year") {
-		shared_ptr<DisplayableComponent> a = buildYear(d, cal);
-		a->display();
-		return a;
+		//shared_ptr<DisplayableComponent> a = buildYear(d, year);
+		//a->display();
+		return year;
 	}
 
-	return nullptr;
+	
 }
 
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) {
