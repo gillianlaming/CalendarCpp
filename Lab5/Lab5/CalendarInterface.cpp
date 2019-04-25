@@ -21,7 +21,7 @@ void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
 		// display the current display of the calendar
-		//currentDisplay->display(); //change thisc
+		currentDisplay->display(); //change thisc
 		// display options to the user and respond to user input accordingly
 		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
 		string in;
@@ -110,6 +110,16 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 			cout << "Bad input. Please enter Y for a reccurring event and N for a one time event." << endl;
 		}
 	}
+	//need to make new struct tm object
+	tm time;
+	time.tm_hour = hour;
+	time.tm_min = minute;
+	time.tm_mday = day;
+	time.tm_mon = month;
+	time.tm_year = year;
+
+	//shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor
+	builder->buildEvent(currentDisplay, name, time, 0, 0);
 
 	//initialize tm HERE and properly
 	//look for system function to add days and stuff, if u cant find, need to do manually

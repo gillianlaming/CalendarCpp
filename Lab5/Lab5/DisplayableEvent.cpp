@@ -8,7 +8,7 @@ using namespace std;
 DisplayableEvent::DisplayableEvent(std::tm now, std::shared_ptr<DisplayableComponent> cal) : CalendarComponent(now, cal) {} // does this need more params?
 
 void DisplayableEvent::display() {
-
+	cout << "yeet" << endl;
 	cout << name << " " << when.tm_hour << endl;
 }
 

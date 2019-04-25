@@ -31,19 +31,22 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 
 	//for the recurrence we need to make different event objects
 	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
-	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year-a->dateInfo.tm_year); //index of the year of the event
+	shared_ptr <DisplayableComponent> year = cal->getChild(when.tm_year - a->dateInfo.tm_year); //index of the year of the event
+	cout << "year index " << year << endl;
 	if (year == NULL) {
-		cout << "invalid entry" << endl;
+		cout << "invalid entry 1" << endl;
 		//RE PROMPT
 	}
-	shared_ptr <DisplayableComponent> month = cal->getChild(when.tm_mon - a->dateInfo.tm_mon); //index of the month of the event
+	shared_ptr <DisplayableComponent> month = year->getChild(when.tm_mon /*- a->dateInfo.tm_mon*/); //index of the month of the event
+	cout << "month index " << month << endl;
 	if (month == NULL) {
-		cout << "invalid entry" << endl;
+		cout << "invalid entry 2" << endl;
 		//throw execption
 	}
-	shared_ptr <DisplayableComponent> day = cal->getChild(when.tm_mday - a->dateInfo.tm_mday); //index of the day of the event
+	shared_ptr <DisplayableComponent> day = month->getChild(when.tm_mday /*- a->dateInfo.tm_mday*/); //index of the day of the event
+	cout << "day index " << day << endl;
 	if (day == NULL) {
-		cout << "invalid entry" << endl;
+		cout << "invalid entry 3" << endl;
 		//throw execption
 	}
 	
