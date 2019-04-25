@@ -59,6 +59,7 @@ void CalendarInterface::run() {
 				char colon;
 				int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
+					month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
 					addEvent(name, month, day, year, hour, minute);
 					goodInput = false;
 				}

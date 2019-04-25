@@ -53,7 +53,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	tm newTime = addDays(when, 0);
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
-		newTime = addDays(newTime, index); //is this correct
+		newTime = addDays(when, index); //is this correct
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal);//make a new displayable event
 		DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
