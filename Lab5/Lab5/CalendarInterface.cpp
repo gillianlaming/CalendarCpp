@@ -25,7 +25,7 @@ void CalendarInterface::run() {
 		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
 
 		// display options to the user and respond to user input accordingly
-		cout << "zoom out: out, zoom in: in, add event: add, quit: q" << endl;
+		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jmp" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
 		if (in == "in") {
@@ -60,11 +60,24 @@ void CalendarInterface::run() {
 				}
 			}
 		}
-			else if (in == "q") {
-				break;
-			}
+		else if (in == "search") {
+			//searching for an event by name
+
+		}
+		else if (in == "jmp"){
+			//jump to a specific day
+		}
+		else if (in == "save") {
+			//save calendar to a file
+		}
+		else if (in == "restore") {
+			//restore calendar from a file
+		}
+		else if (in == "q") {
+			break;
 		}
 	}
+}
 
 
 void CalendarInterface::zoomIn(unsigned int index) {

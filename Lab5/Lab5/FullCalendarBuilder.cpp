@@ -13,6 +13,7 @@ Purpose: Define full calendar builder class, responsible for building and managi
 
 #include <iostream>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -42,12 +43,16 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		newEvent->display();
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
+		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent)); //add to multimap
+	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display();
 		day->addComponent(newEvent); //add the event to the correct day
+		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent));//add to multimap
+		
 	}
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
 }

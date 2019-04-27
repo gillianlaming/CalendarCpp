@@ -1,14 +1,18 @@
 #pragma once
+#include <string>
+#include <map>
 
 #include "CalendarComponent.h"
+//#include "DisplayableEvent.h"
 // forward declarations needed to avoid circular includes, used to declare friends only
 class FullCalendarBuilder;
 class CalendarInterface;
-
+using namespace std;
 class Calendar : public CalendarComponent {
 	// friends
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
+	//friend DisplayableEvent;
 protected:
 	std::string name;
 	size_t yearsToHold;
@@ -22,5 +26,8 @@ public:
 	Calendar(std::string n, size_t y);
 	// inherited methods
 	virtual void display() override;
+	multimap <string,shared_ptr<DisplayableComponent>> myEvents;
+
+
 
 };

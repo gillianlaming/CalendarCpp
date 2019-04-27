@@ -6,7 +6,7 @@ purpose: support functionality for adding events to the calendar
 
 #include "CalendarComponent.h"
 #include <string>
-
+#include <memory>
 class FullCalendarBuilder;
 class CalendarInterface;
 class DisplayableMonth;
