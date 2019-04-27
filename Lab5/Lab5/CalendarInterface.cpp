@@ -76,13 +76,22 @@ void CalendarInterface::run() {
 				typedef multimap <string, shared_ptr<DisplayableComponent>> temp; 
 				pair<temp::iterator, temp::iterator> range;
 				range = cal->myEvents.equal_range(name); //equal_range returns pair of iterators
-
+				int i = 0;
+				vector<shared_ptr<DisplayableComponent>> sameName;
 				for (temp::iterator it1 = range.first; it1 != range.second; ++it1) { //iterate across all the events with the same name
+					cout << "Index " << i << ": ";
 					shared_ptr<DisplayableComponent> event = it1->second;
-					event->display(); //absolutely no idea if this would work 
+					sameName.push_back(event);
+					i++;
+					event->display();
 				}
 				cout << endl;
-
+				if (i > 1) {
+					int index;
+					cout << "Of the above events, which one would you like to display? Type in the index: ";
+					cin >> index;
+					sameName[index]->display(); //this is not the proper way to be displaying, but works for the time being.
+				}
 			}
 			
 		}
