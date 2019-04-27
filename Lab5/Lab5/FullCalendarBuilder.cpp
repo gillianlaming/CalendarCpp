@@ -33,10 +33,13 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	
 	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
 
-	tm newTime = addDays(when, 0);
+	tm newTime = when;
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
+		//cout << "Index: " << index << endl;
+		//cout << "Date of struct tm before passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		newTime = addDays(when, index); //is this correct
+		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal, name); //make a new displayable event
 		newEvent->display();
 		//DisplayableEvent(newTime, newEvent).name = name;

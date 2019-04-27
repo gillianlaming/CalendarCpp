@@ -51,7 +51,7 @@ void CalendarInterface::run() {
 				istringstream iss(line);
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
-					month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
 					addEvent(name, month, day, year, hour, minute);
 					goodInput = false;
 				}
@@ -112,7 +112,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_hour = hour;
 	time.tm_min = minute;
 	time.tm_mday = day;
-	time.tm_mon = month;
+	time.tm_mon = month - 1;
 	time.tm_year = year - CalendarComponent::BASEYEAR;
 	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
