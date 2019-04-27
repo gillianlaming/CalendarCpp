@@ -25,7 +25,8 @@ void CalendarInterface::run() {
 		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
 
 		// display options to the user and respond to user input accordingly
-		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jmp" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "quit : q" << endl;
+		cout << endl; //make this ish more readable
+		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
 		if (in == "in") {
@@ -65,14 +66,32 @@ void CalendarInterface::run() {
 			string name;
 			cout << "What is the name of the event you would like to search for: ";
 			cin >> name;
-			shared_ptr<DisplayableComponent> event = cal->myEvents.find(name)->second;
-			cout << "successfully made it this far lmao" << endl;
-			event->display(); //absolutely no idea if this would work 
-		
-		
+			cal->it = cal->myEvents.find(name);
+			if (cal->it == cal->myEvents.end()) {
+				cout << "There was no event by this name in your calendar" << endl << endl;
+			}
+			else {
+				iterator newIt = cal->it;
+				pair<cal->it, cal->myEvents::iterator> range;
+				range = m.equal_range("a"); //equal_range returns pair of iterators
+
+											//loop through the iterator pair like regular iterators
+				for (mmap::iterator it = range.first; it != range.second; ++it)
+					std::cout << it->first << " " << it->second << endl;
+				
+				shared_ptr<DisplayableComponent> event = cal->myEvents.find(name)->second;
+				event->display(); //absolutely no idea if this would work 
+				
+				cout << endl;
+
+			}
+			
 		}
-		else if (in == "jmp"){
-			//jump to a specific day
+		else if (in == "jump"){ //jump to a specific day
+			string granularity;
+			cout << "What granularity would you like (options are day, month, year): ";
+			cin >> granularity;
+
 		}
 		else if (in == "save") {
 			//save calendar to a file
