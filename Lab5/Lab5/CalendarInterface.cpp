@@ -62,7 +62,14 @@ void CalendarInterface::run() {
 		}
 		else if (in == "search") {
 			//searching for an event by name
-
+			string name;
+			cout << "What is the name of the event you would like to search for: ";
+			cin >> name;
+			shared_ptr<DisplayableComponent> event = cal->myEvents.find(name)->second;
+			cout << "successfully made it this far lmao" << endl;
+			event->display(); //absolutely no idea if this would work 
+		
+		
 		}
 		else if (in == "jmp"){
 			//jump to a specific day

@@ -27,6 +27,7 @@ public:
 	// inherited methods
 	virtual void display() override;
 	multimap <string,shared_ptr<DisplayableComponent>> myEvents;
+	multimap <string, shared_ptr<DisplayableComponent>>::iterator it;
 
 
 
