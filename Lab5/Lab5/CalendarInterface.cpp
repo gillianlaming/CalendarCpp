@@ -2,8 +2,10 @@
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
 #include "CalendarComponent.h"
+#include "DisplayableYear.h"
 #include<iostream>
 #include <istream>
+#include <ostream>
 #include <sstream>
 #include <fstream>
 #include <iterator>
@@ -24,6 +26,12 @@ void CalendarInterface::run() {
 	while (1) {
 		// display the current display of the calendar
 		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
+		
+		//for (int i = 0; i < currentDisplay->children.size(); i++) {
+		//	shared_ptr<DisplayableYear> corresponding_year = dynamic_pointer_cast<DisplayableYear>(cal->getChild(i));
+			// corresponding_year->display();
+			
+		//}
 
 		// display options to the user and respond to user input accordingly
 		cout << endl; //make this ish more readable
@@ -115,6 +123,16 @@ void CalendarInterface::run() {
 		}
 		else if (in == "save") {
 			//TODO: save calendar to a file
+			//i think this works but it wouldn't let me search for the file so we have to make sure
+			ofstream myfile;
+			myfile.open("savedCalendar.txt");
+			//myfile << currentDisplay->display() << endl;
+			if (myfile) {
+				myfile << currentDisplay << endl;
+				cout << "Calendar succcessfully saved to savedCalendar.txt " << endl;
+			}
+
+
 		}
 		else if (in == "restore") {
 			//TODO: restore calendar from a file

@@ -34,6 +34,9 @@ void Calendar::display() {
 			children[i]->display();
 		}
 	}
+	//TODO: fix display to do years initially with indices with ability to zoom in on year, then month etc.
+
+
 }
 
 shared_ptr<DisplayableComponent> Calendar::addComponent(std::shared_ptr<DisplayableComponent> comp) {
