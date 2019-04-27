@@ -6,6 +6,7 @@
 #include <istream>
 #include <sstream>
 #include <fstream>
+#include <iterator>
 
 
 using namespace std;
@@ -71,17 +72,15 @@ void CalendarInterface::run() {
 				cout << "There was no event by this name in your calendar" << endl << endl;
 			}
 			else {
-				iterator newIt = cal->it;
-				pair<cal->it, cal->myEvents::iterator> range;
-				range = m.equal_range("a"); //equal_range returns pair of iterators
+				//code structure from http://www.cplusplus.com/forum/general/102485/
+				typedef multimap <string, shared_ptr<DisplayableComponent>> temp; 
+				pair<temp::iterator, temp::iterator> range;
+				range = cal->myEvents.equal_range(name); //equal_range returns pair of iterators
 
-											//loop through the iterator pair like regular iterators
-				for (mmap::iterator it = range.first; it != range.second; ++it)
-					std::cout << it->first << " " << it->second << endl;
-				
-				shared_ptr<DisplayableComponent> event = cal->myEvents.find(name)->second;
-				event->display(); //absolutely no idea if this would work 
-				
+				for (temp::iterator it1 = range.first; it1 != range.second; ++it1) { //iterate across all the events with the same name
+					shared_ptr<DisplayableComponent> event = it1->second;
+					event->display(); //absolutely no idea if this would work 
+				}
 				cout << endl;
 
 			}
