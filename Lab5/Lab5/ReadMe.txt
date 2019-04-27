@@ -6,6 +6,7 @@ Group members: Gillian Laming, Natalie Stollman
 NOTES:
 1. Our implementation of the calendar uses military time. All times are assumed to be military time.
 2. when adding an event to the calendar, you cannot include spaces in your input line.
+3. I have cited a source in CalendarInterface.cpp. I copied the structure of a portion of my code from a C++ reference guide. Here is the link again: http://www.cplusplus.com/forum/general/102485/
 
 // answer the following questions
 1. Part 2.1: Adding events to the calendar

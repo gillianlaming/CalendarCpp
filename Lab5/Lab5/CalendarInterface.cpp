@@ -62,8 +62,7 @@ void CalendarInterface::run() {
 				}
 			}
 		}
-		else if (in == "search") {
-			//searching for an event by name
+		else if (in == "search") {//searching for an event by name
 			string name;
 			cout << "What is the name of the event you would like to search for: ";
 			cin >> name;
@@ -71,8 +70,7 @@ void CalendarInterface::run() {
 			if (cal->it == cal->myEvents.end()) {
 				cout << "There was no event by this name in your calendar" << endl << endl;
 			}
-			else {
-				//code structure from http://www.cplusplus.com/forum/general/102485/
+			else { //code structure from http://www.cplusplus.com/forum/general/102485/
 				typedef multimap <string, shared_ptr<DisplayableComponent>> temp; 
 				pair<temp::iterator, temp::iterator> range;
 				range = cal->myEvents.equal_range(name); //equal_range returns pair of iterators
@@ -90,22 +88,36 @@ void CalendarInterface::run() {
 					int index;
 					cout << "Of the above events, which one would you like to display? Type in the index: ";
 					cin >> index;
+					//TODO: fix this display
 					sameName[index]->display(); //this is not the proper way to be displaying, but works for the time being.
 				}
-			}
-			
+			}	
 		}
 		else if (in == "jump"){ //jump to a specific day
 			string granularity;
-			cout << "What granularity would you like (options are day, month, year): ";
-			cin >> granularity;
+			cout << "Please enter a date(mm/dd/yyyy): "  << endl;;
+			//wrap date stuff
+			string line;
+			cin >> line;
+			istringstream iss(line);
+			int month = 0;int day = 0;int year = 0;char backslash;
+			if (iss >> month >> backslash >> day >> backslash >> year) {
+				cout << "Please enter a granularity: ";
+				cin >> granularity;
+				//TODO: we're going to want to call getComponent by date, all the code is done just have to figure out how to call it properly
+				//getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity)
+			}
+			else {
+				cout << "Bad input" << endl;
+			}
+			
 
 		}
 		else if (in == "save") {
-			//save calendar to a file
+			//TODO: save calendar to a file
 		}
 		else if (in == "restore") {
-			//restore calendar from a file
+			//TODO: restore calendar from a file
 		}
 		else if (in == "q") {
 			break;
