@@ -35,6 +35,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
 
 	tm newTime = addDays(when, 0);
+	//TODO: fully pack the struct tm
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		newTime = addDays(when, index); //is this correct
@@ -95,6 +96,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 		//a->display();
 		return year;
 	}
+	return nullptr; //hopefully this will fix warning from up top
 
 	
 }

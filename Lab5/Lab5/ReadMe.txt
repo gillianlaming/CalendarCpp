@@ -8,6 +8,9 @@ NOTES:
 2. when adding an event to the calendar, you cannot include spaces in your input line.
 3. I have cited a source in CalendarInterface.cpp. I copied the structure of a portion of my code from a C++ reference guide. Here is the link again: http://www.cplusplus.com/forum/general/102485/
 
+
+ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
+1. non-standard syntax, use '&" to create a pointer to member. this happened when i didn't include () behind a method. eg vector a; a.size; --> a.size();
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 

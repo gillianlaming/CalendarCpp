@@ -37,10 +37,29 @@ void CalendarInterface::run() {
 		//cout << CalendarComponent::BASEYEAR << endl;
 		int yr = CalendarComponent::BASEYEAR;
 		//fixthis to get current year
-		
+
+
+		//this part needs to be before all the other options are displayed so we dont have to wrap another cin (i think this should work but it may not)----------------------------------------------------------------------------
+		cout << endl; //make this ish more readable
+		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
+		int numKids = kids.size();
+		/*	not sure if we need this part
+		if (numKids == 3) { //current display is year
+
+		}
+		else if (numKids == 2) { //current display is month
+
+		}
+		else if (numKids == 1) { //current display is day
+
+		}*/
+		if (currentDisplay->children.size() == 0) { //current display is an event
+			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;
+		}
+		//-----------------------------------------------------------------------------------------------------------------
 
 		// display options to the user and respond to user input accordingly
-		cout << endl; //make this ish more readable
+		
 		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
@@ -70,7 +89,7 @@ void CalendarInterface::run() {
 					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
 					addEvent(name, month, day, year, hour, minute);
 					goodInput = false;
-				}
+				} 
 				else {
 					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
 				}
@@ -129,28 +148,48 @@ void CalendarInterface::run() {
 		}
 		else if (in == "save") {
 			//TODO: save calendar to a file
-			//this isn't working properly, but it is a start
 			ofstream myfile;
-			myfile.open("savedCalendar.txt", ios::out);
-			//string s = currentDisplay->display();
+			cout << "What would you like to name this calendar: ";
+			string calName;
+			cin >> calName;
+			string fileName = calName + ".txt";
+			myfile.open(fileName, ios::out);
 			if (myfile) {
-				//myfile << currentDisplay->display() << endl;
-				//cout << currentDisplay->display() << endl;
-
-				
+				myfile << cal << endl; //I'm a little unclear of what they actually want us to save, this stores the memory address
 				myfile.close();
-				cout << "Calendar succcessfully saved to savedCalendar.txt " << endl;
-				
-
+				cout << "Calendar succcessfully saved to " << fileName << endl;
 			}
 		}
-
 		else if (in == "restore") {
 			//TODO: restore calendar from a file
+			cout << "What is the name of the calendar you would like to restore: ";
+			string calName;
+			cin >> calName;
+			string fileName = calName + ".txt";
+			ifstream restoreCal;
+			restoreCal.open(fileName);
+			string address;
+			if (restoreCal.is_open()) {
+				getline(restoreCal, address);
+			}
+			restoreCal.close();
+		}
+		else if (in == "edit") {
+			//TODO: edit an event
+		}
+		else if (in == "delete") {
+			//TODO: delete the event
+			weak_ptr<DisplayableComponent> parent = currentDisplay->getParent(); //this isn't helpful bc we cant do anything w a weak pointer, leaving this here so ik i already tried this
+			//currentDisplay->removeComponent(/*idk how to find index*/);
+			//get the parent of the event
+			//need to decrement the number of children ->!!!!
+			//THEN the event can be deleted
 		}
 		else if (in == "q") {
 			break;
 		}
+		
+		
 	}
 }
 
