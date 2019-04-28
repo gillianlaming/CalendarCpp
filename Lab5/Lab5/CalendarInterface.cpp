@@ -3,6 +3,7 @@
 #include "FullCalendarBuilder.h"
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
+#include <string>
 #include<iostream>
 #include <istream>
 #include <ostream>
@@ -32,6 +33,11 @@ void CalendarInterface::run() {
 			// corresponding_year->display();
 			
 		//}
+			//initial display - years with indices to zoom in on
+		//cout << CalendarComponent::BASEYEAR << endl;
+		int yr = CalendarComponent::BASEYEAR;
+		//fixthis to get current year
+		
 
 		// display options to the user and respond to user input accordingly
 		cout << endl; //make this ish more readable
@@ -123,17 +129,22 @@ void CalendarInterface::run() {
 		}
 		else if (in == "save") {
 			//TODO: save calendar to a file
-			//i think this works but it wouldn't let me search for the file so we have to make sure
+			//this isn't working properly, but it is a start
 			ofstream myfile;
-			myfile.open("savedCalendar.txt");
-			//myfile << currentDisplay->display() << endl;
+			myfile.open("savedCalendar.txt", ios::out);
+			//string s = currentDisplay->display();
 			if (myfile) {
-				myfile << currentDisplay << endl;
+				//myfile << currentDisplay->display() << endl;
+				//cout << currentDisplay->display() << endl;
+
+				
+				myfile.close();
 				cout << "Calendar succcessfully saved to savedCalendar.txt " << endl;
+				
+
 			}
-
-
 		}
+
 		else if (in == "restore") {
 			//TODO: restore calendar from a file
 		}
