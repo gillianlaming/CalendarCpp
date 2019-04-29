@@ -69,6 +69,7 @@ void CalendarInterface::run() {
 		else if (numKids == 1) { //current display is day
 
 		}*/
+		//TODO: change this. right now it displays edit & delete on days which dont have any events.
 		if (currentDisplay->children.size() == 0) { //current display is an event
 			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;
 		}
@@ -185,12 +186,10 @@ void CalendarInterface::run() {
 			}
 		}
 		else if (in == "restore") {
-			//TODO: restore calendar from a file
 			cout << "What is the name of the calendar you would like to restore: ";
 			string calName;
 			cin >> calName;
 			string fileName = calName + ".txt";
-			//TODO: dummy proof in case file cannot be opened + output correct error message
 			ifstream restoreCal;
 			restoreCal.open(fileName);
 			string line;
@@ -200,14 +199,12 @@ void CalendarInterface::run() {
 					istringstream iss(line);
 					string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 					while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
-					
 						addEvent2(name, month, day, year, hour, minute);
 					}
 				}
-				
 			}
 			else {
-				cout << "Unable to read info from file" << endl;
+				cout << "Unable to read info from file" << endl << endl;
 			}
 			restoreCal.close();
 		}
@@ -217,15 +214,16 @@ void CalendarInterface::run() {
 		}
 		else if (in == "edit") {
 			//TODO: edit an event
+
 		
 		}
 		else if (in == "delete") {
 			//TODO: delete the event
 			weak_ptr<DisplayableComponent> parent = currentDisplay->getParent(); //this isn't helpful bc we cant do anything w a weak pointer, leaving this here so ik i already tried this
-			//currentDisplay->removeComponent(/*idk how to find index*/);
-			//get the parent of the event
+			//TODO: get index of event in vector
 			//need to decrement the number of children ->!!!!
 			//THEN the event can be deleted
+			
 		}
 		else if (in == "q") {
 			break;

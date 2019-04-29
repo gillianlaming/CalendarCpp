@@ -21,6 +21,8 @@ void DisplayableMonth::display(int depth) {
 		//cout << "day: " << dateInfo.tm_mday << endl;
 		
 		//TODO: dateInfo.tm_wday gets us the weekday of the first day of the month
+		//fuck
+		//ok 
 		//this matters for the display bc its how the first line under the weekdays is formatted
 		for (size_t i = 0; i < children.size(); ++i) {
 			if (children[i] != nullptr) { // forward request to all children
