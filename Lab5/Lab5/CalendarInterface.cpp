@@ -166,7 +166,6 @@ void CalendarInterface::run() {
 
 		}
 		else if (in == "save") {
-			//TODO: save calendar to a file
 			ofstream myfile;
 			cout << "What would you like to name this calendar: ";
 			string calName;
@@ -174,18 +173,15 @@ void CalendarInterface::run() {
 			string fileName = calName + ".txt";
 			myfile.open(fileName, ios::out);
 			if (myfile) {
-				//need to load all the events from the multimap
-				
 				for (std::multimap<string, shared_ptr<DisplayableEvent>>::iterator it = cal->myEvents.begin(); it != cal->myEvents.end(); ++it) {
-					//string will be formatted the same way it is when user inputs event
+					//string will be formatted the same way it is when user inputs event. not readable to user but ok for computer
 					char backslash = '/';
 					char colon = ':';
 					char comma = ',';
 					myfile << (*it).second->when.tm_mon << backslash << (*it).second->when.tm_mday << backslash << (*it).second->when.tm_year << comma << (*it).second->when.tm_hour << colon << (*it).second->when.tm_min << comma << (*it).second->name << endl;
 				}
-				
 				myfile.close();
-				cout << "Calendar succcessfully saved to " << fileName << endl;
+				cout << "Calendar succcessfully saved to " << fileName << endl << endl;
 			}
 		}
 		else if (in == "restore") {
@@ -194,11 +190,25 @@ void CalendarInterface::run() {
 			string calName;
 			cin >> calName;
 			string fileName = calName + ".txt";
+			//TODO: dummy proof in case file cannot be opened + output correct error message
 			ifstream restoreCal;
 			restoreCal.open(fileName);
-			string address;
+			string line;
 			if (restoreCal.is_open()) {
-				getline(restoreCal, address);
+				while (!restoreCal.eof()) { //while it's not the end of the file
+					getline(restoreCal, line);
+					istringstream iss(line);
+					string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
+					while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
+						month = month + 1;
+						year = year + CalendarComponent::BASEYEAR;
+						addEvent(name, month, day, year, hour, minute);
+					}
+				}
+				
+			}
+			else {
+				cout << "Unable to read info from file" << endl;
 			}
 			restoreCal.close();
 		}
