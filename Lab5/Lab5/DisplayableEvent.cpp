@@ -15,8 +15,23 @@ void DisplayableEvent::display(int depth) {
 	//int index = when.tm_wday;
 	//cout << daysOfTheWeek[index] << '/t' << mon << "/" << when.tm_mday << "/" << yr << endl; --> THIS IS ALREADY BEING PRINTED (good news)
 	//cout << when.tm_hour << ":" << when.tm_min << '/t' << name << endl;
+	if (depth == 3) {
+		if (when.tm_min == 0) {
+			cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << "00" << " " << name << endl;
+		}
+		else {
+			cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " " << name << endl;
+		}
+	}
+	if (depth == 1) {
+		if (when.tm_min == 0) {
+			cout << when.tm_hour << ":" << "00" << " " << name << endl;
+		}
+		else {
+			cout << when.tm_hour << ":" << when.tm_min << " " << name << endl;
+		}
+	}
 	
-	cout << name << " " << "date: " << mon << "/" << when.tm_mday << "/" << yr << " start time: " << when.tm_hour << ":" << when.tm_min << endl;
 }
 
 //shared_ptr<DisplayableComponent> DisplayableEvent::setName(string a) {}

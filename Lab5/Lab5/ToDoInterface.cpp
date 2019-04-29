@@ -27,7 +27,7 @@ shared_ptr<DisplayableComponent> ToDoList::addComponent(std::shared_ptr<Displaya
 }
 
 	//FROM CALINTERFACE
-	/*
+	
 //cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "Switch to Calendar: calendar" << endl << "quit : q" << endl;
 
 	bool goodInput = true;
@@ -47,7 +47,7 @@ shared_ptr<DisplayableComponent> ToDoList::addComponent(std::shared_ptr<Displaya
 		}
 	}
 		//END FROM CAL INTERFACE
-*/
+
 
 void ToDoList::display() {
 	cout << ToDoList::name << endl;
