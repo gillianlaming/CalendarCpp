@@ -27,6 +27,6 @@ void ToDoList::display(int depth) {
 }
 
 
-std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) {
+//std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) {
 	
-}
+//}
