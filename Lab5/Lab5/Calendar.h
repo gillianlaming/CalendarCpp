@@ -25,8 +25,8 @@ public:
 	// arguments: name of the calendar, length of the calendar in years
 	Calendar(std::string n, size_t y);
 	// inherited methods
-	virtual void display() override;
-	//virtual void display2(int state);
+	virtual void display(int depth) override;
+	// void display2(int state);
 	multimap <string,shared_ptr<DisplayableComponent>> myEvents;
 	multimap <string, shared_ptr<DisplayableComponent>>::iterator it;
 

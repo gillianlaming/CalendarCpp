@@ -27,10 +27,12 @@ Calendar::Calendar(string n, size_t y) : CalendarComponent(tm(), nullptr), name(
 	}
 }
 
-void Calendar::display() {
+void Calendar::display(int depth) {
 	cout << "Calendar: " << name << endl;
+
 	for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
 		if (children[i] != nullptr) {
+			cout << "index: " << i;
 			children[i]->display();
 		}
 	}
@@ -92,6 +94,7 @@ void Calendar::display() {
 
 }
 */
+
  //NS end
 
 shared_ptr<DisplayableComponent> Calendar::addComponent(std::shared_ptr<DisplayableComponent> comp) {

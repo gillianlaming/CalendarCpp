@@ -18,10 +18,10 @@ class DisplayableComponent {
 	friend CalendarInterface;
 public:
 	// defined by concrete classes deriving from DisplayableComponent
-	virtual void display() = 0;
+	virtual void display(int depth) = 0;
 	
 	//NS
-	void display2(int state);
+	//void display2(int state);
 
 
 protected:

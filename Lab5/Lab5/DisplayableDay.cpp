@@ -22,15 +22,17 @@ shared_ptr<DisplayableEvent> & operator<(shared_ptr<DisplayableEvent> e1, shared
 }
 
 
-void DisplayableDay::display() {
+void DisplayableDay::display(int depth) {
 	cout << "\t\t\t" << daysoftheweek[dateInfo.tm_wday] << " ";
 	cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
 	//add to this to display events 
 	//int i = children.size();
-	
+	/*
 	for (unsigned int i = 0; i < children.size(); ++i) {
 		children[i]->display();
 	}
+	*/
+	
 
 
 }

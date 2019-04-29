@@ -50,3 +50,4 @@ shared_ptr<DisplayableComponent> DisplayableComponent::getChild(unsigned int ind
 		return nullptr; // nullptr if index is out of bounds
 	}
 }
+

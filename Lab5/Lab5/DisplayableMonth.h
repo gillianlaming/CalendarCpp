@@ -18,7 +18,7 @@ class DisplayableMonth : public CalendarComponent {
 public:
 	// arguments = date/time info, its parent, name of the month, days in the month
 	DisplayableMonth(std::tm, std::shared_ptr<DisplayableComponent>, std::string monthname, unsigned int numdays);
-	virtual void display() override;
+	virtual void display(int depth) override;
 protected:
 	std::string name;
 	unsigned int numberOfDays;

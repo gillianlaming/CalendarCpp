@@ -3,6 +3,7 @@
 #include <iostream>
 #include "DisplayableMonth.h"
 
+
 using namespace std;
 
 DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent> p, bool l) : CalendarComponent(d, p), leap(l) {
@@ -11,13 +12,18 @@ DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent
 	}
 }
 
-void DisplayableYear::display() {
-	cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << ":" << endl;
-	for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
-		if (children[i] != nullptr) {
-			children[i]->display();
+void DisplayableYear::display(int depth) {
+	cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
+	cout << "depth from displayable year " << depth << endl;
+	if (depth == 3) {
+		for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
+			if (children[i] != nullptr) {
+				children[i]->display(depth);
+			}
 		}
 	}
+	
+	
 }
 
 shared_ptr<DisplayableComponent> DisplayableYear::addComponent(shared_ptr<DisplayableComponent> comp) {

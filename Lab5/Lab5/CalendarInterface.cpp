@@ -20,6 +20,7 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		builder = make_shared<FullCalendarBuilder>();
 		cal = builder->buildCalendar(calendarName, years);
 		currentDisplay = cal;
+		cal->depth = 4;
 		
 	}
 }
@@ -30,19 +31,15 @@ void CalendarInterface::run() {
 
 		//NS: Initialize current display children size to 4 for overall cal view??
 		//call  display2 passing in 
-		//currentDisplay->display2(3);
-		if (currentDisplay->children.size() == 4) {
-			//currentDisplay->display(3);
-		}
-		if (currentDisplay->children.size() == 3) {
-			//currentDisplay->display(3);
-		}
+		//currentDisplay->display2(currentDisplay->children.size());
+		
 
 		
 
 		//if year
 		//if (currentDisplay->children.size() == 3) {
-			//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
+		cout << "depth " << cal->depth << endl;
+		currentDisplay->display(cal->depth); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
 		
 
 
@@ -88,6 +85,7 @@ void CalendarInterface::run() {
 				int index = 0;
 				cin >> index;
 				zoomIn(index);
+				
 			}
 			else {
 				cout << "Nothing to zoom in on" << endl;
@@ -95,6 +93,7 @@ void CalendarInterface::run() {
 		}
 		else if (in == "out") {
 			zoomOut();
+			
 		}
 		else if (in == "add") {
 			bool goodInput = true;
@@ -134,7 +133,7 @@ void CalendarInterface::run() {
 					shared_ptr<DisplayableComponent> event = it1->second;
 					sameName.push_back(event);
 					i++;
-					event->display();
+					event->display(cal->depth);
 				}
 				cout << endl;
 				if (i > 1) {
@@ -142,7 +141,7 @@ void CalendarInterface::run() {
 					cout << "Of the above events, which one would you like to display? Type in the index: ";
 					cin >> index;
 					//TODO: fix this display
-					sameName[index]->display(); //this is not the proper way to be displaying, but works for the time being.
+					sameName[index]->display(cal->depth); //this is not the proper way to be displaying, but works for the time being.
 				}
 			}	
 		}
@@ -222,6 +221,7 @@ void CalendarInterface::zoomIn(unsigned int index) {
 	if (temp != nullptr) {
 		currentDisplay = temp;
 	}
+	cal->depth--;
 }
 
 void CalendarInterface::zoomOut() {
@@ -230,6 +230,7 @@ void CalendarInterface::zoomOut() {
 		// create a shared_ptr from a weak_ptr, contributing to the objects reference count
 		currentDisplay = currentDisplay->getParent().lock();
 	}
+	cal->depth++;
 }
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) { //helper function
 	int recurrFor;

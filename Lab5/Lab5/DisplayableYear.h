@@ -18,7 +18,7 @@ class DisplayableYear : public CalendarComponent {
 public:
 	// arguments: date/time info, parent, leap year or no?
 	DisplayableYear(std::tm, std::shared_ptr<DisplayableComponent>, bool);
-	virtual void display() override;
+	virtual void display(int depth) override;
 protected:
 	bool leap;
 	// year contains months - override accordingly

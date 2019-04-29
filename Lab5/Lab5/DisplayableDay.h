@@ -22,7 +22,7 @@ class DisplayableDay : public CalendarComponent {
 public:
 	// 1st argument = start date/timeof the day, 2nd argument = its parent
 	DisplayableDay(std::tm, std::shared_ptr<DisplayableComponent>);
-	virtual void display() override;
+	virtual void display(int depth) override;
 	void sorter();
 	//void sort(iterator it, iterator it2, bool g)
 	// currently a leaf class, so no need to override addComponent()
