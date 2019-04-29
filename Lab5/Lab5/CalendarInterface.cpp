@@ -194,25 +194,28 @@ void CalendarInterface::run() {
 		else if (in == "delete") {
 
 			//TODO: delete the event
-			DisplayableEvent* e = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
+			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
 
-			shared_ptr<DisplayableDay> d = shared_ptr<DisplayableDay>(e->parent);
+			shared_ptr<DisplayableComponent> d = shared_ptr<DisplayableComponent>(event1->parent);
+			vector<shared_ptr<DisplayableComponent>> a = d->children;
 			
-		
+			/*
+			for (std::vector<shared_ptr<DisplayableComponent>>::iterator it = a.begin(); it != a.end(); ++it) {
+				it->get
+			}
+			*/
+			for (int i = 0; i < a.size(); ++i) {
+				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
+				if (event1->name == event2->name && event1->when.tm_hour == event2->when.tm_hour) {
 
-		//	vector <shared_ptr<DisplayableComponent>> kidz = currentDisplay->children;
-			
-			int index;
+				}
 
+			}
 
-			
 			//need to get the vector of children																	 
 			//get index of event in vector
 			//remove the specific component by calling remove component
 			//need to decrement the number of children ->!!!! v unclear how to do this
-
-		
-			
 		}
 		else if (in == "q") {
 			break;
