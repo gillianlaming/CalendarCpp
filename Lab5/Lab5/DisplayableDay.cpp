@@ -30,7 +30,14 @@ std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_p
 
 
 void DisplayableDay::display(int depth) {
-	if (depth == 1 || depth==3) {
+	if (depth == 3) {
+		for (int i = 0; i < children.size(); ++i) {
+
+			children[i]->display(depth);
+
+		}
+	}
+	else if (depth == 1 || depth==3) {
 		for (int i = 0; i < children.size(); ++i) {
 
 			children[i]->display(depth);

@@ -18,53 +18,42 @@ void DisplayableMonth::display(int depth) {
 	cout << "\t\t" << name  << endl;
 		if (depth == 2) {
 		cout << "Sunday     " << "Monday     " << "Tuesday    " << "Wednesday  " << "Thursday   " << "Friday     " << "Saturday   " << endl;
-		//cout << "day: " << dateInfo.tm_mday << endl;
 		
-		/*
-		for (size_t i = 0; i < children.size(); ++i) {
-
-			if (children[i] != nullptr) { // forward request to all children
-				//cout <<i<<"    ";
-
-				cout << "wday: " << dateInfo.tm_wday << endl;
-				//if (dateInfo.tm_wday == 0) {
+			for (int i = 0; i < 7; ++i) {
+				if (i < dateInfo.tm_wday) {
+					//cout <<setw(11) << "";
+					cout << "           ";
+				}
+			}
+		
+			for (int i = 0; i < children.size(); ++i) {
 			
+					children[i]->display(depth);
+				
+			}
+
+	}
+		if (depth == 3) {
+
+			for (int i = 0; i < children.size(); ++i) {
+
+				children[i]->display(depth);
+
+			}
+		}
+		//else {
+			//if (depth == 3) {
+				//for (int i = 0; i < children.size(); ++i) {
+
+					//children[i]->display(depth);
+
 				//}
 
-				//eventually we want to delete this(?) bc we just want the number(i) not full display
-				children[i]->display(depth);
-				
-			}
-			
-		}
-		*/
-		
-		for (int i = 0; i < 7; ++i) {
-			if (i < dateInfo.tm_wday) {
-				//cout <<setw(11) << "";
-				cout << "           ";
-			}
-		}
-		
-		for (int i = 0; i < children.size(); ++i) {
-			
-				children[i]->display(depth);
-				
-				}
-
-			}
-	//	if (depth == 3) {
-			//for (int i = 0; i < children.size(); ++i) {
-
-				//children[i]->display(depth);
-
 			//}
-
-	//	}
+		//}
 		
 		
-
-		}
+}
 	
 	
 

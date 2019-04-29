@@ -19,9 +19,11 @@ void DisplayableYear::display(int depth) {
 		for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
 			if (children[i] != nullptr) {
 				cout << i;
+				//children[i]->children;
 				children[i]->display(depth);
 			}
 			
+
 		}
 	}
 	
