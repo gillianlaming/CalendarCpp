@@ -33,14 +33,21 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
 	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
-
-	tm newTime = addDays(when, 0);
+	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
+	
+	shared_ptr <DisplayableComponent> year1 = cal->getChild(when.tm_year - a->dateInfo.tm_year); //index of the year of the event
+	shared_ptr <DisplayableComponent> month1 = year1->getChild(when.tm_mon); //index of the month of the event
+	shared_ptr <DisplayableComponent> day1 = month1->getChild(when.tm_mday); //index of the day of the event
+	//DisplayableDay(when, day1).dateInfo;
+	
 	//TODO: fully pack the struct tm
+	// newTime = DisplayableDay(when, day1).dateInfo; //this is wrong, but it is a fully packed struct tm so it recurrs properly
+	
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
-		newTime = addDays(when, index); //is this correct
+		tm newTime1 = addDays(newTime, index); //is this correct
 		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
-		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime, cal, name); //make a new displayable event
+		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->display();
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
@@ -75,6 +82,9 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 		return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday ); //index of the day of the event
+	
+
+	
 	if (day == NULL) {
 		cout << "Day doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later

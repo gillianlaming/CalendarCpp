@@ -14,6 +14,8 @@ void DisplayableDay::display() {
 	for (int i = 0; i < children.size(); ++i) {
 		//USE SORTING Algorthm
 		//look at studio 9
+		//TODO
+
 		
 	}
 
