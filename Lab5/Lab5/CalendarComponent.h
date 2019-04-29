@@ -35,7 +35,7 @@ class CalendarComponent : public DisplayableComponent {
 	friend CalendarInterface;
 public:
 	// inherited
-	virtual void display() = 0;
+	virtual void display(int depth) = 0;
 protected:
 	// stores date/time associated with this component
 	// see struct tm details above. This will always be set to the date/time at the beginning of the component. So for a month, it is set to the first day of the month

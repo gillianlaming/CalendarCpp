@@ -14,7 +14,7 @@ DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent
 
 void DisplayableYear::display(int depth) {
 	cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
-	cout << "depth from displayable year " << depth << endl;
+	//cout << "depth from displayable year " << depth << endl;
 	if (depth == 3) {
 		for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
 			if (children[i] != nullptr) {

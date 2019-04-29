@@ -61,7 +61,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		tm newTime1 = addDays(newTime, index); //is this correct
 		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
-		newEvent->display();
+		newEvent->display(currentCalendar->depth);
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
 		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent)); //add to multimap
@@ -71,7 +71,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
 		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
-		newEvent->display();
+		newEvent->display(currentCalendar->depth);
 		day->addComponent(newEvent); //add the event to the correct day
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent));//add to multimap
 		

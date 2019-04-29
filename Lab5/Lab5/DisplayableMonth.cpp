@@ -14,13 +14,14 @@ DisplayableMonth::DisplayableMonth(std::tm d, std::shared_ptr<DisplayableCompone
 
 void DisplayableMonth::display(int depth) {
 	cout << "\t\t" << name << ":" << endl;
-	/*
-	for (size_t i = 0; i < children.size(); ++i) {
-		if (children[i] != nullptr) { // forward request to all children
-			children[i]->display();
+	if (depth == 2) {
+		for (size_t i = 0; i < children.size(); ++i) {
+			if (children[i] != nullptr) { // forward request to all children
+				children[i]->display(depth);
+			}
 		}
 	}
-	*/
+	
 }
 
 shared_ptr<DisplayableComponent> DisplayableMonth::addComponent(shared_ptr<DisplayableComponent> comp) {

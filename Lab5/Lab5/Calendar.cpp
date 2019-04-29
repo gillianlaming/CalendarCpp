@@ -33,7 +33,7 @@ void Calendar::display(int depth) {
 	for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
 		if (children[i] != nullptr) {
 			cout << "index: " << i;
-			children[i]->display();
+			children[i]->display(depth);
 		}
 	}
 	//TODO: fix display to do years initially with indices with ability to zoom in on year, then month etc.
