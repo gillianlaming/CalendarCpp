@@ -218,11 +218,19 @@ void CalendarInterface::run() {
 		
 		}
 		else if (in == "delete") {
+			//WE WANT THIS TO BE CALLED ON A DAY W EVENTS, NOT AN EVENT idk if that is what the instructions want
 			//TODO: delete the event
-			weak_ptr<DisplayableComponent> parent = currentDisplay->getParent(); //this isn't helpful bc we cant do anything w a weak pointer, leaving this here so ik i already tried this
-			//TODO: get index of event in vector
-			//need to decrement the number of children ->!!!!
-			//THEN the event can be deleted
+			vector <shared_ptr<DisplayableComponent>> kidz = currentDisplay->children;
+			cout << "What is the index of the event that you want to be deleted: ";
+			int index;
+
+			
+			//need to get the vector of children																	 
+			//get index of event in vector
+			//remove the specific component by calling remove component
+			//need to decrement the number of children ->!!!! v unclear how to do this
+
+		
 			
 		}
 		else if (in == "q") {

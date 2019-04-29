@@ -33,7 +33,8 @@ shared_ptr<DisplayableComponent> DisplayableComponent::removeComponent(unsigned 
 		children[index] = nullptr;
 		return removed; // pointer to the removed component if successful
 	}
-	return nullptr; // nullptr is remove fails
+	children.size();
+	return nullptr; // nullptr if remove fails
 }
 
 
