@@ -13,7 +13,7 @@ DisplayableMonth::DisplayableMonth(std::tm d, std::shared_ptr<DisplayableCompone
 }
 
 void DisplayableMonth::display(int depth) {
-	cout << "\t\t" << name << ":" << endl;
+	cout << "\t\t" << name  << endl;
 	if (depth == 2) {
 		for (size_t i = 0; i < children.size(); ++i) {
 			if (children[i] != nullptr) { // forward request to all children
