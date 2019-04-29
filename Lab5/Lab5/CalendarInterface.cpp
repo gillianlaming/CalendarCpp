@@ -206,8 +206,11 @@ void CalendarInterface::run() {
 			*/
 			for (int i = 0; i < a.size(); ++i) {
 				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
+				if (event2 == nullptr) {
+					cout << "event 2 is null " << endl;
+				}
 				if (event1->name == event2->name && event1->when.tm_hour == event2->when.tm_hour) {
-
+					cout << "hey" << endl;
 				}
 
 			}
