@@ -12,19 +12,20 @@ It declares and defines the interface that all objects in the composite share.
 // forward declaration, needed for friend declaration
 class FullCalendarBuilder;
 class CalendarInterface;
+class ToDoList;
+class ToDoInterface;
 
 // abstract base class representing a composite object
 class DisplayableComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
+	friend ToDoList;
+	friend ToDoInterface;
 public:
 	// defined by concrete classes deriving from DisplayableComponent
 	virtual void display(int depth) = 0;
 	
-	//NS
-	//void display2(int state);
-
-
+	
 protected:
 	// member variables
 	std::vector<std::shared_ptr<DisplayableComponent> > children;

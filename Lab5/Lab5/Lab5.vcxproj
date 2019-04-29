@@ -157,10 +157,12 @@
     <ClInclude Include="DisplayableDay.h" />
     <ClInclude Include="DisplayableEvent.h" />
     <ClInclude Include="DisplayableMonth.h" />
+    <ClInclude Include="DisplayableTask.h" />
     <ClInclude Include="DisplayableYear.h" />
     <ClInclude Include="FullCalendarBuilder.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ToDoList.h" />
     <ClInclude Include="ToDoInterface.h" />
     <ClInclude Include="utilityfunctions.h" />
   </ItemGroup>
@@ -172,6 +174,7 @@
     <ClCompile Include="DisplayableDay.cpp" />
     <ClCompile Include="DisplayableEvent.cpp" />
     <ClCompile Include="DisplayableMonth.cpp" />
+    <ClCompile Include="DisplayableTask.cpp" />
     <ClCompile Include="DisplayableYear.cpp" />
     <ClCompile Include="FullCalendarBuilder.cpp" />
     <ClCompile Include="lab5_driver.cpp" />
@@ -181,6 +184,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ToDoList.cpp" />
     <ClCompile Include="ToDoInterface.cpp" />
     <ClCompile Include="utilityfunctions.cpp" />
   </ItemGroup>
