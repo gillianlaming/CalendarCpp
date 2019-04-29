@@ -200,9 +200,8 @@ void CalendarInterface::run() {
 					istringstream iss(line);
 					string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 					while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
-						month = month + 1;
-						year = year + CalendarComponent::BASEYEAR;
-						addEvent(name, month, day, year, hour, minute);
+					
+						addEvent2(name, month, day, year, hour, minute);
 					}
 				}
 				
@@ -287,7 +286,23 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_mday = day;
 	time.tm_mon = month - 1;
 	time.tm_year = year - CalendarComponent::BASEYEAR;
-	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
 	
+}
+
+
+void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, int& hour, int& minute) {
+	int recurrFor = 0;
+	int recurrEvery = 0;
+
+	
+	//need to make new struct tm object
+	tm time;
+	time.tm_hour = hour;
+	time.tm_min = minute;
+	time.tm_mday = day;
+	time.tm_mon = month;
+	time.tm_year = year;
+	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
+	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
 }
