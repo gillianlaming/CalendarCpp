@@ -1,4 +1,7 @@
 #pragma once
+#include "DisplayableEvent.h"
+#include <algorithm>
+#include <iterator>
 /*
 Author: Jon Shidal
 Purpose: declare the DisplayableDay class. This class may be a component of a calendar. It inherits from CalendarComponent and defines pure virtual functions
@@ -19,5 +22,7 @@ public:
 	// 1st argument = start date/timeof the day, 2nd argument = its parent
 	DisplayableDay(std::tm, std::shared_ptr<DisplayableComponent>);
 	virtual void display() override;
+	bool sortHelper(shared_ptr<DisplayableEvent> e1, shared_ptr<DisplayableEvent> e2);
+	//void sort(iterator it, iterator it2, bool g)
 	// currently a leaf class, so no need to override addComponent()
 };

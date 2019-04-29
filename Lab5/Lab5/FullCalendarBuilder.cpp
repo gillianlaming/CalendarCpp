@@ -41,8 +41,10 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	//DisplayableDay(when, day1).dateInfo;
 	
 	//TODO: fully pack the struct tm
-	// newTime = DisplayableDay(when, day1).dateInfo; //this is wrong, but it is a fully packed struct tm so it recurrs properly
-	
+	tm time = currentCalendar->dateInfo;
+	//print out when
+	DisplayableDay newTimed = DisplayableDay(when, day1); //this is wrong, but it is a fully packed struct tm so it recurrs properly
+	tm newTime = newTimed.dateInfo;
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct

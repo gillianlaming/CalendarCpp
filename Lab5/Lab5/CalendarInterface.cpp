@@ -25,6 +25,7 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
+		cout << "Baseyear " << cal->BASEYEAR << endl;
 		// display the current display of the calendar
 		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
 		
