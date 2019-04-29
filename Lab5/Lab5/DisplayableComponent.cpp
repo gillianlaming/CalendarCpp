@@ -5,6 +5,7 @@ inherited by all concrete classes deriving from it.
 */
 #include "stdafx.h"
 #include "DisplayableComponent.h"
+#include <iomanip>
 
 using namespace std;
 

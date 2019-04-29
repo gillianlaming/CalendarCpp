@@ -6,6 +6,7 @@ It declares and defines the interface that all objects in the composite share.
 #pragma once
 #include<memory>
 #include<vector>
+#include <iomanip>
 
 
 // forward declaration, needed for friend declaration

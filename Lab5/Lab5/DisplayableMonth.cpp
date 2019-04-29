@@ -2,6 +2,7 @@
 #include "DisplayableMonth.h"
 #include "DisplayableDay.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -16,17 +17,16 @@ DisplayableMonth::DisplayableMonth(std::tm d, std::shared_ptr<DisplayableCompone
 void DisplayableMonth::display(int depth) {
 	cout << "\t\t" << name  << endl;
 		if (depth == 2) {
-		cout <<  endl;
 		cout << "Sunday     " << "Monday     " << "Tuesday    " << "Wednesday  " << "Thursday   " << "Friday     " << "Saturday   " << endl;
 		//cout << "day: " << dateInfo.tm_mday << endl;
 		
-		//TODO: dateInfo.tm_wday gets us the weekday of the first day of the month
-		//fuck
-		//ok 
-		//this matters for the display bc its how the first line under the weekdays is formatted
+		/*
 		for (size_t i = 0; i < children.size(); ++i) {
+
 			if (children[i] != nullptr) { // forward request to all children
-				cout <<i<<"    ";
+				//cout <<i<<"    ";
+
+				cout << "wday: " << dateInfo.tm_wday << endl;
 				//if (dateInfo.tm_wday == 0) {
 			
 				//}
@@ -37,9 +37,37 @@ void DisplayableMonth::display(int depth) {
 			}
 			
 		}
-	}
+		*/
+		
+		for (int i = 0; i < 7; ++i) {
+			if (i < dateInfo.tm_wday) {
+				//cout <<setw(11) << "";
+				cout << "           ";
+			}
+		}
+		
+		for (int i = 0; i < children.size(); ++i) {
+			
+				children[i]->display(depth);
+				
+				}
+
+			}
+	//	if (depth == 3) {
+			//for (int i = 0; i < children.size(); ++i) {
+
+				//children[i]->display(depth);
+
+			//}
+
+	//	}
+		
+		
+
+		}
 	
-}
+	
+
 
 shared_ptr<DisplayableComponent> DisplayableMonth::addComponent(shared_ptr<DisplayableComponent> comp) {
 	// try to dynamically cast comp to a pointer to a DisplayableDay, will fail if the DisplayableComponent is not a day

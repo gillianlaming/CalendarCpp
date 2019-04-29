@@ -21,6 +21,7 @@ void DisplayableYear::display(int depth) {
 				cout << i;
 				children[i]->display(depth);
 			}
+			
 		}
 	}
 	

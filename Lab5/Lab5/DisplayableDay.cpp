@@ -30,14 +30,35 @@ std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_p
 
 
 void DisplayableDay::display(int depth) {
-	cout << "\t\t\t" << daysoftheweek[dateInfo.tm_wday] << " ";
-	cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
+	if (depth == 1 || depth==3) {
+		for (int i = 0; i < children.size(); ++i) {
+
+			children[i]->display(depth);
+
+		}
+		cout << "\t\t\t" << daysoftheweek[dateInfo.tm_wday] << " ";
+		cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
+		
+	}
+	else {
+		int spacing = 11;
+		//cout <<left << setw(11) << dateInfo.tm_mday;
+		for (unsigned int i = 0; i < children.size(); ++i) {
+			cout << "*";
+			spacing--;
+			//cout << i << '\t';
+			//children[i]->display(depth);
+		}
+		cout << left << setw(spacing) << dateInfo.tm_mday;
+		if (dateInfo.tm_wday  == 6) {
+			cout << endl << endl;
+		}
+		
+	}
 	//add to this to display events 
 	int i = children.size();
-	for (unsigned int i = 0; i < children.size(); ++i) {
-		cout << i << '\t';
-		children[i]->display(depth);
-	}
+	
+	
 	
 	
 
