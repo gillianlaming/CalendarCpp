@@ -3,7 +3,7 @@
 #include <map>
 
 #include "CalendarComponent.h"
-//#include "DisplayableEvent.h"
+#include "DisplayableEvent.h"
 // forward declarations needed to avoid circular includes, used to declare friends only
 class FullCalendarBuilder;
 class CalendarInterface;
@@ -27,8 +27,8 @@ public:
 	// inherited methods
 	virtual void display(int depth) override;
 	// void display2(int state);
-	multimap <string,shared_ptr<DisplayableComponent>> myEvents;
-	multimap <string, shared_ptr<DisplayableComponent>>::iterator it;
+	multimap <string,shared_ptr<DisplayableEvent>> myEvents;
+	multimap <string, shared_ptr<DisplayableEvent>>::iterator it;
 
 
 

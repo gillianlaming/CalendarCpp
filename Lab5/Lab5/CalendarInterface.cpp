@@ -123,14 +123,14 @@ void CalendarInterface::run() {
 				cout << "There was no event by this name in your calendar" << endl << endl;
 			}
 			else { //code structure from http://www.cplusplus.com/forum/general/102485/
-				typedef multimap <string, shared_ptr<DisplayableComponent>> temp; 
+				typedef multimap <string, shared_ptr<DisplayableEvent>> temp; 
 				pair<temp::iterator, temp::iterator> range;
 				range = cal->myEvents.equal_range(name); //equal_range returns pair of iterators
 				int i = 0;
-				vector<shared_ptr<DisplayableComponent>> sameName;
+				vector<shared_ptr<DisplayableEvent>> sameName;
 				for (temp::iterator it1 = range.first; it1 != range.second; ++it1) { //iterate across all the events with the same name
 					cout << "Index " << i << ": ";
-					shared_ptr<DisplayableComponent> event = it1->second;
+					shared_ptr<DisplayableEvent> event = it1->second;
 					sameName.push_back(event);
 					i++;
 					event->display(cal->depth);
@@ -174,7 +174,16 @@ void CalendarInterface::run() {
 			string fileName = calName + ".txt";
 			myfile.open(fileName, ios::out);
 			if (myfile) {
-				myfile << cal << endl; //I'm a little unclear of what they actually want us to save, this stores the memory address
+				//need to load all the events from the multimap
+				
+				for (std::multimap<string, shared_ptr<DisplayableEvent>>::iterator it = cal->myEvents.begin(); it != cal->myEvents.end(); ++it) {
+					//string will be formatted the same way it is when user inputs event
+					char backslash = '/';
+					char colon = ':';
+					char comma = ',';
+					myfile << (*it).second->when.tm_mon << backslash << (*it).second->when.tm_mday << backslash << (*it).second->when.tm_year << comma << (*it).second->when.tm_hour << colon << (*it).second->when.tm_min << comma << (*it).second->name << endl;
+				}
+				
 				myfile.close();
 				cout << "Calendar succcessfully saved to " << fileName << endl;
 			}

@@ -33,17 +33,8 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
 	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
-	CalendarComponent *a = dynamic_cast<CalendarComponent*>(cal.get());
-	
-	shared_ptr <DisplayableComponent> year1 = cal->getChild(when.tm_year - a->dateInfo.tm_year); //index of the year of the event
-	shared_ptr <DisplayableComponent> month1 = year1->getChild(when.tm_mon); //index of the month of the event
-	shared_ptr <DisplayableComponent> day1 = month1->getChild(when.tm_mday); //index of the day of the event
-	//DisplayableDay(when, day1).dateInfo;
-	
-	//TODO: fully pack the struct tm
-	tm time = currentCalendar->dateInfo;
-	//print out when
-	cout << "when " << when.tm_mon + 1 << "/" << when.tm_mday << '/' << when.tm_year << endl;
+
+	//fully pack this struct tm
 	tm newTime = when;
 	newTime.tm_sec = 0;   // seconds of minutes from 0 to 61
 	newTime.tm_min = when.tm_min;   // minutes of hour from 0 to 59
@@ -54,26 +45,25 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	newTime.tm_wday = 0; // days since sunday
 	newTime.tm_yday;  // days since January 1st
 	newTime.tm_isdst; // hours of daylight savings time
-	DisplayableDay newTimed = DisplayableDay(when, day1); //this is wrong, but it is a fully packed struct tm so it recurrs properly
-//	tm newTime = newTimed.dateInfo;
+	
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
 		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
-		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
+		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->display(currentCalendar->depth);
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
-		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent)); //add to multimap
+		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent)); //add to multimap
 		sort(day->children.begin(), day->children.end());
 	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
-		shared_ptr <DisplayableComponent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
+		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display(currentCalendar->depth);
 		day->addComponent(newEvent); //add the event to the correct day
-		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent));//add to multimap
+		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
 		
 	}
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
