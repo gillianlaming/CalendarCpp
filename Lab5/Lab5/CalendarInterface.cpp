@@ -76,7 +76,7 @@ void CalendarInterface::run() {
 
 		// display options to the user and respond to user input accordingly
 		
-		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl << "quit : q" << endl;
+		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl <<"Switch to ToDo List: todo" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
 		if (in == "in") {
@@ -192,6 +192,10 @@ void CalendarInterface::run() {
 				getline(restoreCal, address);
 			}
 			restoreCal.close();
+		}
+		//TODO: todoLIst
+		else if (in == "todo") {
+			cout << "todo view" << endl;
 		}
 		else if (in == "edit") {
 			//TODO: edit an event

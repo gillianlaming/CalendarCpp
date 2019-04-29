@@ -12,13 +12,28 @@ DisplayableMonth::DisplayableMonth(std::tm d, std::shared_ptr<DisplayableCompone
 	}
 }
 
+//TODO: put asterisk after days with events
 void DisplayableMonth::display(int depth) {
 	cout << "\t\t" << name  << endl;
-	if (depth == 2) {
+		if (depth == 2) {
+		cout <<  endl;
+		cout << "Sunday     " << "Monday     " << "Tuesday    " << "Wednesday  " << "Thursday   " << "Friday     " << "Saturday   " << endl;
+		//cout << "day: " << dateInfo.tm_mday << endl;
+		
+		//TODO: dateInfo.tm_wday gets us the weekday of the first day of the month
+		//this matters for the display bc its how the first line under the weekdays is formatted
 		for (size_t i = 0; i < children.size(); ++i) {
 			if (children[i] != nullptr) { // forward request to all children
+				cout <<i<<"    ";
+				//if (dateInfo.tm_wday == 0) {
+			
+				//}
+
+				//eventually we want to delete this(?) bc we just want the number(i) not full display
 				children[i]->display(depth);
+				
 			}
+			
 		}
 	}
 	

@@ -11,7 +11,7 @@ DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent
 		children.push_back(nullptr);
 	}
 }
-
+//TODO: display events under corresponding months
 void DisplayableYear::display(int depth) {
 	cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
 	//cout << "depth from displayable year " << depth << endl;
@@ -23,6 +23,7 @@ void DisplayableYear::display(int depth) {
 			}
 		}
 	}
+	
 	
 	
 }
