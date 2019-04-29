@@ -19,6 +19,11 @@ class DisplayableComponent {
 public:
 	// defined by concrete classes deriving from DisplayableComponent
 	virtual void display() = 0;
+	
+	//NS
+	void display2(int state);
+
+
 protected:
 	// member variables
 	std::vector<std::shared_ptr<DisplayableComponent> > children;

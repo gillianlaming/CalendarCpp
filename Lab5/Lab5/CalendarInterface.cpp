@@ -3,6 +3,7 @@
 #include "FullCalendarBuilder.h"
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
+#include "Calendar.h"
 #include <string>
 #include<iostream>
 #include <istream>
@@ -28,15 +29,21 @@ void CalendarInterface::run() {
 	while (1) {
 
 		//NS: Initialize current display children size to 4 for overall cal view??
+		//call  display2 passing in 
+		//currentDisplay->display2(3);
+		if (currentDisplay->children.size() == 4) {
+			//currentDisplay->display(3);
+		}
+		if (currentDisplay->children.size() == 3) {
+			//currentDisplay->display(3);
+		}
 
-
-		cout << "Baseyear " << cal->BASEYEAR << endl;
-		// display the current display of the calendar
+		
 
 		//if year
 		//if (currentDisplay->children.size() == 3) {
 			//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
-		}
+		
 
 
 
@@ -205,6 +212,7 @@ void CalendarInterface::run() {
 		
 		
 	}
+
 }
 
 

@@ -43,8 +43,19 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	//TODO: fully pack the struct tm
 	tm time = currentCalendar->dateInfo;
 	//print out when
+	cout << "when " << when.tm_mon + 1 << "/" << when.tm_mday << '/' << when.tm_year << endl;
+	tm newTime = when;
+	newTime.tm_sec = 0;   // seconds of minutes from 0 to 61
+	newTime.tm_min = when.tm_min;   // minutes of hour from 0 to 59
+	newTime.tm_hour = when.tm_hour;  // hours of day from 0 to 24
+	newTime.tm_mday = when.tm_mday;  // day of month from 1 to 31
+	newTime.tm_mon = when.tm_mon;   // month of year from 0 to 11
+	newTime.tm_year = when.tm_year;  // year since 1900
+	newTime.tm_wday = 0; // days since sunday
+	newTime.tm_yday;  // days since January 1st
+	newTime.tm_isdst; // hours of daylight savings time
 	DisplayableDay newTimed = DisplayableDay(when, day1); //this is wrong, but it is a fully packed struct tm so it recurrs properly
-	tm newTime = newTimed.dateInfo;
+//	tm newTime = newTimed.dateInfo;
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
