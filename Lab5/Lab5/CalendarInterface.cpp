@@ -26,49 +26,15 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 }
 
 void CalendarInterface::run() {
-	// run until the user quits
-	while (1) {
-
-		//NS: Initialize current display children size to 4 for overall cal view??
-		//call  display2 passing in 
-		//currentDisplay->display2(currentDisplay->children.size());
-		
-
-		
-
-		//if year
-		//if (currentDisplay->children.size() == 3) {
+	while (1) { 	// run until the user quits
 		cout << "depth " << cal->depth << endl;
 		currentDisplay->display(cal->depth); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
-		
-
-
-
-		//for (int i = 0; i < currentDisplay->children.size(); i++) {
-		//	shared_ptr<DisplayableYear> corresponding_year = dynamic_pointer_cast<DisplayableYear>(cal->getChild(i));
-			// corresponding_year->display();
-			
-		//}
-			//initial display - years with indices to zoom in on
-		//cout << CalendarComponent::BASEYEAR << endl;
+	
 		int yr = CalendarComponent::BASEYEAR;
-		//fixthis to get current year
-
-
 		//this part needs to be before all the other options are displayed so we dont have to wrap another cin (i think this should work but it may not)----------------------------------------------------------------------------
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		int numKids = kids.size();
-		/*	not sure if we need this part
-		if (numKids == 3) { //current display is year
-
-		}
-		else if (numKids == 2) { //current display is month
-
-		}
-		else if (numKids == 1) { //current display is day
-
-		}*/
 		//TODO: change this. right now it displays edit & delete on days which dont have any events.
 		if (currentDisplay->children.size() == 0) { //current display is an event
 			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;
