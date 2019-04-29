@@ -130,7 +130,7 @@ void CalendarInterface::run() {
 				time.tm_mon = month;
 				time.tm_year = year;
 				//^^reallllllly unclear if that is going to work
-				FullCalendarBuilder::getComponentByDate(cal, /*date*/, granularity);
+			//	FullCalendarBuilder::getComponentByDate(cal, /*date*/, granularity);
 				//TODO: we're going to want to call getComponent by date, all the code is done just have to figure out how to call it properly
 				//getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity)
 			}
@@ -192,7 +192,7 @@ void CalendarInterface::run() {
 		
 		}
 		else if (in == "delete") {
-			//WE WANT THIS TO BE CALLED ON A DAY W EVENTS, NOT AN EVENT idk if that is what the instructions want
+			
 			//TODO: delete the event
 			vector <shared_ptr<DisplayableComponent>> kidz = currentDisplay->children;
 			cout << "What is the index of the event that you want to be deleted: ";
