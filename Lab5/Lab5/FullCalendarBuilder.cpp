@@ -54,6 +54,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
 		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableComponent>>(name, newEvent)); //add to multimap
+		sort(day->children.begin(), day->children.end());
 	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event

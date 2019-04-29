@@ -19,16 +19,27 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		builder = make_shared<FullCalendarBuilder>();
 		cal = builder->buildCalendar(calendarName, years);
 		currentDisplay = cal;
+		
 	}
 }
 
 void CalendarInterface::run() {
 	// run until the user quits
 	while (1) {
+
+		//NS: Initialize current display children size to 4 for overall cal view??
+
+
 		cout << "Baseyear " << cal->BASEYEAR << endl;
 		// display the current display of the calendar
-		//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
-		
+
+		//if year
+		//if (currentDisplay->children.size() == 3) {
+			//currentDisplay->display(); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
+		}
+
+
+
 		//for (int i = 0; i < currentDisplay->children.size(); i++) {
 		//	shared_ptr<DisplayableYear> corresponding_year = dynamic_pointer_cast<DisplayableYear>(cal->getChild(i));
 			// corresponding_year->display();
@@ -95,6 +106,7 @@ void CalendarInterface::run() {
 					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
 				}
 			}
+			
 		}
 		else if (in == "search") {//searching for an event by name
 			string name;
@@ -177,6 +189,7 @@ void CalendarInterface::run() {
 		}
 		else if (in == "edit") {
 			//TODO: edit an event
+		
 		}
 		else if (in == "delete") {
 			//TODO: delete the event
@@ -244,4 +257,5 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_year = year - CalendarComponent::BASEYEAR;
 	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
+	
 }

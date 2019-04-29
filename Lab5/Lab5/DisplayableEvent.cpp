@@ -10,7 +10,7 @@ DisplayableEvent::DisplayableEvent(std::tm now, std::shared_ptr<DisplayableCompo
 void DisplayableEvent::display() {
 	int yr = when.tm_year + 1900;
 	int mon = when.tm_mon + 1;
-	cout << name << " " << "date: " << mon << "/" << when.tm_mday << "/" << yr << endl;
+	cout << name << " " << "date: " << mon << "/" << when.tm_mday << "/" << yr << " start time: " << when.tm_hour << ":" << when.tm_min << endl;
 }
 
 //shared_ptr<DisplayableComponent> DisplayableEvent::setName(string a) {}
