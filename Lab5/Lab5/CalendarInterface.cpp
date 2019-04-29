@@ -192,11 +192,18 @@ void CalendarInterface::run() {
 		
 		}
 		else if (in == "delete") {
-			
+
 			//TODO: delete the event
-			vector <shared_ptr<DisplayableComponent>> kidz = currentDisplay->children;
-			cout << "What is the index of the event that you want to be deleted: ";
+			DisplayableEvent* e = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
+
+			shared_ptr<DisplayableDay> d = shared_ptr<DisplayableDay>(e->parent);
+			
+		
+
+		//	vector <shared_ptr<DisplayableComponent>> kidz = currentDisplay->children;
+			
 			int index;
+
 
 			
 			//need to get the vector of children																	 

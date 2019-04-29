@@ -32,6 +32,7 @@ shared_ptr<DisplayableComponent> DisplayableComponent::removeComponent(unsigned 
 	if (index < children.size()) { // leaf objects will have size of 0
 		shared_ptr<DisplayableComponent> removed = children[index];
 		children[index] = nullptr;
+
 		return removed; // pointer to the removed component if successful
 	}
 	children.size();
