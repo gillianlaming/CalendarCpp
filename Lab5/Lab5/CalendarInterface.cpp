@@ -29,20 +29,20 @@ void CalendarInterface::run() {
 	while (1) { 	// run until the user quits
 		cout << "depth " << cal->depth << endl;
 		currentDisplay->display(cal->depth); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
-	
 		int yr = CalendarComponent::BASEYEAR;
 		//this part needs to be before all the other options are displayed so we dont have to wrap another cin (i think this should work but it may not)----------------------------------------------------------------------------
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		int numKids = kids.size();
+		
 		//TODO: change this. right now it displays edit & delete on days which dont have any events.
-		if (currentDisplay->children.size() == 0) { //current display is an event
+		//if (currentDisplay->children.size() == 0) { //current display is an event
+		if (cal->depth == 0){ //hopefully now this will only display if it is an event
 			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;
 		}
 		//-----------------------------------------------------------------------------------------------------------------
 
 		// display options to the user and respond to user input accordingly
-		
 		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl <<"Switch to ToDo List: todo" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
@@ -108,6 +108,7 @@ void CalendarInterface::run() {
 					cout << "Of the above events, which one would you like to display? Type in the index: ";
 					cin >> index;
 					//TODO: fix this display
+					//TODO this now
 					sameName[index]->display(cal->depth); //this is not the proper way to be displaying, but works for the time being.
 				}
 			}	
@@ -123,6 +124,13 @@ void CalendarInterface::run() {
 			if (iss >> month >> backslash >> day >> backslash >> year) {
 				cout << "Please enter a granularity: ";
 				cin >> granularity;
+				//need to build a struct tm
+				tm time;
+				time.tm_mday = day;
+				time.tm_mon = month;
+				time.tm_year = year;
+				//^^reallllllly unclear if that is going to work
+				FullCalendarBuilder::getComponentByDate(cal, /*date*/, granularity);
 				//TODO: we're going to want to call getComponent by date, all the code is done just have to figure out how to call it properly
 				//getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity)
 			}
