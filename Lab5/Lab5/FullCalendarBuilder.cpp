@@ -32,8 +32,8 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
-	shared_ptr <DisplayableComponent> day =getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
-
+	
+	
 	//fully pack this struct tm
 	tm newTime = when;
 	newTime.tm_sec = 0;   // seconds of minutes from 0 to 61
@@ -42,10 +42,14 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	newTime.tm_mday = when.tm_mday;  // day of month from 1 to 31
 	newTime.tm_mon = when.tm_mon;   // month of year from 0 to 11
 	newTime.tm_year = when.tm_year;  // year since 1900
-	newTime.tm_wday = 0; // days since sunday
-	newTime.tm_yday;  // days since January 1st
-	newTime.tm_isdst; // hours of daylight savings time
-	
+	newTime.tm_wday = when.tm_wday; // days since sunday
+	newTime.tm_yday = when.tm_yday;  // days since January 1st
+	newTime.tm_isdst = when.tm_isdst; // hours of daylight savings time
+
+	when.tm_mday -= 1;
+	shared_ptr <DisplayableComponent> day = getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
+	when.tm_mday += 1; //bad fix to problem but works
+
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
@@ -54,6 +58,9 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		newEvent->display(currentCalendar->depth);
 		//DisplayableEvent(newTime, newEvent).name = name;
 		day->addComponent(newEvent); //add the event to the correct day
+		//TODO: figure out why it's adding to the wrong day
+		//DisplayableDay(newTime1, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
+
 		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent)); //add to multimap
 		sort(day->children.begin(), day->children.end());
 	
@@ -63,6 +70,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display(currentCalendar->depth);
 		day->addComponent(newEvent); //add the event to the correct day
+		//DisplayableDay(when, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
 		
 	}

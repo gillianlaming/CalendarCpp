@@ -284,6 +284,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_mday = day;
 	time.tm_mon = month - 1;
 	time.tm_year = year - CalendarComponent::BASEYEAR;
+//	currentDisplay->display;
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
 	
 }
@@ -301,6 +302,5 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 	time.tm_mday = day;
 	time.tm_mon = month;
 	time.tm_year = year;
-	//shared_ptr<DisplayableComponent> cal, sring name, tm when, int recurrEvery, int recurrFor
 	builder->buildEvent(currentDisplay, name, time, recurrEvery, recurrFor);
 }
