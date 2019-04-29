@@ -35,7 +35,7 @@ void DisplayableDay::display(int depth) {
 	//add to this to display events 
 	int i = children.size();
 	for (unsigned int i = 0; i < children.size(); ++i) {
-		cout << i << '/t';
+		cout << i << '\t';
 		children[i]->display(depth);
 	}
 	
