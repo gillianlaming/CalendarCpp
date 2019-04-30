@@ -26,5 +26,5 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) override;
 	virtual void display(int depth) override;
 	static ToDoList* getList();
-	multimap <string, shared_ptr<DisplayableComponent>> myTasks;
+//	multimap <string, shared_ptr<Task>> myTasks;
 };

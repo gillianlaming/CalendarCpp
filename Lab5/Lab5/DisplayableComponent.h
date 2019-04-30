@@ -7,6 +7,7 @@ It declares and defines the interface that all objects in the composite share.
 #include<memory>
 #include<vector>
 #include <iomanip>
+#include <map>
 #include <algorithm>
 
 
@@ -25,6 +26,7 @@ class DisplayableComponent {
 public:
 	// defined by concrete classes deriving from DisplayableComponent
 	virtual void display(int depth) = 0;
+	//multimap <string, shared_ptr<Task>> myTasks;
 	
 	
 protected:

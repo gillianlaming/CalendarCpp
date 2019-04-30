@@ -46,8 +46,14 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildTasks(shared_ptr<Disp
 	return tsk;
 	//SORT TASKS
 }
-*/
 
+
+std::shared_ptr<Task> buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed) {
+	shared_ptr<Task> tsk = make_shared<Task>(name, list, when);
+	list->myTasks.insert(pair<string, shared_ptr<Task>>(name, tsk));
+	//list->addComponent(tsk);
+}
+*/
 // you may decide to define this.
 shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor, bool a) {
 	//TOFO:FIX DATE OF RECURRING EVENTS

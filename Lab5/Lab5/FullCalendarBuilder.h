@@ -17,6 +17,7 @@ public:
 	FullCalendarBuilder() {};
 	virtual std::shared_ptr<ToDoList> buildTDList();
 	//virtual std::shared_ptr<DisplayableComponent> buildTasks(std::shared_ptr<DisplayableComponent> list, tm when, std::string name);
+	//virtual std::shared_ptr<DisplayableComponent> buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed);
 
 
 protected:
