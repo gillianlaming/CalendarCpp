@@ -54,11 +54,8 @@ std::shared_ptr<Task> buildTasks(std::shared_ptr<DisplayableComponent> list, std
 	//list->addComponent(tsk);
 }
 */
-// you may decide to define this.
+
 shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor, bool a) {
-	//TOFO:FIX DATE OF RECURRING EVENTS
-	
-	
 	//fully pack this struct tm
 	tm newTime = when;
 	newTime.tm_sec = 0;   // seconds of minutes from 0 to 61
@@ -78,56 +75,30 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
-		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
-		//newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		if (a) {
-			//newEvent->calNum = "C" + currentCalendar->numCals;
 			newEvent->calNum = currentCalendar->numCals;
-
-			
-			//newEvent->numberCalendars = currentCalendar->numCals;
-		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent->calNum << endl;
-
 		}
 		day->addComponent(newEvent); //add the event to the correct day
-		
-		//DisplayableDay(newTime1, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
-
 		sort(day->children.begin(), day->children.end());
 		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent)); //add to multimap
-		
-	
+
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
 		
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
-		//DisplayableEvent(when, newEvent).name = name;
-		//newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
 		if (a) {
-			//newEvent->calNum = "C" + currentCalendar->numCals;
-			//int aNumber = currentCalendar->numCals;
-			//string theName = "C" + std::to_string(aNumber);
-			//cout << "name " << theName << "++++++++++++++++++++++++++++" << endl;
-			//newEvent->calNum = theName;
 			newEvent->calNum = currentCalendar->numCals;
-			//newEvent->numberCalendars = currentCalendar->numCals;
-		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent-> calNum << endl;
-
 		}
-		//DisplayableDay(when, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
 		sort(day->children.begin(), day->children.end());
-		
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
-		
 	}
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
 }
 //TODO: breaks upon adding event when not at depth of 4
-//warning not all paths return. What should we return if improper so it doesn't break
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -144,33 +115,21 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 		return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday ); //index of the day of the event
-	
-
-	
 	if (day == NULL) {
 		cout << "Day doesn't exist in this cal, sry dude" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
-
-	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 	if (granularity == "day") {
 		return day;
 	}
 	if (granularity == "month") {
-		//shared_ptr<DisplayableComponent> a = buildMonth(d, month);
-		//a->display();
 		return month;
 		
 	}
 	if (granularity == "year") {
-		//shared_ptr<DisplayableComponent> a = buildYear(d, year);
-		//a->display();
 		return year;
 	}
-	return nullptr; //hopefully this will fix warning from up top
-
-	
+	return nullptr;
 }
 
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) {
@@ -200,18 +159,3 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildYear(std::tm d, std::
 	}
 	return y;
 }
-/*
-bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
-	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
-	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
-	if (event1->when.tm_hour < event2->when.tm_hour) {
-		return true;
-	}
-	else if (event1->when.tm_hour == event2->when.tm_hour) {
-		if (event1->when.tm_min < event2->when.tm_min) {
-			return true;
-		}
-	}
-	return false;
-}
-*/
