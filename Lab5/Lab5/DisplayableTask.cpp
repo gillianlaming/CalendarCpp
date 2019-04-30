@@ -6,7 +6,6 @@
 using namespace std;
 
 
-
 Task::Task(string name, std::shared_ptr<DisplayableComponent> p) : DisplayableComponent(p) {
 	Task::name = name;
 }
