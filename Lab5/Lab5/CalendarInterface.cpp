@@ -437,6 +437,7 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 }
 
 //addtodo
+/*
 void CalendarInterface::addTask(string name, int& month, int& day, int& year, int& hour, int& minute) {
 	
 	//need to make new struct tm object
@@ -449,7 +450,7 @@ void CalendarInterface::addTask(string name, int& month, int& day, int& year, in
 	tdbuilder->buildTasks(todo, name, time, false);
 	cout << "task added" << endl;
 }
-
+*/
 
 //merge
 void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {
