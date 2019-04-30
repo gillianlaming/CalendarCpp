@@ -31,12 +31,12 @@ ToDoInterface::ToDoInterface(std::string builderType) : builder(nullptr), todo(n
 	}
 }
 
-void CalendarInterface::run() {
+void ToDoInterface::run() {
 	while (1) { 	// run until the user quits
-		currentDisplay->display(todo->depth);
+		//currentDisplay->display(todo->depth);
 		cout << endl; //make this ish more readable
-		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
-		int numKids = kids.size();
+	//	vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
+	//	int numKids = kids.size();
 
 	
 
