@@ -223,6 +223,20 @@ void CalendarInterface::run() {
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
 					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+					shared_ptr<DisplayableComponent> oldDay = event1->getParent().lock();
+					vector < shared_ptr<DisplayableComponent>>  a = oldDay->children;
+					int index = 0;
+					for (int i = 0; i < a.size(); ++i) {
+						DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
+						if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
+							//cout << "got here yay" << endl;
+							index = i;
+							break;
+						}
+					}
+					//oldDay->removeComponent(index);
+					oldDay->children.erase(oldDay->children.begin() + index);
+
 					event1->when.tm_hour = hour;
 					event1->when.tm_min = minute;
 					event1->when.tm_mday = day;
@@ -230,7 +244,19 @@ void CalendarInterface::run() {
 					event1->when.tm_year = year - CalendarComponent::BASEYEAR;
 					event1->name = name;
 					shared_ptr<DisplayableComponent> day = event1->getParent().lock();
+					builder->buildEvent(cal, event1->name, event1->when, 0, 0, false);
+					/*
+					event1->parent = day;
+					
+				//	day->addComponent(event1);
 					sort(day->children.begin(), day->children.end()); //need to re-sort children vectors now
+					
+					cal->depth = 1;
+					//cout << "year " << event1->when.tm_year << endl;
+					//shared_ptr<DisplayableComponent> newDisplay = builder->getComponentByDate(cal, event1->when, "day");
+					
+					//currentDisplay = newDisplay;
+					*/
 					goodInput = false;
 				}
 				else {
