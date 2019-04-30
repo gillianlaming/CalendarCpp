@@ -78,12 +78,12 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(
 		int curYear = a->dateInfo.tm_year;
 		int newYear = d.tm_year;
 		//ADD THAT YEAR
-		addYears(curYear, newYear);
+		year = addYears(curYear, newYear, currentCalendar);
 		//return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon); //index of the month of the event
 	if (month == NULL) {
-		cout << "Month doesn't exist in this cal, sry dude" << endl;
+		cout << "need to add month" << endl;
 		return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday); //index of the day of the event
@@ -122,27 +122,38 @@ shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildMonth(std::tm
 }
 shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> y = make_shared<DisplayableYear>(d, p, false);
+	int mon = d.tm_mon;
+	y->addComponent(buildMonth(d, y));
 	// construct each month and add it as a child of the year
+	/*
 	for (unsigned int i = 0; i < CalendarComponent::MONTHS; ++i) {
 		d.tm_mon = i;
 		y->addComponent(buildMonth(d, y));
 		// set week day of first day of the next month
 		d.tm_wday = (d.tm_wday + CalendarComponent::days[i]) % CalendarComponent::DAYSINAWEEK;
 	}
+	*/
 	return y;
 }
-void IncrementalCalendarBuilder::addYears(int curYear, int newYear) {
+shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::addYears(int curYear, int newYear, shared_ptr<Calendar> currentCalendar) {
 	int diff = newYear - curYear;
 	if (diff < 0) {
 		cout << "Error: cannot add event in the past" << endl;
 	}
 	else {
-		for (unsigned int i = 0; i < diff; ++i) {
+		
+		for (unsigned int i = 1; i < diff; ++i) {
+			cout << "adding more years" << endl;
 			tm y = currentCalendar->dateInfo;
 			y.tm_year += i;
 			y.tm_wday = (y.tm_wday + CalendarComponent::DAYSINAYEAR * i) % CalendarComponent::DAYSINAWEEK; // calculate day of the week for first day of the year
 			currentCalendar->addComponent(buildYear(y, currentCalendar));
 		}
+		tm y = currentCalendar->dateInfo;
+		y.tm_year += diff;
+		y.tm_wday = (y.tm_wday + CalendarComponent::DAYSINAYEAR * diff) % CalendarComponent::DAYSINAWEEK; // calculate day of the week for first day of the year
+		return currentCalendar->addComponent(buildYear(y, currentCalendar));
 	}
+
 	
 }

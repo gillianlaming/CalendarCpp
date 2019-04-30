@@ -22,6 +22,11 @@ void DisplayableYear::display(int depth) {
 				//children[i]->children;
 				children[i]->display(depth);
 			}
+			else {
+				cout << i << setw(20);
+				cout <<CalendarComponent::months[i] << endl;
+				
+			}
 			
 
 		}

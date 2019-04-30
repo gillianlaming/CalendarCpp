@@ -9,6 +9,7 @@ Purpose: declare abstract base class to represent a builder for the calendar.
 #include<memory>
 
 class CalendarBuilder {
+	friend IncrementalCalendarBuilder;
 public:
 	virtual std::shared_ptr<DisplayableEvent> buildEvent(std::shared_ptr<DisplayableComponent> cal, std::string name, std::tm when, int recurrEvery, int recurrFor, bool a) = 0;
 	virtual std::shared_ptr<DisplayableComponent> getComponentByDate(std::shared_ptr<DisplayableComponent> cal, std::tm d, std::string granularity) = 0;
