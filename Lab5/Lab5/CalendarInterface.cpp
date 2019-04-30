@@ -24,9 +24,7 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		cal = builder->buildCalendar(calendarName, years);
 		currentDisplay = cal;
 		cal->depth = 4;
-		cal->numCals = "";
-		
-		
+		cal->numCals = "";	
 	}
 }
 

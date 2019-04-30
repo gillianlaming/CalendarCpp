@@ -160,6 +160,7 @@
     <ClInclude Include="DisplayableTask.h" />
     <ClInclude Include="DisplayableYear.h" />
     <ClInclude Include="FullCalendarBuilder.h" />
+    <ClInclude Include="IncrementalCalendarBuilder.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ToDoInterface.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="DisplayableTask.cpp" />
     <ClCompile Include="DisplayableYear.cpp" />
     <ClCompile Include="FullCalendarBuilder.cpp" />
+    <ClCompile Include="IncrementalCalendarBuilder.cpp" />
     <ClCompile Include="lab5_driver.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

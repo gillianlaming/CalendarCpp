@@ -28,11 +28,13 @@ struct tm {
 
 // forward declarations needed to avoid circular includes, used to declare friends only
 class FullCalendarBuilder;
+class IncrementalCalendarBuilder;
 class CalendarInterface;
 
 class CalendarComponent : public DisplayableComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
+	friend IncrementalCalendarBuilder;
 public:
 	// inherited
 	virtual void display(int depth) = 0;

@@ -41,62 +41,6 @@ void Calendar::display(int depth) {
 
 }
 
-//NS
-/*
- void Calendar::display2(int state) {
-	 //full cal initial - list years w indices
-	 if (state == 4) {
-		 cout << "Calendar: " << name << endl;
-
-	}
-	 //year
-	 else if (state == 3) {
-		 //from DisplayableYear.cpp
-		 cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << ":" << endl;
-		 for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
-			 if (children[i] != nullptr) {
-				 children[i]->display();
-			 }
-		 }
-	}
-	 //month
-	 else if (state == 2) {
-		 //from DisplayableMonth.cpp
-		 cout << "\t\t" << name << ":" << endl;
-		 for (size_t i = 0; i < children.size(); ++i) {
-			 if (children[i] != nullptr) { // forward request to all children
-				 children[i]->display();
-			 }
-		 }
-	 }
-	 //day
-	 else if (state == 1) {
-
-		 //from DisplayableDay.cpp
-		 cout << "\t\t\t" << daysoftheweek[dateInfo.tm_wday] << " ";
-		 cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
-		 //add to this to display events 
-		 //int i = children.size();
-
-		 for (unsigned int i = 0; i < children.size(); ++i) {
-			 children[i]->display();
-		 }
-	 }
-	 //event
-	 else {
-
-		 //from DisplayableEvent.cpp
-		 int yr = dateInfo.tm_year + 1900;
-		 int mon = dateInfo.tm_mon + 1;
-		 cout << name << " " << "date: " << mon << "/" << dateInfo.tm_mday << "/" << yr << " start time: " << dateInfo.tm_hour << ":" << dateInfo.tm_min << endl;
-
-	 }
-
-}
-*/
-
- //NS end
-
 shared_ptr<DisplayableComponent> Calendar::addComponent(std::shared_ptr<DisplayableComponent> comp) {
 	DisplayableYear* y = dynamic_cast<DisplayableYear *>(comp.get());
 	if (y == nullptr) { // if the cast fails, return nullptr
