@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool completed) : DisplayableComponent(ptr) {
+Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool completed) : CalendarComponent(deadline, ptr) {
 	Task::name = name;
 	Task::deadline = deadline;
 	Task::completed = false;
@@ -17,7 +17,7 @@ Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool 
 void Task::display(int depth) {
 
 	int yr = deadline.tm_year;
-	int mon = deadline.tm_mon + 1;
+	int mon = deadline.tm_mon;
 
 	if (completed == false) {
 		if (deadline.tm_min == 0) {

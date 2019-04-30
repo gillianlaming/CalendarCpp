@@ -6,15 +6,27 @@ using namespace std;
 std::shared_ptr<ToDoList> ToDoListBuilder::buildToDoList() {
 	currenttodo = make_shared<ToDoList>();
 	return currenttodo;
+	
 }
+
+
+
 
 std::shared_ptr<DisplayableComponent> ToDoListBuilder::buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed) {
 	tm newTime = when;
-	shared_ptr<ToDoList> todo = currenttodo;
-	shared_ptr <Task> newTask = make_shared<Task>(name, list, when, completed);
-	//newTask->parent = todo;
-	todo->addComponent(newTask);
-	//sort
+	//TODO: i think we're gonna need to fully pack this struct tm
 
-	return make_shared<Task>(name, list, when, completed);
+	//shared_ptr<ToDoList> todo = currenttodo; //this line is the issue
+	CalendarComponent *a = dynamic_cast<CalendarComponent*>(currenttodo.get());
+	
+	
+	shared_ptr <Task> newTask = make_shared<Task>(name, list, when, completed);
+	newTask->parent = currenttodo;
+	currenttodo->addComponent(newTask);
+	//set the parent of the task as the todo list
+	//shared_ptr<DisplayableComponent> parent = newTask->parent.lock();
+	
+	//sort
+	return newTask;
+	
 }

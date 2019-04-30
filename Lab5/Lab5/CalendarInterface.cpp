@@ -222,7 +222,7 @@ void CalendarInterface::run() {
 
 		//TODO: todoLIst
 		else if (in == "todo") {
-			cout << "ToDoList" << endl;
+			//cout << "ToDoList" << endl;
 			tdbuilder = make_shared<ToDoListBuilder>();
 			todo = tdbuilder->buildToDoList();
 			currentDisplay = todo;

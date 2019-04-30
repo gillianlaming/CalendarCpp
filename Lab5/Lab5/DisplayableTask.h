@@ -1,5 +1,7 @@
 #pragma once
 #include "DisplayableComponent.h"
+#include "CalendarComponent.h"
+#include "ToDoListBuilder.h"
 #include "ToDoList.h"
 #include <string>
 #include <map>
@@ -7,17 +9,14 @@
 
 class calendarInterface;
 class FullCalendarBuilder;
-class calendarBuilder;
 
 using namespace std;
 
-class Task : public DisplayableComponent {
-	friend FullCalendarBuilder;
-	friend calendarInterface;
-	friend class ToDoList;
-	friend class displayableComponenet;
-	friend class calendarBuilder;
-	friend class calendarInterface;
+class Task :public CalendarComponent {
+	friend CalendarInterface;
+	friend ToDoList;
+	//friend class DisplayableComponenet;
+	friend class ToDoListBuilder;
 	
 	
 public:
