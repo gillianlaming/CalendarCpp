@@ -50,7 +50,7 @@ void DisplayableEvent::display(int depth) {
 		}
 		
 	}
-	if (depth == 0) {
+	if (depth == 0 || depth == 2) {
 		if (calNum == "") {
 			if (when.tm_min == 0) {
 				cout << mon << "/" << when.tm_mday << "/" << yr << endl;
@@ -72,6 +72,7 @@ void DisplayableEvent::display(int depth) {
 			}
 		}
 	}	
+	
 }
 
 

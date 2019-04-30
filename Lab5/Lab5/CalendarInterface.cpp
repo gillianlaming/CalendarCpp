@@ -113,9 +113,13 @@ void CalendarInterface::run() {
 				for (temp::iterator it1 = range.first; it1 != range.second; ++it1) { //iterate across all the events with the same name
 					cout << "Index " << i << ": ";
 					shared_ptr<DisplayableEvent> event = it1->second;
+					//event->when.tm_mday = event->when.tm_mday - 1;
 					sameName.push_back(event);
 					i++;
+					int z = cal->depth;
+					cal->depth = 3;
 					event->display(cal->depth);
+					cal->depth = z;
 				}
 				cout << endl;
 				if (i > 1) {
@@ -124,7 +128,13 @@ void CalendarInterface::run() {
 					cin >> index;
 					//TODO: fix this display
 					//TODO this now
+					int z = cal->depth;
+
+					cal->depth = 3;
+					
+					
 					sameName[index]->display(cal->depth); //this is not the proper way to be displaying, but works for the time being.
+					cal->depth = z;
 				}
 			}	
 			cout << "------------------------------------------------------------------" << endl << endl;
