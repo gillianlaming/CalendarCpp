@@ -43,7 +43,7 @@ void CalendarInterface::run() {
 		//-----------------------------------------------------------------------------------------------------------------
 
 		// display options to the user and respond to user input accordingly
-		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl <<"Switch to ToDo List: todo" << endl << "quit : q" << endl;
+		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl <<"Merge a calendar with another calendar: merge" << endl <<"Switch to ToDo List: todo" << endl << "quit : q" << endl;
 		string in;
 		cin >> in;
 		if (in == "in") {
@@ -80,6 +80,10 @@ void CalendarInterface::run() {
 				}
 			}
 			
+		}
+		else if (in == "merge") {
+			cout << "What is the name of the calendar you would like to merge with: ";
+			restore();
 		}
 		else if (in == "search") {//searching for an event by name
 			string name;
@@ -140,11 +144,6 @@ void CalendarInterface::run() {
 				time.tm_year = year-CalendarComponent::BASEYEAR;
 				shared_ptr<DisplayableComponent> a = builder->getComponentByDate(currentDisplay, time, granularity);
 				currentDisplay = a;
-				//currentDisplay->display(cal->depth);
-				//^^reallllllly unclear if that is going to work
-			//	FullCalendarBuilder::getComponentByDate(cal, /*date*/, granularity);
-				//TODO: we're going to want to call getComponent by date, all the code is done just have to figure out how to call it properly
-				//getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity)
 			}
 			else {
 				cout << "Bad input" << endl;
@@ -253,6 +252,29 @@ void CalendarInterface::run() {
 
 }
 
+void CalendarInterface::restore() {
+	
+	string calName;
+	cin >> calName;
+	string fileName = calName + ".txt";
+	ifstream restoreCal;
+	restoreCal.open(fileName);
+	string line;
+	if (restoreCal.is_open()) {
+		while (!restoreCal.eof()) { //while it's not the end of the file
+			getline(restoreCal, line);
+			istringstream iss(line);
+			string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
+			while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
+				addEvent2(name, month, day, year, hour, minute);
+			}
+		}
+	}
+	else {
+		cout << "Unable to read info from file" << endl << endl;
+	}
+	restoreCal.close();
+}
 
 void CalendarInterface::zoomIn(unsigned int index) {
 	shared_ptr<DisplayableComponent> temp = currentDisplay->getChild(index);

@@ -8,22 +8,22 @@ using namespace std;
 DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> p) : CalendarComponent(d, p) { }
 
 
-/*
-DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
+
+bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
 	cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
 	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
 	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
 	if (event1->when.tm_hour < event2->when.tm_hour) {
-		return event1;
+		return true;
 	}
 	else if (event1->when.tm_hour == event2->when.tm_hour) {
 		if (event1->when.tm_min < event2->when.tm_min) {
-			return event1;
+			return true;
 		}
 	}
-	return event2;
+	return false;
 }
-*/
+
 std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_ptr<DisplayableComponent> e) {
 	
 	children.push_back(e);

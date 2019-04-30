@@ -26,7 +26,8 @@ public:
 	std::string name;
 	std::tm when; //contains date/time of the event
 	//bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
-	bool operator<(const DisplayableEvent & e1);
+	//bool operator<(const DisplayableEvent & e1);
+
 protected: //unclear if i need this part
 	
 	

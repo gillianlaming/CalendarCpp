@@ -53,11 +53,12 @@ void DisplayableEvent::setName(char *a) {
 
 	DisplayableEvent::name = nameA; //set this equal to the name
 }
-
+/*
 bool DisplayableEvent::operator<(const DisplayableEvent & e1) {
 	cout << "---------------------------------------------------------------" << endl;
 	//DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
 	//DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
+
 	if (e1.when.tm_hour < dateInfo.tm_hour) {
 		return false;
 	}
@@ -68,4 +69,5 @@ bool DisplayableEvent::operator<(const DisplayableEvent & e1) {
 	}
 	return true;
 }
+*/
 
