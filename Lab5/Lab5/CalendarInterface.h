@@ -5,6 +5,7 @@ Purpose: declare the user interface for our calendar
 #pragma once
 #include "CalendarBuilder.h"
 #include "CalendarComponent.h"
+#include "ToDoListBuilder.h"
 #include<memory>
 #include <string>
 
@@ -14,6 +15,9 @@ class CalendarInterface {
 	std::shared_ptr<Calendar> cal; // the calendar
 	std::shared_ptr<CalendarBuilder> builder; // builder for managing construction of the calendar
 	std::shared_ptr<DisplayableComponent> currentDisplay; // which component the user is currently viewing
+	std::shared_ptr<ToDoListBuilder> tdbuilder;
+	std::shared_ptr<ToDoList> todo;
+	
 public:
 	// constructor
 	// arguments: 1 - what type of builder? 2 - how many years to hold? 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
+#include "ToDoListBuilder.h"
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
 #include "Calendar.h"
@@ -222,6 +223,12 @@ void CalendarInterface::run() {
 		//TODO: todoLIst
 		else if (in == "todo") {
 			cout << "todo view" << endl;
+			tdbuilder = make_shared<ToDoListBuilder>();
+			todo = tdbuilder->buildToDoList();
+			currentDisplay = todo;
+			//do we need to figure out depth here?
+			todo->display(9);
+			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 
 		else if (in == "edit") {

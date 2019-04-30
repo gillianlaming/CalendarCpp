@@ -15,7 +15,7 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> getComponentByDate(std::shared_ptr<DisplayableComponent> cal, std::tm d, std::string granularity) override;
 	virtual std::shared_ptr<Calendar> buildCalendar(std::string name, size_t years) override;
 	FullCalendarBuilder() {};
-	virtual std::shared_ptr<ToDoList> buildTDList();
+	//virtual std::shared_ptr<ToDoList> buildTDList();
 	//virtual std::shared_ptr<DisplayableComponent> buildTasks(std::shared_ptr<DisplayableComponent> list, tm when, std::string name);
 	//virtual std::shared_ptr<DisplayableComponent> buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed);
 

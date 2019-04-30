@@ -30,10 +30,12 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 	}
 	return currentCalendar;
 }
-
+/*
 shared_ptr<ToDoList> FullCalendarBuilder::buildTDList() {
+	//todo = make_shared<ToDoList>(name);
 	ToDoList * tdl = ToDoList::getList();
-	shared_ptr<ToDoList>tp;
+	shared_ptr<ToDoList>tp(tdl);
+	shared_ptr<ToDoList> myTD = ToDoList();
 	return tp;
 }
 
@@ -50,7 +52,9 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildTasks(shared_ptr<Disp
 
 std::shared_ptr<Task> buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed) {
 	shared_ptr<Task> tsk = make_shared<Task>(name, list, when);
-	list->myTasks.insert(pair<string, shared_ptr<Task>>(name, tsk));
+	
+
+	//list->myTasks.insert(pair<string, shared_ptr<Task>>(name, tsk));
 	//list->addComponent(tsk);
 }
 */
