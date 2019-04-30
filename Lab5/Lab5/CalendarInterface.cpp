@@ -188,12 +188,38 @@ void CalendarInterface::run() {
 		}
 		else if (in == "edit") {
 			//TODO: edit an event
+			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
+			cout << "enter the new info for your event ";
+			bool goodInput = true;
+			while (goodInput) {
+				cout << "mm/dd/yyyy,hh:mm,name" << endl;
+				string line;
+				cin >> line;
+				istringstream iss(line);
+				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
+				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
+					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+					event1->when.tm_hour = hour;
+					event1->when.tm_min = minute;
+					event1->when.tm_mday = day;
+					event1->when.tm_mon = month - 1;
+					event1->when.tm_year = year - CalendarComponent::BASEYEAR;
+					event1->name = name;
+					goodInput = false;
+				}
+				else {
+					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
+				}
+			}
+			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
+			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
+
+		
 
 		
 		}
 		else if (in == "delete") {
 
-			//TODO: delete the event
 			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
 			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
 			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
@@ -209,34 +235,7 @@ void CalendarInterface::run() {
 			string key = event2->name;
 			cal->myEvents.erase(key);
 			rent->children.erase(rent->children.begin() + index);
-			//need 
-
-
-				/*
-			shared_ptr<DisplayableComponent> d = shared_ptr<DisplayableComponent>(event1->parent);
-			vector<shared_ptr<DisplayableComponent>> a = d->children;
-			
-			/*
-			for (std::vector<shared_ptr<DisplayableComponent>>::iterator it = a.begin(); it != a.end(); ++it) {
-				it->get
-			}
-			
-			for (int i = 0; i < a.size(); ++i) {
-				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
-				if (event2 == nullptr) {
-					cout << "event 2 is null " << endl;
-				}
-				if (event1->name == event2->name && event1->when.tm_hour == event2->when.tm_hour) {
-					cout << "hey" << endl;
-				}
-
-			}
-			*/
-
-			//need to get the vector of children																	 
-			//get index of event in vector
-			//remove the specific component by calling remove component
-			//need to decrement the number of children ->!!!! v unclear how to do this
+		
 		}
 		else if (in == "q") {
 			break;
