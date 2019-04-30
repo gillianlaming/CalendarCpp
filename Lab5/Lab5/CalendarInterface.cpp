@@ -182,6 +182,7 @@ void CalendarInterface::run() {
 			}
 		}
 		else if (in == "restore") {
+			
 			cout << "What is the name of the calendar you would like to restore: ";
 			string calName;
 			cin >> calName;
@@ -190,6 +191,7 @@ void CalendarInterface::run() {
 			restoreCal.open(fileName);
 			string line;
 			if (restoreCal.is_open()) {
+				cal->myEvents.clear(); //clear the multiset
 				while (!restoreCal.eof()) { //while it's not the end of the file
 					getline(restoreCal, line);
 					istringstream iss(line);
@@ -240,18 +242,21 @@ void CalendarInterface::run() {
 			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
 			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
 			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
-			int index;
+			int index = 0;
 			for (int i = 0; i < a.size(); ++i) {
 				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
 				if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
 					cout << "got here yay" << endl;
-					index = 1;
+					index = i;
+					break;
 				}
 			}
 			DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[index].get());
 			string key = event2->name;
 			cal->myEvents.erase(key);
+			
 			rent->children.erase(rent->children.begin() + index);
+			//zoomOut();
 		
 		}
 		else if (in == "q") {
