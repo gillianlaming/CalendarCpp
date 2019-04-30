@@ -99,7 +99,7 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
-		cout << "NUM CALS " << currentCalendar ->numCals;
+		
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display(currentCalendar->depth);

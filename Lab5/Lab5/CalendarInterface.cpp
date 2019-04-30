@@ -29,20 +29,15 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 
 void CalendarInterface::run() {
 	while (1) { 	// run until the user quits
-		cout << "depth " << cal->depth << endl;
-		currentDisplay->display(cal->depth); //UNCOMMENT THIS LATER i just commented out so full cal doesn't print every time
+		currentDisplay->display(cal->depth); 
 		int yr = CalendarComponent::BASEYEAR;
-		//this part needs to be before all the other options are displayed so we dont have to wrap another cin (i think this should work but it may not)----------------------------------------------------------------------------
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		int numKids = kids.size();
 		
-		//TODO: change this. right now it displays edit & delete on days which dont have any events.
-		//if (currentDisplay->children.size() == 0) { //current display is an event
 		if (cal->depth == 0){ //hopefully now this will only display if it is an event
 			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;
 		}
-		//-----------------------------------------------------------------------------------------------------------------
 
 		// display options to the user and respond to user input accordingly
 		cout << "zoom out: out" << endl << "zoom in: in" << endl << "add event: add" << endl << "search for an event by name: search" << endl << "jump to a specific day: jump" << endl << "Save calendar to a file: save " << endl << "Resore calendar from a file: restore" << endl <<"Merge a calendar with another calendar: merge" << endl <<"Switch to ToDo List: todo" << endl << "quit : q" << endl;
@@ -86,14 +81,12 @@ void CalendarInterface::run() {
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
 			cal->numCals = cal->numCals + 1;
-			//cout << "the number of calendars is changing " << cal->numCals << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
 			
 			if (mergeMeBb()) {
 				cout << "mergemebb worked" << endl;
 			}
 			else {
 				cal->numCals = cal->numCals - 1;
-				//cout << "Error merging calendars." << endl;
 			}
 		}
 		else if (in == "search") {//searching for an event by name
@@ -127,6 +120,7 @@ void CalendarInterface::run() {
 					sameName[index]->display(cal->depth); //this is not the proper way to be displaying, but works for the time being.
 				}
 			}	
+			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 		else if (in == "jump"){ //jump to a specific day
 			string granularity;
@@ -159,8 +153,7 @@ void CalendarInterface::run() {
 			else {
 				cout << "Bad input" << endl;
 			}
-			
-
+			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 		else if (in == "save") {
 			ofstream myfile;
@@ -180,6 +173,11 @@ void CalendarInterface::run() {
 				myfile.close();
 				cout << "Calendar succcessfully saved to " << fileName << endl << endl;
 			}
+			else {
+				cout << "Error opening file to save calendar." << endl;
+			}
+			myfile.close(); //new
+			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 		else if (in == "restore") {
 			
@@ -205,13 +203,15 @@ void CalendarInterface::run() {
 				cout << "Unable to read info from file" << endl << endl;
 			}
 			restoreCal.close();
+			cout << "------------------------------------------------------------------" << endl << endl;
 		}
+
 		//TODO: todoLIst
 		else if (in == "todo") {
 			cout << "todo view" << endl;
 		}
+
 		else if (in == "edit") {
-			//TODO: edit an event
 			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
 			cout << "enter the new info for your event ";
 			bool goodInput = true;
@@ -229,12 +229,15 @@ void CalendarInterface::run() {
 					event1->when.tm_mon = month - 1;
 					event1->when.tm_year = year - CalendarComponent::BASEYEAR;
 					event1->name = name;
+					shared_ptr<DisplayableComponent> day = event1->getParent().lock();
+					sort(day->children.begin(), day->children.end()); //need to re-sort children vectors now
 					goodInput = false;
 				}
 				else {
 					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
 				}
 			}
+			cout << "------------------------------------------------------------------" << endl << endl;
 			
 		}
 		else if (in == "delete") {
@@ -257,13 +260,12 @@ void CalendarInterface::run() {
 			
 			rent->children.erase(rent->children.begin() + index);
 			//zoomOut();
+			cout << "------------------------------------------------------------------" << endl << endl;
 		
 		}
 		else if (in == "q") {
 			break;
-		}
-		
-		
+		}	
 	}
 
 }
@@ -303,6 +305,7 @@ void CalendarInterface::zoomIn(unsigned int index) {
 		currentDisplay = temp;
 	}
 	cal->depth--;
+	cout << "------------------------------------------------------------------" << endl;
 }
 
 void CalendarInterface::zoomOut() {
@@ -312,7 +315,9 @@ void CalendarInterface::zoomOut() {
 		currentDisplay = currentDisplay->getParent().lock();
 	}
 	cal->depth++;
+	cout << "------------------------------------------------------------------" << endl;
 }
+//regular add event
 void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year,  int& hour,  int& minute ) { //helper function
 	int recurrFor;
 	int recurrEvery;
@@ -355,7 +360,6 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 	int recurrFor = 0;
 	int recurrEvery = 0;
 
-	
 	//need to make new struct tm object
 	tm time;
 	time.tm_hour = hour;
