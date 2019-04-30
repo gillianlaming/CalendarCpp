@@ -275,7 +275,6 @@ void CalendarInterface::run() {
 			for (int i = 0; i < a.size(); ++i) {
 				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
 				if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
-					cout << "got here yay" << endl;
 					index = i;
 					break;
 				}
@@ -285,6 +284,8 @@ void CalendarInterface::run() {
 			cal->myEvents.erase(key);
 			
 			rent->children.erase(rent->children.begin() + index);
+		//	cal->depth = cal->depth + 2;
+			//currentDisplay->display(cal->depth);
 			//zoomOut();
 			cout << "------------------------------------------------------------------" << endl << endl;
 		

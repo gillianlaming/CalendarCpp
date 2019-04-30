@@ -80,7 +80,7 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		tm newTime1 = addDays(newTime, index); //is this correct
 		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
-		newEvent->display(currentCalendar->depth);
+		//newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		if (a) {
 			newEvent->calNum = "C" + currentCalendar->numCals;
@@ -102,7 +102,7 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
-		newEvent->display(currentCalendar->depth);
+		//newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
 		if (a) {

@@ -72,12 +72,6 @@ void DisplayableEvent::display(int depth) {
 	
 }
 
-//shared_ptr<DisplayableComponent> DisplayableEvent::setName(string a) {}
-void DisplayableEvent::setName(char *a) {
-	string nameA(a);
-
-	DisplayableEvent::name = nameA; //set this equal to the name
-}
 /*
 bool DisplayableEvent::operator<(const DisplayableEvent & e1) {
 	cout << "---------------------------------------------------------------" << endl;
