@@ -85,13 +85,15 @@ void CalendarInterface::run() {
 		}
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
-			cal->numCals++;
+			cal->numCals = cal->numCals + 1;
+			//cout << "the number of calendars is changing " << cal->numCals << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+			
 			if (mergeMeBb()) {
 				cout << "mergemebb worked" << endl;
 			}
 			else {
-				cal->numCals--;
-				cout << "Error merging calendars." << endl;
+				cal->numCals = cal->numCals - 1;
+				//cout << "Error merging calendars." << endl;
 			}
 		}
 		else if (in == "search") {//searching for an event by name
@@ -339,7 +341,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	time.tm_mon = month - 1;
 	time.tm_year = year - CalendarComponent::BASEYEAR;
 //	currentDisplay->display;
-	builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
+	builder->buildEvent(cal, name, time, recurrEvery, recurrFor, false);
 	
 }
 
@@ -356,7 +358,7 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 	time.tm_mday = day;
 	time.tm_mon = month;
 	time.tm_year = year;
-	builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
+	builder->buildEvent(cal, name, time, recurrEvery, recurrFor, false);
 }
 //merge
 void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {
@@ -369,9 +371,9 @@ void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, 
 	time.tm_mday = day;
 	time.tm_mon = month;
 	time.tm_year = year;
-	shared_ptr<DisplayableEvent> mergedEvent = builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
+	shared_ptr<DisplayableEvent> mergedEvent = builder->buildEvent(cal, name, time, recurrEvery, recurrFor, true);
 	//need to put this in full calendar builder
-	mergedEvent->calNum = "C" + cal->numCals;
-	mergedEvent->numberCalendars = cal->numCals;
+	//mergedEvent->calNum = "C" + cal->numCals;
+	//mergedEvent->numberCalendars = cal->numCals;
 
 }
