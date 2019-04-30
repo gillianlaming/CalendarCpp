@@ -18,7 +18,7 @@ class DisplayableDay : public CalendarComponent {
 	friend class DisplayableMonth;
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
-	friend shared_ptr<DisplayableEvent> & operator<(shared_ptr<DisplayableEvent> e1, shared_ptr<DisplayableEvent> e2);
+	friend DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 public:
 	// 1st argument = start date/timeof the day, 2nd argument = its parent
 	DisplayableDay(std::tm, std::shared_ptr<DisplayableComponent>);
@@ -27,6 +27,7 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> e);
 	//void sort(iterator it, iterator it2, bool g)
 	// currently a leaf class, so no need to override addComponent()
+	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 };
 
-shared_ptr<DisplayableEvent> & operator<(shared_ptr<DisplayableEvent> e1, shared_ptr<DisplayableEvent> e2);
+DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);

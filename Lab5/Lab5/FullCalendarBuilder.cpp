@@ -14,6 +14,7 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include <iostream>
 #include <string>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -61,8 +62,9 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		
 		//DisplayableDay(newTime1, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
 
-		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent)); //add to multimap
 		sort(day->children.begin(), day->children.end());
+		currentCalendar-> myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent)); //add to multimap
+		
 	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
@@ -150,3 +152,18 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildYear(std::tm d, std::
 	}
 	return y;
 }
+/*
+bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
+	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
+	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
+	if (event1->when.tm_hour < event2->when.tm_hour) {
+		return true;
+	}
+	else if (event1->when.tm_hour == event2->when.tm_hour) {
+		if (event1->when.tm_min < event2->when.tm_min) {
+			return true;
+		}
+	}
+	return false;
+}
+*/

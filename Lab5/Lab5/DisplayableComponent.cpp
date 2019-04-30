@@ -6,6 +6,7 @@ inherited by all concrete classes deriving from it.
 #include "stdafx.h"
 #include "DisplayableComponent.h"
 #include <iomanip>
+#include "DisplayableEvent.h"
 
 using namespace std;
 
@@ -52,5 +53,19 @@ shared_ptr<DisplayableComponent> DisplayableComponent::getChild(unsigned int ind
 	else {
 		return nullptr; // nullptr if index is out of bounds
 	}
+}
+
+bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
+	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
+	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
+	if (event1->when.tm_hour < event2->when.tm_hour) {
+		return true;
+	}
+	else if (event1->when.tm_hour == event2->when.tm_hour) {
+		if (event1->when.tm_min < event2->when.tm_min) {
+			return true;
+		}
+	}
+	return false;
 }
 

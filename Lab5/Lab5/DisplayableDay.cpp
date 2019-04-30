@@ -9,16 +9,19 @@ DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> 
 
 
 
-shared_ptr<DisplayableEvent> & operator<(shared_ptr<DisplayableEvent> e1, shared_ptr<DisplayableEvent> e2) {
-	if (e1->when.tm_hour < e2->when.tm_hour) {
-		return e2;
+DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
+	cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
+	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
+	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
+	if (event1->when.tm_hour < event2->when.tm_hour) {
+		return event1;
 	}
-	else if (e1->when.tm_hour == e2->when.tm_hour) {
-		if (e1->when.tm_min < e2->when.tm_min) {
-			return e2;
+	else if (event1->when.tm_hour == event2->when.tm_hour) {
+		if (event1->when.tm_min < event2->when.tm_min) {
+			return event1;
 		}
 	}
-	return e1;
+	return event2;
 }
 
 std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_ptr<DisplayableComponent> e) {
@@ -30,6 +33,7 @@ std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_p
 
 
 void DisplayableDay::display(int depth) {
+	//sort(children.begin(), children.end());
 	if (depth == 3) {
 		for (int i = 0; i < children.size(); ++i) {
 			cout << '\t';
@@ -74,4 +78,7 @@ void DisplayableDay::display(int depth) {
 	
 
 
+
+
 }
+
