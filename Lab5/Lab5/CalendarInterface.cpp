@@ -195,7 +195,24 @@ void CalendarInterface::run() {
 
 			//TODO: delete the event
 			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
+			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
+			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
+			int index;
+			for (int i = 0; i < a.size(); ++i) {
+				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
+				if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
+					cout << "got here yay" << endl;
+					index = 1;
+				}
+			}
+			DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[index].get());
+			string key = event2->name;
+			cal->myEvents.erase(key);
+			rent->children.erase(rent->children.begin() + index);
 
+
+
+				/*
 			shared_ptr<DisplayableComponent> d = shared_ptr<DisplayableComponent>(event1->parent);
 			vector<shared_ptr<DisplayableComponent>> a = d->children;
 			
@@ -203,7 +220,7 @@ void CalendarInterface::run() {
 			for (std::vector<shared_ptr<DisplayableComponent>>::iterator it = a.begin(); it != a.end(); ++it) {
 				it->get
 			}
-			*/
+			
 			for (int i = 0; i < a.size(); ++i) {
 				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
 				if (event2 == nullptr) {
@@ -214,6 +231,7 @@ void CalendarInterface::run() {
 				}
 
 			}
+			*/
 
 			//need to get the vector of children																	 
 			//get index of event in vector
