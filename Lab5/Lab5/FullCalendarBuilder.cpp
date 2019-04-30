@@ -30,34 +30,7 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 	}
 	return currentCalendar;
 }
-/*
-shared_ptr<ToDoList> FullCalendarBuilder::buildTDList() {
-	//todo = make_shared<ToDoList>(name);
-	ToDoList * tdl = ToDoList::getList();
-	shared_ptr<ToDoList>tp(tdl);
-	shared_ptr<ToDoList> myTD = ToDoList();
-	return tp;
-}
 
-/*
-shared_ptr<DisplayableComponent> FullCalendarBuilder::buildTasks(shared_ptr<DisplayableComponent> list, tm when, std::string name) {
-	//Task t = Task(when, name);
-	shared_ptr<DisplayableComponent> tsk = make_shared<DisplayableComponent>>(list, when, name));
-	list->myTasks.insert(pair <string, shared_ptr<DisplayableComponent>>(name, tsk));
-	list->addComponent(tsk);
-	return tsk;
-	//SORT TASKS
-}
-
-
-std::shared_ptr<Task> buildTasks(std::shared_ptr<DisplayableComponent> list, std::string name, std::tm when, bool completed) {
-	shared_ptr<Task> tsk = make_shared<Task>(name, list, when);
-	
-
-	//list->myTasks.insert(pair<string, shared_ptr<Task>>(name, tsk));
-	//list->addComponent(tsk);
-}
-*/
 
 shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor, bool a) {
 	//fully pack this struct tm
@@ -79,6 +52,7 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
+		day = getComponentByDate(cal, newTime1, "day");
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->parent = day;
 		if (a) {
