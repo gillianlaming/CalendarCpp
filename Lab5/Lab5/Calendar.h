@@ -7,11 +7,13 @@
 // forward declarations needed to avoid circular includes, used to declare friends only
 class FullCalendarBuilder;
 class CalendarInterface;
+class IncrementalCalendarBuilder;
 using namespace std;
 class Calendar : public CalendarComponent {
 	// friends
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
+	friend IncrementalCalendarBuilder;
 	//friend DisplayableEvent;
 protected:
 	std::string name;
