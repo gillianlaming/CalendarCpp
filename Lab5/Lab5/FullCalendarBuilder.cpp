@@ -12,7 +12,6 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include "utilityfunctions.h"
 #include "ToDoList.h"
 #include "DisplayableTask.h"
-
 #include <iostream>
 #include <string>
 #include <map>
@@ -32,14 +31,25 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 	return currentCalendar;
 }
 
-shared_ptr<ToDoList>FullCalendarBuilder::buildToDo() {
+shared_ptr<ToDoList> FullCalendarBuilder::buildTDList() {
 	ToDoList * tdl = ToDoList::getList();
 	shared_ptr<ToDoList>tp;
 	return tp;
 }
 
+/*
+shared_ptr<DisplayableComponent> FullCalendarBuilder::buildTasks(shared_ptr<DisplayableComponent> list, tm when, std::string name) {
+	//Task t = Task(when, name);
+	shared_ptr<DisplayableComponent> tsk = make_shared<DisplayableComponent>>(list, when, name));
+	list->myTasks.insert(pair <string, shared_ptr<DisplayableComponent>>(name, tsk));
+	list->addComponent(tsk);
+	return tsk;
+	//SORT TASKS
+}
+*/
+
 // you may decide to define this.
-shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
+shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
 	
 	
