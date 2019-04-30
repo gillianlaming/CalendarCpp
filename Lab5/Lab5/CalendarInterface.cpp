@@ -124,11 +124,23 @@ void CalendarInterface::run() {
 			if (iss >> month >> backslash >> day >> backslash >> year) {
 				cout << "Please enter a granularity: ";
 				cin >> granularity;
+				if (granularity == "day") {
+					cal->depth = 1;
+				}
+				if (granularity == "month") {
+					cal->depth = 2;
+				}
+				if (granularity == "year") {
+					cal->depth = 3;
+				}
 				//need to build a struct tm
 				tm time;
 				time.tm_mday = day;
-				time.tm_mon = month;
-				time.tm_year = year;
+				time.tm_mon = month-1;
+				time.tm_year = year-CalendarComponent::BASEYEAR;
+				shared_ptr<DisplayableComponent> a = builder->getComponentByDate(currentDisplay, time, granularity);
+				currentDisplay = a;
+				//currentDisplay->display(cal->depth);
 				//^^reallllllly unclear if that is going to work
 			//	FullCalendarBuilder::getComponentByDate(cal, /*date*/, granularity);
 				//TODO: we're going to want to call getComponent by date, all the code is done just have to figure out how to call it properly
@@ -211,12 +223,7 @@ void CalendarInterface::run() {
 					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
 				}
 			}
-			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
-			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
-
-		
-
-		
+			
 		}
 		else if (in == "delete") {
 
