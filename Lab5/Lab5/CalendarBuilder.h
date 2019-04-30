@@ -13,6 +13,8 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> buildEvent(std::shared_ptr<DisplayableComponent> cal, std::string name, std::tm when, int recurrEvery, int recurrFor) = 0;
 	virtual std::shared_ptr<DisplayableComponent> getComponentByDate(std::shared_ptr<DisplayableComponent> cal, std::tm d, std::string granularity) = 0;
 	virtual std::shared_ptr<Calendar> buildCalendar(std::string name, size_t years) = 0;
+	CalendarBuilder() {};
+	
 	//virtual std::shared_ptr<ToDoList>buildToDo() =0;
 protected:
 	// the Calendar object the builder is currently constructing and managing. Each of the above functions 

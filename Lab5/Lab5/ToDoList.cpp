@@ -8,8 +8,12 @@ using namespace std;
 
 //why isn't this working?
 
+ToDoList* ToDoList::tdlist = 0;
+
 ToDoList::ToDoList(string name, std::shared_ptr<DisplayableComponent> p) : DisplayableComponent(p) {
 	ToDoList::name = name;
+	
+
 }
 
 void ToDoList::display(int depth) {
@@ -30,10 +34,11 @@ std::shared_ptr<DisplayableComponent> ToDoList::addComponent(std::shared_ptr<Dis
 	return apple;
 }
 
+
 ToDoList* ToDoList::getInstance() {
 	if (ToDoList::tdlist == nullptr) {
-		tdlist = new ToDoList;
+		ToDoList::tdlist = new ToDoList;
 	}
-	return tdlist;
+	return ToDoList::tdlist;
 }
 
