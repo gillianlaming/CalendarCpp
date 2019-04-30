@@ -394,6 +394,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 //	currentDisplay->display;
 	builder->buildEvent(cal, name, time, recurrEvery, recurrFor, false);
 	
+	cout << "------------------------------------------------------------------" << endl;
 }
 
 //restore
