@@ -26,6 +26,6 @@ public:
 	void addEvent(string name, int& month,  int& day,  int& year,  int& hour,  int& minute ); //this is just a helper function dw
 	void addEvent2(string name, int& month, int& day, int& year, int& hour, int& minute);
 	void run(); // display the current view to the user and prompt for input
-	void restore();
+	bool restore();
 	//int depth;
 };

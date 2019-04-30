@@ -43,4 +43,5 @@ protected:
 	virtual std::shared_ptr<DisplayableComponent> getChild(unsigned int);
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent>);
 	virtual std::shared_ptr<DisplayableComponent> removeComponent(unsigned int);
+
 };

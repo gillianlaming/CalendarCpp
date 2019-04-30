@@ -10,7 +10,6 @@ DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> 
 
 
 bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
-	cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
 	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
 	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
 	if (event1->when.tm_hour < event2->when.tm_hour) {

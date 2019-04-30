@@ -83,7 +83,14 @@ void CalendarInterface::run() {
 		}
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
-			restore();
+			numCals++;
+			if (restore()) {
+				numCals--;
+			}
+			else {
+				
+				cout << "Error merging calendars." << endl;
+			}
 		}
 		else if (in == "search") {//searching for an event by name
 			string name;
@@ -252,7 +259,7 @@ void CalendarInterface::run() {
 
 }
 
-void CalendarInterface::restore() {
+bool CalendarInterface::restore() {
 	
 	string calName;
 	cin >> calName;
@@ -267,13 +274,16 @@ void CalendarInterface::restore() {
 			string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 			while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
 				addEvent2(name, month, day, year, hour, minute);
+				return true;
 			}
 		}
 	}
 	else {
 		cout << "Unable to read info from file" << endl << endl;
 	}
+	
 	restoreCal.close();
+	return false;
 }
 
 void CalendarInterface::zoomIn(unsigned int index) {
