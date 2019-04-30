@@ -66,6 +66,9 @@
     <ClInclude Include="ToDoListBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ToDoInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ToDoListBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToDoInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

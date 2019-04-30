@@ -12,7 +12,7 @@ using namespace std;
 //ToDoList* ToDoList::tdlist = 0;
 
 ToDoList::ToDoList() : CalendarComponent() {
-	//cout << "todo construct" << endl;
+	cout << "todo construct" << endl;
 	//multimap <string, shared_ptr<Task>> myTasks;
 
 }
