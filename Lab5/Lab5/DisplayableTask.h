@@ -22,9 +22,13 @@ class Task : public DisplayableComponent {
 	
 public:
 	virtual void display(int depth) override;
-	Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline);
+	Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool completed);
 	std::string name;
 	std::tm deadline;
 	bool completed;
-	//multimap<string, shared_ptr<Task>> myTasks;
+
+protected:
+	std::weak_ptr<DisplayableComponent> parent; // weak_ptr to avoid cycles, does not contribute to reference count
+
+	
 };

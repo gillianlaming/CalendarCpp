@@ -18,11 +18,12 @@ friend CalendarInterface;
 protected:
 	//std::string name;
 //ToDoList(string name, shared_ptr<DisplayableComponent>);
+	std::vector<std::shared_ptr<DisplayableComponent> > children;
 	
 public:
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) override;
 	virtual void display(int depth) override;
 	ToDoList();
-	static shared_ptr<ToDoList> ToDoList::getList();
-//	multimap <string, shared_ptr<Task>> myTasks;
+	//static shared_ptr<ToDoList> ToDoList::getList();
+	//multimap <string, shared_ptr<Task>> myTasks;
 };

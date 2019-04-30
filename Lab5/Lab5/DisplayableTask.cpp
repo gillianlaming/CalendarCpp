@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline) : DisplayableComponent(ptr) {
+Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool completed) : DisplayableComponent(ptr) {
 	Task::name = name;
 	Task::deadline = deadline;
 	Task::completed = false;
@@ -15,5 +15,10 @@ Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline) : Dis
 }
 
 void Task::display(int depth) {
-	cout << name << endl;
+	if (completed == false) {
+		cout << name <<" TODO" << endl;
+	}
+	else {
+		cout << name << " COMPLETED" << endl;
+	}
 }

@@ -29,6 +29,7 @@ public:
 	void zoomOut(); // zoom out to the parent of the current_display
 	void addEvent(string name, int& month,  int& day,  int& year,  int& hour,  int& minute ); //this is just a helper function dw
 	void addEvent2(string name, int& month, int& day, int& year, int& hour, int& minute);
+	void addTask(string name, int& month, int& day, int& year, int& hour, int& minute);
 	void addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute);
 	void run(); // display the current view to the user and prompt for input
 	bool mergeMeBb();
