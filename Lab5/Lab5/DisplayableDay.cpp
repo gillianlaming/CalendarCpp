@@ -56,21 +56,18 @@ void DisplayableDay::display(int depth) {
 	}
 	else {
 		int spacing = 11;
-		//cout <<left << setw(11) << dateInfo.tm_mday;
+		string stars = "";
 		for (unsigned int i = 0; i < children.size(); ++i) {
-			cout << "*";
-			spacing--;
-			//cout << i << '\t';
-			//children[i]->display(depth);
+			stars = stars + "*";
 		}
-		cout << left << setw(spacing) << dateInfo.tm_mday;
+		string daze = std::to_string(dateInfo.tm_mday) + stars;
+		cout << setw(spacing) << left  << daze;
 		if (dateInfo.tm_wday  == 6) {
 			cout << endl << endl;
 		}
 		
 	}
-	//add to this to display events 
-	//int i = children.size();
+
 	
 	
 	
