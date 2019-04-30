@@ -6,18 +6,24 @@
 #include <memory>
 
 using namespace std;
-class ToDoBuilder;
-class ToDoInterface;
+
+class FullCalendarBuilder;
+class CalendarInterface;
 
 class ToDoList : public DisplayableComponent {
-friend ToDoBuilder;
-friend ToDoInterface;
+friend FullCalendarBuilder;
+friend CalendarInterface;
 protected:
 	std::string name;
 
-
+private:
+	static ToDoList* tdlist;
+	ToDoList() {};
+	ToDoList(string name, shared_ptr<DisplayableComponent>);
+	
 public:
-	ToDoList(string name);
-	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple);
-	virtual void display(int depth);
+	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) override;
+	virtual void display(int depth) override;
+	ToDoList* getInstance();
+
 };

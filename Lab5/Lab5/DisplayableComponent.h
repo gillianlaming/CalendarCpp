@@ -32,6 +32,7 @@ protected:
 
 	// construction, destruction
 	DisplayableComponent(std::shared_ptr<DisplayableComponent>);
+	DisplayableComponent() {};
 	virtual ~DisplayableComponent();
 
 	// composite and traversal functions
