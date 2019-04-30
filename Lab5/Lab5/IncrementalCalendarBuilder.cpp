@@ -66,7 +66,7 @@ shared_ptr<DisplayableEvent> IncrementalCalendarBuilder::buildEvent(shared_ptr<D
 	}
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
 }
-//TODO: breaks upon adding event when not at depth of 4
+
 shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------

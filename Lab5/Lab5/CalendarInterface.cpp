@@ -2,6 +2,7 @@
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
 #include "ToDoListBuilder.h"
+#include "IncrementalCalendarBuilder.h"
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
 #include "Calendar.h"
@@ -25,6 +26,11 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		currentDisplay = cal;
 		cal->depth = 4;
 		cal->numCals = "";	
+	}
+	if (builderType == "incremental") {
+		builder = make_shared<IncrementalCalendarBuilder>();
+		cal = builder->buildCalendar(calendarName, years);
+		currentDisplay = cal;
 	}
 }
 
