@@ -65,7 +65,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		//cout << "Date of struct tm after passing thru " << newTime.tm_mon + 1 << "/" << newTime.tm_mday << "/" << newTime.tm_year << endl;
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->display(currentCalendar->depth);
-
+		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
 		
 		//DisplayableDay(newTime1, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
@@ -79,9 +79,11 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display(currentCalendar->depth);
+		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
 		//DisplayableDay(when, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
 		sort(day->children.begin(), day->children.end());
+		
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
 		
 	}

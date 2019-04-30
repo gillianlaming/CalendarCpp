@@ -34,12 +34,12 @@ void DisplayableEvent::display(int depth) {
 	if (depth == 0) {
 		
 		if (when.tm_min == 0) {
-			cout  << when.tm_mday << "/" << when.tm_mday << "/" << yr << endl;
+			cout  << mon << "/" << when.tm_mday << "/" << yr << endl;
 			cout<< when.tm_hour << ":" << "00" << " " << name << endl;
 
 		}
 		else {
-			cout  << when.tm_mday << "/" << when.tm_mday << "/" << yr << endl;
+			cout  << mon<< "/" << when.tm_mday << "/" << yr << endl;
 			cout << when.tm_hour << ":" << when.tm_min << " " << name << endl;
 		}
 	}
