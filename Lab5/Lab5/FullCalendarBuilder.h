@@ -18,6 +18,7 @@ public:
 	virtual std::shared_ptr<ToDoList> buildTDList();
 	//virtual std::shared_ptr<DisplayableComponent> buildTasks(std::shared_ptr<DisplayableComponent> list, tm when, std::string name);
 
+
 protected:
 	virtual std::shared_ptr<DisplayableComponent> buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) override;
 	virtual std::shared_ptr<DisplayableComponent> buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) override;
