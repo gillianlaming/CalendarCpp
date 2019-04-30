@@ -32,8 +32,9 @@ calendar builder
 
 2. Part 2.2 Make the calendar interactive
 How did you decide to efficiently search for an event by name?
+We took in the name of the event to be searched for from the user, then used a multimap to
 
-
+//TODO: gillian you did this part can u answer it
 
 Which object in the project understands the structure of the Calendar? Which object should be responsible for jumping to a specific object in the Calendar?
 
@@ -41,6 +42,10 @@ Which object in the project understands the structure of the Calendar? Which obj
 
 How did you design saving/restoring the calendar to/from a file? What information needs to be saved about a Calendar to successfully restore it?
 
+To Save, we used an ofstream and iterated through the multimap to save the events (events are all that needs to be saved)
+to a file and wrote them to the file with the same formatting we display them with. 
+To Restore, we ise an ifstream to open the file and iterate through it with an isstream,  taking in each event and calling 
+an addevent helper function to add these events to the calendar. 
 
 
 
@@ -49,6 +54,10 @@ How did you design saving/restoring the calendar to/from a file? What informatio
 How a particular component in the calendar should be displayed depends on what the current display of the calendar is.
 How did you implement this functionality? 
 
+We created an integer variable called depth, which we made a parameter of all display() functions. 
+Essentially, the full calendar view is a depth of 4, year is 3, month is 2, day is 1, and event is 0.
+Depending on the depth, each display function behaves accordingly by using if statements to check
+current depth and couting the correct/relavent information in the proper format.
 
 
 

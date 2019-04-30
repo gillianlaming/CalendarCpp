@@ -76,7 +76,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 	}
 	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
 }
-
+//TODO: breaks upon adding event when not at depth of 4
 //warning not all paths return. What should we return if improper so it doesn't break
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 	

@@ -1,5 +1,7 @@
 #pragma once
 #include "DisplayableComponent.h"
+#include "DisplayableTask.h"
+#include "ToDoList.h"
 #include <string>
 #include <memory>
 

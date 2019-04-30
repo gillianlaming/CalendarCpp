@@ -7,6 +7,7 @@ using namespace std;
 
 
 //why isn't this working?
+
 //ToDoList::ToDoList(string name) {
 //	ToDoList::name = name;
 //}
@@ -21,9 +22,7 @@ void ToDoList::display(int depth) {
 			children[i]->display(depth);
 		}
 	}
-	//TODO: fix display to do years initially with indices with ability to zoom in on year, then month etc.
-
-
+	
 }
 
 

@@ -57,9 +57,6 @@
     <ClInclude Include="utilityfunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ToDoInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ToDoList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DisplayableEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ToDoInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ToDoList.cpp">

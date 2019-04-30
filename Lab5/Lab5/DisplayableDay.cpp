@@ -46,6 +46,11 @@ void DisplayableDay::display(int depth) {
 
 		}
 	}
+	else if (depth == 0) {
+		cout << "hi";
+		cout << daysoftheweek[dateInfo.tm_wday];
+		
+	}
 	else {
 		int spacing = 11;
 		//cout <<left << setw(11) << dateInfo.tm_mday;
@@ -62,7 +67,7 @@ void DisplayableDay::display(int depth) {
 		
 	}
 	//add to this to display events 
-	int i = children.size();
+	//int i = children.size();
 	
 	
 	
