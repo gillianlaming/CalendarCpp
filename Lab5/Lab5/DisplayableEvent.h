@@ -24,7 +24,8 @@ public:
 	//virtual shared_ptr<DisplayableComponent> setName(string a);
 	void setName(char *a);
 	std::string name;
-	string calNum = "C0";
+	string calNum = "";
+	int numberCalendars = 0;
 	std::tm when; //contains date/time of the event
 	//bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 	//bool operator<(const DisplayableEvent & e1);

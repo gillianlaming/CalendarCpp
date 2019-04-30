@@ -84,11 +84,11 @@ void CalendarInterface::run() {
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
 			numCals++;
-			if (restore()) {
-				numCals--;
+			if (mergeMeBb()) {
+				cout << "mergemebb worked" << endl;
 			}
 			else {
-				
+				numCals--;
 				cout << "Error merging calendars." << endl;
 			}
 		}
@@ -259,7 +259,7 @@ void CalendarInterface::run() {
 
 }
 
-bool CalendarInterface::restore() {
+bool CalendarInterface::mergeMeBb() {
 	
 	string calName;
 	cin >> calName;
@@ -273,7 +273,7 @@ bool CalendarInterface::restore() {
 			istringstream iss(line);
 			string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 			while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
-				addEvent2(name, month, day, year, hour, minute);
+				addEvent3(name, month, day, year, hour, minute);
 				return true;
 			}
 		}
@@ -340,7 +340,7 @@ void CalendarInterface::addEvent(string name,  int& month,  int& day,  int& year
 	
 }
 
-
+//restore
 void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, int& hour, int& minute) {
 	int recurrFor = 0;
 	int recurrEvery = 0;
@@ -354,4 +354,22 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 	time.tm_mon = month;
 	time.tm_year = year;
 	builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
+}
+//merge
+void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {
+	int recurrFor = 0;
+	int recurrEvery = 0;
+
+
+	//need to make new struct tm object
+	tm time;
+	time.tm_hour = hour;
+	time.tm_min = minute;
+	time.tm_mday = day;
+	time.tm_mon = month;
+	time.tm_year = year;
+	shared_ptr<DisplayableEvent> mergedEvent = builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
+	mergedEvent->calNum = "C" + numCals;
+	mergedEvent->numberCalendars = numCals;
+
 }
