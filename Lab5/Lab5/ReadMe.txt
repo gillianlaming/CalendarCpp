@@ -12,8 +12,7 @@ NOTES:
 ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 1. non-standard syntax, use '&" to create a pointer to member. this happened when i didn't include () behind a method. eg vector a; a.size; --> a.size();
 2. Error with recurring events starting on wrong date - fixed by fully packing the struct tm
-3. we had an issue adding events if users were not on the calendar view (couldn't have zoomed in) - 
-
+3. we had an issue adding events if users were not on the calendar view (couldn't have zoomed in) - fixed by
 
 
 // answer the following questions
@@ -29,7 +28,7 @@ What class/classes is responsible for managing the representation and constructi
 calendarBuilder and FullCalendarBuilder deal with the construction of the Calendar. Calendar interface helps with the representation.
 
 Which class should handle collecting information from the user about an event?
-calendarinterface.cpp - takes in information about an event from the user input and uses the info to call addEvent()
+calendarinterface.cpp - takes in information about an event from the user input and uses the info to call addEvent().
 
 Which class should handle constructing and adding the event to the Calendar?
 calendar builder handles cosntructing/building the event, and calendar itnerface handles adding the event to the calendar itself.
@@ -40,14 +39,14 @@ calendar builder handles cosntructing/building the event, and calendar itnerface
 
 2. Part 2.2 Make the calendar interactive
 How did you decide to efficiently search for an event by name?
-We took in the name of the event to be searched for from the user, then used the multimap of events to search through
-for the given name as a key. Therefore, it only iterates through existing events, not all days/dates.
 
-//TODO: gillian you did this part can u answer it
+We took in the name of the event to be searched for from the user, then used the multimap of events to search through
+for the given name as a key. Therefore, it only iterates through existing events, not all days/dates, making it more efficient than iterating through all dates.
+
 
 Which object in the project understands the structure of the Calendar? Which object should be responsible for jumping to a specific object in the Calendar?
 
-
+We use granularity to get the depth of which view the user wants and tm deals with which date we are looking at.
 
 How did you design saving/restoring the calendar to/from a file? What information needs to be saved about a Calendar to successfully restore it?
 
