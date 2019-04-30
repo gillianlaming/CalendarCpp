@@ -7,12 +7,14 @@ It declares and defines the interface that all objects in the composite share.
 #include<memory>
 #include<vector>
 #include <iomanip>
+#include <algorithm>
 
 
 // forward declaration, needed for friend declaration
 class FullCalendarBuilder;
 class CalendarInterface;
 class ToDoList;
+using namespace std;
 
 // abstract base class representing a composite object
 class DisplayableComponent {
@@ -34,6 +36,7 @@ protected:
 	DisplayableComponent(std::shared_ptr<DisplayableComponent>);
 	DisplayableComponent() {};
 	virtual ~DisplayableComponent();
+	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 
 	// composite and traversal functions
 	virtual std::weak_ptr<DisplayableComponent> getParent();
