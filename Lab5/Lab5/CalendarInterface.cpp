@@ -6,6 +6,7 @@
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
 #include "Calendar.h"
+#include "ToDoInterface.h"
 #include <string>
 #include<iostream>
 #include <istream>
@@ -227,7 +228,9 @@ void CalendarInterface::run() {
 
 		//TODO: todoLIst
 		else if (in == "todo") {
-			//call todo interfacw
+			//call todo interface
+			ToDoInterface tdi("todo");
+			tdi.run();
 
 		}
 

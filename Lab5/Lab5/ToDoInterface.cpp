@@ -40,7 +40,7 @@ void ToDoInterface::run() {
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		int numKids = kids.size();
 
-		cout << "add task: add" << endl << "mark a task as complete: complete" << endl;
+		cout << "add task: add" << endl << "mark a task as complete: complete" << endl << "quit: q" << endl;
 
 		string in;
 		cin >> in;
@@ -54,7 +54,7 @@ void ToDoInterface::run() {
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
 					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
-					//	addTask(name, month, day, year, hour, minute);
+						addTask(name, month, day, year, hour, minute);
 					goodInput = false;
 				}
 				else {
@@ -75,6 +75,9 @@ void ToDoInterface::run() {
 				completeTask(name);
 			}
 		}
+		else if (in == "q") {
+			break;
+		}
 	}
 }
 
@@ -92,9 +95,9 @@ void ToDoInterface::run() {
 	}
 
 	void ToDoInterface::completeTask(string name) {
-		Task* t1 = dynamic_cast<Task*>(currentDisplay.get());
-		shared_ptr<DisplayableComponent> rent = t1->getParent().lock();
-		vector < shared_ptr<DisplayableComponent>>  a = rent->children;
+		ToDoList* t1 = dynamic_cast<ToDoList*>(currentDisplay.get());
+		//shared_ptr<DisplayableComponent> rent = t1->getParent().lock();
+		vector < shared_ptr<DisplayableComponent>>  a = t1->children;
 		int index = 0;
 		for (int i = 0; i < a.size(); ++i) {
 			Task* t2 = dynamic_cast<Task*>(a[i].get());
