@@ -23,7 +23,7 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		cal = builder->buildCalendar(calendarName, years);
 		currentDisplay = cal;
 		cal->depth = 4;
-		cal->numCals = 0;
+		cal->numCals = "";
 		
 		
 	}
@@ -81,13 +81,13 @@ void CalendarInterface::run() {
 		}
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
-			cal->numCals = cal->numCals + 1;
+			//cal->numCals = cal->numCals + 1;
 			
 			if (mergeMeBb()) {
 				cout << "mergemebb worked" << endl;
 			}
 			else {
-				cal->numCals = cal->numCals - 1;
+				//cal->numCals = cal->numCals - 1;
 			}
 		}
 		else if (in == "search") {//searching for an event by name
@@ -316,6 +316,7 @@ bool CalendarInterface::mergeMeBb() {
 	string calName;
 	cin >> calName;
 	string fileName = calName + ".txt";
+	cal->numCals = calName;
 	ifstream restoreCal;
 	restoreCal.open(fileName);
 	string line;

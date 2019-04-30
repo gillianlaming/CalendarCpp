@@ -83,9 +83,11 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		//newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		if (a) {
-			newEvent->calNum = "C" + currentCalendar->numCals;
+			//newEvent->calNum = "C" + currentCalendar->numCals;
+			newEvent->calNum = currentCalendar->numCals;
+
 			
-			newEvent->numberCalendars = currentCalendar->numCals;
+			//newEvent->numberCalendars = currentCalendar->numCals;
 		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent->calNum << endl;
 
 		}
@@ -107,11 +109,12 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		day->addComponent(newEvent); //add the event to the correct day
 		if (a) {
 			//newEvent->calNum = "C" + currentCalendar->numCals;
-			int aNumber = currentCalendar->numCals;
-			string theName = "C" + std::to_string(aNumber);
-			cout << "name " << theName << "++++++++++++++++++++++++++++" << endl;
-			newEvent->calNum = theName;
-			newEvent->numberCalendars = currentCalendar->numCals;
+			//int aNumber = currentCalendar->numCals;
+			//string theName = "C" + std::to_string(aNumber);
+			//cout << "name " << theName << "++++++++++++++++++++++++++++" << endl;
+			//newEvent->calNum = theName;
+			newEvent->calNum = currentCalendar->numCals;
+			//newEvent->numberCalendars = currentCalendar->numCals;
 		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent-> calNum << endl;
 
 		}
