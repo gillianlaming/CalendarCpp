@@ -39,7 +39,7 @@ shared_ptr<ToDoList>FullCalendarBuilder::buildToDo() {
 }
 
 // you may decide to define this.
-shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
+shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
 	
 	
