@@ -49,7 +49,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildTasks(shared_ptr<Disp
 */
 
 // you may decide to define this.
-shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {
+shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor, bool a) {
 	//TOFO:FIX DATE OF RECURRING EVENTS
 	
 	
@@ -76,6 +76,13 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
+		if (a) {
+			newEvent->calNum = "C" + currentCalendar->numCals;
+			
+			newEvent->numberCalendars = currentCalendar->numCals;
+		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent->calNum << endl;
+
+		}
 		day->addComponent(newEvent); //add the event to the correct day
 		
 		//DisplayableDay(newTime1, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
@@ -86,11 +93,22 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 	
 	}
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
+		cout << "NUM CALS " << currentCalendar ->numCals;
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
 		//DisplayableEvent(when, newEvent).name = name;
 		newEvent->display(currentCalendar->depth);
 		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
+		if (a) {
+			//newEvent->calNum = "C" + currentCalendar->numCals;
+			int aNumber = currentCalendar->numCals;
+			string theName = "C" + std::to_string(aNumber);
+			cout << "name " << theName << "++++++++++++++++++++++++++++" << endl;
+			newEvent->calNum = theName;
+			newEvent->numberCalendars = currentCalendar->numCals;
+		//	cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++" << newEvent-> calNum << endl;
+
+		}
 		//DisplayableDay(when, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
 		sort(day->children.begin(), day->children.end());
 		
