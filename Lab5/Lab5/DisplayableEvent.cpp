@@ -21,7 +21,7 @@ void DisplayableEvent::display(int depth) {
 	if (depth == 3) {
 		if (calNum == "") {
 			if (when.tm_min == 0) {
-				cout << mon << "/" << when.tm_mday << "/" << yr << " " << calNum << ":" << when.tm_hour << ":" << "00" << " "  << name << endl;
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << "00" << " "  << name << endl;
 			}
 			else {
 				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " "<< name << endl;
@@ -29,7 +29,7 @@ void DisplayableEvent::display(int depth) {
 		}
 		else {
 			if (when.tm_min == 0) {
-				cout << mon << "/" << when.tm_mday << "/" << yr << " " << calNum << ":" << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
 			}
 			else {
 				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " " << calNum << ":" << name << endl;
@@ -57,19 +57,27 @@ void DisplayableEvent::display(int depth) {
 		
 	}
 	if (depth == 0) {
-		
-		if (when.tm_min == 0) {
-			cout  << mon << "/" << when.tm_mday << "/" << yr << endl;
-			cout << when.tm_hour << ":" << "00" << " " << name << endl;
-
+		if (calNum == "") {
+			if (when.tm_min == 0) {
+				cout << mon << "/" << when.tm_mday << "/" << yr << endl;
+				cout << when.tm_hour << ":" << "00" << " " << name << endl;
+			}
+			else {
+				cout << mon << "/" << when.tm_mday << "/" << yr << endl;
+				cout << when.tm_hour << ":" << when.tm_min << " " << name << endl;
+			}
 		}
 		else {
-			cout  << mon<< "/" << when.tm_mday << "/" << yr << endl;
-			cout << when.tm_hour << ":" << when.tm_min << " " << name << endl;
+			if (when.tm_min == 0) {
+				cout << mon << "/" << when.tm_mday << "/" << yr << endl;
+				cout << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+			}
+			else {
+				cout << mon << "/" << when.tm_mday << "/" << yr << endl;
+				cout << when.tm_hour << ":" << when.tm_min << " " << calNum << ":" << name << endl;
+			}
 		}
-	}
-
-	
+	}	
 }
 
 /*

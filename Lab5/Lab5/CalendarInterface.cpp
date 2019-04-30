@@ -9,8 +9,10 @@
 #include <istream>
 #include <ostream>
 #include <sstream>
+#include <map>
 #include <fstream>
 #include <iterator>
+#include <algorithm>
 
 
 using namespace std;
@@ -30,7 +32,6 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 void CalendarInterface::run() {
 	while (1) { 	// run until the user quits
 		currentDisplay->display(cal->depth); 
-		int yr = CalendarComponent::BASEYEAR;
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		int numKids = kids.size();
@@ -180,7 +181,20 @@ void CalendarInterface::run() {
 			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 		else if (in == "restore") {
-			
+			//iterate thru map
+			typedef multimap <string, shared_ptr<DisplayableEvent>> temp;
+			vector <shared_ptr<DisplayableEvent>> eventsToBeDeleted;
+			for (std::multimap <string, shared_ptr<DisplayableEvent>>::iterator it1 = cal->myEvents.begin(); it1 != cal->myEvents.end(); ++it1) { //iterate across all the events with the same name
+				shared_ptr<DisplayableEvent> event = (*it1).second;
+				eventsToBeDeleted.push_back(event);
+			}
+			//need to pushback onto vector and delete from vector otherwise will get a cannot iterate over map error
+			for (int i = 0; i < eventsToBeDeleted.size(); ++i) {
+				clearEvent(eventsToBeDeleted[i]);
+			}
+			cal->myEvents.clear(); //clear the multiset
+
+			//now that calendar and map are both clear/empty, let's get new info to replace
 			cout << "What is the name of the calendar you would like to restore: ";
 			string calName;
 			cin >> calName;
@@ -189,7 +203,7 @@ void CalendarInterface::run() {
 			restoreCal.open(fileName);
 			string line;
 			if (restoreCal.is_open()) {
-				cal->myEvents.clear(); //clear the multiset
+				
 				while (!restoreCal.eof()) { //while it's not the end of the file
 					getline(restoreCal, line);
 					istringstream iss(line);
@@ -412,4 +426,21 @@ void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, 
 	//mergedEvent->calNum = "C" + cal->numCals;
 	//mergedEvent->numberCalendars = cal->numCals;
 
+}
+
+void CalendarInterface::clearEvent(shared_ptr<DisplayableEvent> event1) {
+	shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
+	vector < shared_ptr<DisplayableComponent>>  a = rent->children;
+	int index = 0;
+	for (int i = 0; i < a.size(); ++i) {
+		DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
+		if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
+			index = i;
+			break;
+		}
+	}
+	DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[index].get());
+	string key = event2->name;
+	cal->myEvents.erase(key);
+	rent->children.erase(rent->children.begin() + index);
 }
