@@ -34,6 +34,7 @@ protected:
 
 	// construction, destruction
 	DisplayableComponent(std::shared_ptr<DisplayableComponent>);
+	DisplayableComponent() {};
 	virtual ~DisplayableComponent();
 	//bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 

@@ -36,6 +36,7 @@ class CalendarComponent : public DisplayableComponent {
 public:
 	// inherited
 	virtual void display(int depth) = 0;
+
 protected:
 	// stores date/time associated with this component
 	// see struct tm details above. This will always be set to the date/time at the beginning of the component. So for a month, it is set to the first day of the month
@@ -44,7 +45,7 @@ protected:
 
 	// constructor, protected is ok. Builder class is a friend
 	CalendarComponent(std::tm, std::shared_ptr<DisplayableComponent>);
-
+	CalendarComponent() {};
 	// some static constants to use in place of hardcoded calendar values
 	static const std::vector<std::string> daysoftheweek;
 	static const std::vector<std::string> months;
