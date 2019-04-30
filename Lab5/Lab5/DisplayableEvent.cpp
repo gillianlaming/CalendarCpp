@@ -19,20 +19,42 @@ void DisplayableEvent::display(int depth) {
 	//cout << daysOfTheWeek[index] << '/t' << mon << "/" << when.tm_mday << "/" << yr << endl; --> THIS IS ALREADY BEING PRINTED (good news)
 	//cout << when.tm_hour << ":" << when.tm_min << '/t' << name << endl;
 	if (depth == 3) {
-		if (when.tm_min == 0) {
-			cout << mon << "/" << when.tm_mday << "/" << yr << " "<< calNum << ":" << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+		if (calNum == "") {
+			if (when.tm_min == 0) {
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << calNum << ":" << when.tm_hour << ":" << "00" << " "  << name << endl;
+			}
+			else {
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " "<< name << endl;
+			}
 		}
 		else {
-			cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " " << calNum << ":" << name << endl;
+			if (when.tm_min == 0) {
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << calNum << ":" << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+			}
+			else {
+				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << when.tm_min << " " << calNum << ":" << name << endl;
+			}
 		}
+		
 	}
 	if (depth == 1) {
-		if (when.tm_min == 0) {
-			cout << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+		if (calNum == "") {
+			if (when.tm_min == 0) {
+				cout << when.tm_hour << ":" << "00" << " "  << name << endl;
+			}
+			else {
+				cout << when.tm_hour << ":" << when.tm_min << " " << name << endl;
+			}
 		}
 		else {
-			cout << when.tm_hour << ":" << when.tm_min << " " << calNum << ":"  << name << endl;
+			if (when.tm_min == 0) {
+				cout << when.tm_hour << ":" << "00" << " " << calNum << ":" << name << endl;
+			}
+			else {
+				cout << when.tm_hour << ":" << when.tm_min << " " << calNum << ":" << name << endl;
+			}
 		}
+		
 	}
 	if (depth == 0) {
 		

@@ -55,4 +55,5 @@ protected:
 	static const unsigned int BASEYEAR;
 	static const unsigned int DAYSINAYEAR;
 	int depth = 4;
+	int numCals = 0;
 };

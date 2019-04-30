@@ -21,6 +21,8 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		cal = builder->buildCalendar(calendarName, years);
 		currentDisplay = cal;
 		cal->depth = 4;
+		cal->numCals = 0;
+		
 		
 	}
 }
@@ -83,12 +85,12 @@ void CalendarInterface::run() {
 		}
 		else if (in == "merge") {
 			cout << "What is the name of the calendar you would like to merge with: ";
-			numCals++;
+			cal->numCals++;
 			if (mergeMeBb()) {
 				cout << "mergemebb worked" << endl;
 			}
 			else {
-				numCals--;
+				cal->numCals--;
 				cout << "Error merging calendars." << endl;
 			}
 		}
@@ -274,9 +276,10 @@ bool CalendarInterface::mergeMeBb() {
 			string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 			while (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) { //while there are still strings to be extracted
 				addEvent3(name, month, day, year, hour, minute);
-				return true;
+				
 			}
 		}
+		return true;
 	}
 	else {
 		cout << "Unable to read info from file" << endl << endl;
@@ -359,8 +362,6 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {
 	int recurrFor = 0;
 	int recurrEvery = 0;
-
-
 	//need to make new struct tm object
 	tm time;
 	time.tm_hour = hour;
@@ -369,7 +370,8 @@ void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, 
 	time.tm_mon = month;
 	time.tm_year = year;
 	shared_ptr<DisplayableEvent> mergedEvent = builder->buildEvent(cal, name, time, recurrEvery, recurrFor);
-	mergedEvent->calNum = "C" + numCals;
-	mergedEvent->numberCalendars = numCals;
+	//need to put this in full calendar builder
+	mergedEvent->calNum = "C" + cal->numCals;
+	mergedEvent->numberCalendars = cal->numCals;
 
 }
