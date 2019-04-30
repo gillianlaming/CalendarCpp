@@ -2,6 +2,7 @@
 #include "CalendarInterface.h"
 #include "FullCalendarBuilder.h"
 #include "ToDoListBuilder.h"
+#include "IncrementalCalendarBuilder.h"
 #include "CalendarComponent.h"
 #include "DisplayableYear.h"
 #include "Calendar.h"
@@ -25,6 +26,11 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 		currentDisplay = cal;
 		cal->depth = 4;
 		cal->numCals = "";	
+	}
+	if (builderType == "incremental") {
+		builder = make_shared<IncrementalCalendarBuilder>();
+		cal = builder->buildCalendar(calendarName, years);
+		currentDisplay = cal;
 	}
 }
 
@@ -437,6 +443,7 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 }
 
 //addtodo
+/*
 void CalendarInterface::addTask(string name, int& month, int& day, int& year, int& hour, int& minute) {
 	
 	//need to make new struct tm object
@@ -449,7 +456,7 @@ void CalendarInterface::addTask(string name, int& month, int& day, int& year, in
 	tdbuilder->buildTasks(todo, name, time, false);
 	cout << "task added" << endl;
 }
-
+*/
 
 //merge
 void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {
