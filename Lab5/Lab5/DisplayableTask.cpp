@@ -15,10 +15,26 @@ Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool 
 }
 
 void Task::display(int depth) {
+
+	int yr = deadline.tm_year + 1900;
+	int mon = deadline.tm_mon + 1;
+
 	if (completed == false) {
-		cout << name <<" TODO" << endl;
+		if (deadline.tm_min == 0) {
+			cout <<name<<": " << mon<<"/"<<deadline.tm_mday<<"/"<<yr<<" "<< deadline.tm_hour << ":" << "00" << " TODO" << endl;
+		}
+		else {
+			cout << name << ": " << mon << "/" << deadline.tm_mday << "/" << yr << " " << deadline.tm_hour << ":" << deadline.tm_min << " TODO" << endl;
+		}
+	
 	}
 	else {
-		cout << name << " COMPLETED" << endl;
+		if (deadline.tm_min == 0) {
+			cout << name << ": " << mon << "/" << deadline.tm_mday << "/" << yr << " " << deadline.tm_hour << ":" << "00" << " COMPLETED" << endl;
+		}
+		else {
+			cout << name << ": " << mon << "/" << deadline.tm_mday << "/" << yr << " " << deadline.tm_hour << ":" << deadline.tm_min << " COMPLETED" << endl;
+		}
+
 	}
 }

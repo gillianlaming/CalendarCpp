@@ -228,24 +228,27 @@ void CalendarInterface::run() {
 			currentDisplay = todo;
 			//do we need to figure out depth here?
 			todo->display(9);
-
-			bool goodInput = true;
-			while (goodInput) {
-				cout << "enter task in the format deadline date, time, name in the format:mm/dd/yyyy,hh:mm,name" << endl;
-				string line;
-				cin >> line;
-				istringstream iss(line);
-				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
-				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
-					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
-					addTask(name, month, day, year, hour, minute);
-					goodInput = false;
-				}
-				else {
-					cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
+			cout << "add task: addtask" << endl;
+			string in;
+			cin >> in;
+			if (in == "addtask") {
+				bool goodInput = true;
+				while (goodInput) {
+					cout << "enter task in the format deadline date, time, name in the format:mm/dd/yyyy,hh:mm,name" << endl;
+					string line;
+					cin >> line;
+					istringstream iss(line);
+					string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
+					if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
+						//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+						addTask(name, month, day, year, hour, minute);
+						goodInput = false;
+					}
+					else {
+						cout << "Incorrect input. Please note that you cannot include spaces in your input line" << endl;
+					}
 				}
 			}
-
 		
 			cout << "------------------------------------------------------------------" << endl << endl;
 		}
