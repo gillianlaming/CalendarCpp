@@ -351,18 +351,13 @@ void CalendarInterface::zoomIn(unsigned int index) {
 		currentDisplay = temp;
 	}
 	else {
-		DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(temp.get());
-		tm newTime = event1->when;
-		newTime.tm_sec = 0;   // seconds of minutes from 0 to 61
-		newTime.tm_min = event1->when.tm_min;   // minutes of hour from 0 to 59
-		newTime.tm_hour = event1->when.tm_hour;  // hours of day from 0 to 24
-		newTime.tm_mday = event1->when.tm_mday;  // day of month from 1 to 31
-		newTime.tm_mon = event1->when.tm_mon;   // month of year from 0 to 11
-		newTime.tm_year = event1->when.tm_year;  // year since 1900
-		newTime.tm_wday = event1->when.tm_wday; // days since sunday
-		newTime.tm_yday = event1->when.tm_yday;  // days since January 1st
-		newTime.tm_isdst = event1->when.tm_isdst; // hours of daylight savings time
+		//DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay->);
+		tm newTime;
 		
+		
+		newTime.tm_mon = index;   // month of year from 0 to 11
+	
+		builder->buildYear(newTime, currentDisplay);
 	}
 	cal->depth--;
 	cout << "------------------------------------------------------------------" << endl;
