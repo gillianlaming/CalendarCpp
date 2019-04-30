@@ -18,7 +18,7 @@ class DisplayableDay : public CalendarComponent {
 	friend class DisplayableMonth;
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
-	friend DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
+//	friend DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 public:
 	// 1st argument = start date/timeof the day, 2nd argument = its parent
 	DisplayableDay(std::tm, std::shared_ptr<DisplayableComponent>);
@@ -30,4 +30,4 @@ public:
 	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 };
 
-DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
+//DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);

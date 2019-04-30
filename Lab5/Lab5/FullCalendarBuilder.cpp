@@ -73,6 +73,7 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<Disp
 		newEvent->display(currentCalendar->depth);
 		day->addComponent(newEvent); //add the event to the correct day
 		//DisplayableDay(when, day).addComponent(newEvent); //this line is new: adding to the wrong date index is one too big
+		sort(day->children.begin(), day->children.end());
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
 		
 	}

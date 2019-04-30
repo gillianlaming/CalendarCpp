@@ -8,7 +8,7 @@ using namespace std;
 DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> p) : CalendarComponent(d, p) { }
 
 
-
+/*
 DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
 	cout << "----------------------------------------------------------------------------------------------------------------------" << endl;
 	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
@@ -23,7 +23,7 @@ DisplayableEvent * operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<Dis
 	}
 	return event2;
 }
-
+*/
 std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_ptr<DisplayableComponent> e) {
 	
 	children.push_back(e);

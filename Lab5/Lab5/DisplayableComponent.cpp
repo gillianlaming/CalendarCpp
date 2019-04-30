@@ -54,7 +54,7 @@ shared_ptr<DisplayableComponent> DisplayableComponent::getChild(unsigned int ind
 		return nullptr; // nullptr if index is out of bounds
 	}
 }
-
+/*
 bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
 	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
 	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
@@ -68,4 +68,5 @@ bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent
 	}
 	return false;
 }
+*/
 

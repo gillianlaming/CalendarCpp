@@ -35,7 +35,7 @@ protected:
 	// construction, destruction
 	DisplayableComponent(std::shared_ptr<DisplayableComponent>);
 	virtual ~DisplayableComponent();
-	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
+	//bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 
 	// composite and traversal functions
 	virtual std::weak_ptr<DisplayableComponent> getParent();
