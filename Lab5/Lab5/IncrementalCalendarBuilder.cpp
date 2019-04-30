@@ -122,13 +122,17 @@ shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildMonth(std::tm
 }
 shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> y = make_shared<DisplayableYear>(d, p, false);
+	int mon = d.tm_mon;
+	y->addComponent(buildMonth(d, y));
 	// construct each month and add it as a child of the year
+	/*
 	for (unsigned int i = 0; i < CalendarComponent::MONTHS; ++i) {
 		d.tm_mon = i;
 		y->addComponent(buildMonth(d, y));
 		// set week day of first day of the next month
 		d.tm_wday = (d.tm_wday + CalendarComponent::days[i]) % CalendarComponent::DAYSINAWEEK;
 	}
+	*/
 	return y;
 }
 shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::addYears(int curYear, int newYear, shared_ptr<Calendar> currentCalendar) {
