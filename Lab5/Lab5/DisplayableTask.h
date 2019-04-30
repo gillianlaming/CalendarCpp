@@ -18,5 +18,6 @@ public:
 	virtual void display(int depth) override;
 	Task(string name, shared_ptr<DisplayableComponent> p);
 	std::string name;
-	std::tm when;
+	std::tm deadline;
+	bool completed;
 };
