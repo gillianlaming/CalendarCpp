@@ -35,10 +35,10 @@ std::shared_ptr<DisplayableComponent> ToDoList::addComponent(std::shared_ptr<Dis
 }
 
 
-ToDoList* ToDoList::getInstance() {
+ToDoList* ToDoList::getList() {
 	if (ToDoList::tdlist == nullptr) {
 		ToDoList::tdlist = new ToDoList;
 	}
-	return ToDoList::tdlist;
+	return tdlist;
 }
 

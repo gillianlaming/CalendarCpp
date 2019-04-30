@@ -10,6 +10,8 @@ Purpose: Define full calendar builder class, responsible for building and managi
 #include "DisplayableYear.h"
 #include "DisplayableEvent.h"
 #include "utilityfunctions.h"
+#include "ToDoList.h"
+#include "DisplayableTask.h"
 
 #include <iostream>
 #include <string>
@@ -30,9 +32,11 @@ shared_ptr<Calendar> FullCalendarBuilder::buildCalendar(string name, size_t year
 	return currentCalendar;
 }
 
-//shared_ptr<ToDoList>buildToDo() {
-
-//}
+shared_ptr<ToDoList>FullCalendarBuilder::buildToDo() {
+	ToDoList * tdl = ToDoList::getList();
+	shared_ptr<ToDoList>tp;
+	return tp;
+}
 
 // you may decide to define this.
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildEvent(shared_ptr<DisplayableComponent> cal, string name, tm when, int recurrEvery, int recurrFor) {

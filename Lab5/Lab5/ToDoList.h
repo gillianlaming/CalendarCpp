@@ -24,6 +24,6 @@ private:
 public:
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> apple) override;
 	virtual void display(int depth) override;
-	ToDoList* getInstance();
+	static ToDoList* getList();
 
 };
