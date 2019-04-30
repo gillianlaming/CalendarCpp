@@ -16,7 +16,7 @@ Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool 
 
 void Task::display(int depth) {
 
-	int yr = deadline.tm_year + 1900;
+	int yr = deadline.tm_year;
 	int mon = deadline.tm_mon + 1;
 
 	if (completed == false) {
