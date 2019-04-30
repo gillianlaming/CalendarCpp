@@ -9,12 +9,14 @@
 
 class FullCalendarBuilder;
 class CalendarInterface;
+class ToDoInterface;
 
 using namespace std;
 
 class ToDoList : public CalendarComponent {
 friend FullCalendarBuilder;
 friend CalendarInterface;
+friend ToDoInterface;
 protected:
 	//std::string name;
 //ToDoList(string name, shared_ptr<DisplayableComponent>);
@@ -25,5 +27,5 @@ public:
 	virtual void display(int depth) override;
 	ToDoList();
 	//static shared_ptr<ToDoList> ToDoList::getList();
-	//multimap <string, shared_ptr<Task>> myTasks;
+	multimap <string, shared_ptr<CalendarComponent>> myTasks;
 };

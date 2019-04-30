@@ -14,6 +14,7 @@ It declares and defines the interface that all objects in the composite share.
 // forward declaration, needed for friend declaration
 class FullCalendarBuilder;
 class IncrementalCalendarBuilder;
+class ToDoInterface;
 class CalendarInterface;
 class ToDoList;
 using namespace std;
@@ -22,6 +23,7 @@ using namespace std;
 class DisplayableComponent {
 	friend FullCalendarBuilder;
 	friend CalendarInterface;
+	friend ToDoInterface;
 	friend IncrementalCalendarBuilder;
 	friend ToDoList;
 	

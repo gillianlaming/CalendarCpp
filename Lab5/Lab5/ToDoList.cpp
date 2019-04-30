@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ToDoList.h"
+#include "DisplayableTask.h"
 #include "DisplayableComponent.h"
 #include <iostream>
 #include <string>

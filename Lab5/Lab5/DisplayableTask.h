@@ -9,13 +9,16 @@
 
 class calendarInterface;
 class FullCalendarBuilder;
+class ToDoList;
+class ToDoListBuilder;
+//class DisplayableComponent;
 
 using namespace std;
 
 class Task :public CalendarComponent {
 	friend CalendarInterface;
 	friend ToDoList;
-	//friend class DisplayableComponenet;
+	//friend DisplayableComponent;
 	friend class ToDoListBuilder;
 	
 	
