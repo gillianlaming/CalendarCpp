@@ -74,9 +74,12 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(
 
 	shared_ptr <DisplayableComponent> year = cal->getChild(d.tm_year - a->dateInfo.tm_year); //index of the year of the event
 	if (year == NULL) {
-		cout << "Year doesn't exist in this cal, sry dude" << endl;
+		cout << "Adding new year to cal" << endl;
+		int curYear = a->dateInfo.tm_year;
+		int newYear = d.tm_year;
 		//ADD THAT YEAR
-		return nullptr; //return null pointer so code does break later
+		addYears(curYear, newYear);
+		//return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon); //index of the month of the event
 	if (month == NULL) {
@@ -127,4 +130,19 @@ shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildYear(std::tm 
 		d.tm_wday = (d.tm_wday + CalendarComponent::days[i]) % CalendarComponent::DAYSINAWEEK;
 	}
 	return y;
+}
+void IncrementalCalendarBuilder::addYears(int curYear, int newYear) {
+	int diff = newYear - curYear;
+	if (diff < 0) {
+		cout << "Error: cannot add event in the past" << endl;
+	}
+	else {
+		for (unsigned int i = 0; i < diff; ++i) {
+			tm y = currentCalendar->dateInfo;
+			y.tm_year += i;
+			y.tm_wday = (y.tm_wday + CalendarComponent::DAYSINAYEAR * i) % CalendarComponent::DAYSINAWEEK; // calculate day of the week for first day of the year
+			currentCalendar->addComponent(buildYear(y, currentCalendar));
+		}
+	}
+	
 }

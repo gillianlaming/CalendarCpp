@@ -8,6 +8,7 @@ public:
 	virtual std::shared_ptr<DisplayableEvent> buildEvent(std::shared_ptr<DisplayableComponent> cal, std::string name, std::tm when, int recurrEvery, int recurrFor, bool a) override;
 	virtual std::shared_ptr<DisplayableComponent> getComponentByDate(std::shared_ptr<DisplayableComponent> cal, std::tm d, std::string granularity) override;
 	virtual std::shared_ptr<Calendar> buildCalendar(std::string name, size_t years) override;
+	void addYears(int curYear, int newYear);
 	IncrementalCalendarBuilder() {};
 	
 protected:
