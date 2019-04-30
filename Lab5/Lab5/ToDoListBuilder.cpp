@@ -2,6 +2,7 @@
 #include "ToDoList.h"
 #include "ToDoListBuilder.h"
 #include <map>
+#include <algorithm>
 using namespace std;
 
 std::shared_ptr<ToDoList> ToDoListBuilder::buildToDoList() {
@@ -24,6 +25,8 @@ std::shared_ptr<DisplayableComponent> ToDoListBuilder::buildTasks(std::shared_pt
 	shared_ptr <Task> newTask = make_shared<Task>(name, list, when, completed);
 	newTask->parent = currenttodo;
 	currenttodo->addComponent(newTask);
+	//SORT!
+	sort(currenttodo->children.begin(), currenttodo->children.end());
 	//set the parent of the task as the todo list
 	//shared_ptr<DisplayableComponent> parent = newTask->parent.lock();
 	currenttodo->myTasks.insert(pair<string, shared_ptr<CalendarComponent>>(name, newTask)); //add to multimap

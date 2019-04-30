@@ -29,5 +29,5 @@ public:
 	// currently a leaf class, so no need to override addComponent()
 	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 };
-
+inline
 bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
