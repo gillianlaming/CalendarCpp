@@ -88,10 +88,14 @@ void ToDoInterface::run() {
 		time.tm_mday = day;
 		time.tm_mon = month;
 		time.tm_year = year;
-		builder->buildTasks(todo, name, time, false);
-		//todo->myTasks.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newTask)); //add to multimap
-		cout << "task added" << endl;
-
+		if (time.tm_year < 2019) {
+			cout << "Task must be during or after 2019, not added" << endl;
+		}
+		else {
+			builder->buildTasks(todo, name, time, false);
+			//todo->myTasks.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newTask)); //add to multimap
+			cout << "task added" << endl;
+		}
 	}
 
 	void ToDoInterface::completeTask(string name) {
@@ -99,11 +103,17 @@ void ToDoInterface::run() {
 		//shared_ptr<DisplayableComponent> rent = t1->getParent().lock();
 		vector < shared_ptr<DisplayableComponent>>  a = t1->children;
 		int index = 0;
+		bool exists = false;
 		for (int i = 0; i < a.size(); ++i) {
 			Task* t2 = dynamic_cast<Task*>(a[i].get());
 			if (t2->name ==name) {
+				exists = true;
 				t2->completed = true;
 			}
 		}
+		if (exists == false) {
+			cout << "Task by that name not found" << endl;
+		}
+		
 	}
 
