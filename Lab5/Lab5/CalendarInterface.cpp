@@ -144,10 +144,10 @@ void CalendarInterface::run() {
 				}
 				//need to build a struct tm
 				tm time;
-				time.tm_mday = day;
+				time.tm_mday = day - 1; //weird bug where if granularity is day it was taking us to wrong index.
 				time.tm_mon = month-1;
 				time.tm_year = year-CalendarComponent::BASEYEAR;
-				shared_ptr<DisplayableComponent> a = builder->getComponentByDate(currentDisplay, time, granularity);
+				shared_ptr<DisplayableComponent> a = builder->getComponentByDate(cal, time, granularity);
 				currentDisplay = a;
 			}
 			else {
