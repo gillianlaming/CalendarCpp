@@ -144,7 +144,7 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::addYears(int curYea
 	}
 	else {
 		
-		for (unsigned int i = 1; i < diff; ++i) {
+		for (int i = 1; i < diff; ++i) {
 			cout << "adding more years" << endl;
 			tm y = currentCalendar->dateInfo;
 			y.tm_year += i;
@@ -157,5 +157,5 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::addYears(int curYea
 		return currentCalendar->addComponent(buildYear(y, currentCalendar));
 	}
 
-	
+	return nullptr;
 }
