@@ -53,6 +53,9 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		int index = i* recurrEvery;
 		tm newTime1 = addDays(newTime, index); //is this correct
 		day = getComponentByDate(cal, newTime1, "day");
+		if (day == nullptr) {
+			return nullptr;
+		}
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(newTime1, cal, name); //make a new displayable event
 		newEvent->parent = day;
 		if (a) {
@@ -66,6 +69,9 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 	if (recurrEvery == 0 && recurrFor == 0) { //in the case of a onetime event
 		
 		shared_ptr <DisplayableEvent> newEvent = make_shared<DisplayableEvent>(when, cal, name);
+		if (day == nullptr) {
+			return nullptr;
+		}
 		newEvent->parent = day;
 		day->addComponent(newEvent); //add the event to the correct day
 		if (a) {

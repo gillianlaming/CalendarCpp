@@ -33,7 +33,7 @@ std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_p
 
 void DisplayableDay::display(int depth) {
 	//sort(children.begin(), children.end());
-	cout << " +++++++++++++++++++++++++++++++++" << endl;
+	//cout << " +++++++++++++++++++++++++++++++++" << endl;
 	if (depth == 3) {
 		for (int i = 0; i < children.size(); ++i) {
 			cout << '\t';
