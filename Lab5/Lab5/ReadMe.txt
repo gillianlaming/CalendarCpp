@@ -72,8 +72,6 @@ current depth and couting the correct/relavent information in the proper format.
 
 
 
-
-
 Did you make any changes to the interfaces provided in the starter code? If so, how easy was it to 
 refactor the code to match this change? 
 
@@ -84,9 +82,8 @@ to implement this change. Many of the others remained similar, with perhaps mino
 
 How does your implementation maintain flexibility and extensibility of the project? Compare this with other designs you considered.
 
-
-
-
+Our implememntation's use of swhared pointers allows for us to access children and parents and could be easily extended because of this.
+We considered other implementations before realizing hoe useful shared pointers would be here, and our current implementation proved to maintain flexibility and extensibility.
 
 
 
@@ -97,14 +94,14 @@ support merging calendars?
 
 
 
-
+GILLIAN
 
 
 If you chose not to use the decorator pattern, how does your design compare with it when 
 considering flexibility and extensibility of the design? 
 
 
-
+GILLIAN
 
 
 
@@ -124,3 +121,4 @@ the build todo function will only build if one does not already exist.
 What challenges did you run into while implementing this? Were any changes to the builder interface required? 
 How does using the builder pattern contribute to easily being able to change how an object(calendar in this case)
 is represented?
+GILLIAN

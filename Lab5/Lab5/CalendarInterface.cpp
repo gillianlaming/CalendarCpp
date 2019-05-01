@@ -43,7 +43,7 @@ void CalendarInterface::run() {
 		currentDisplay->display(cal->depth); 
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
-		int numKids = kids.size();
+		size_t numKids = kids.size();
 		
 		if (cal->depth == 0){ //hopefully now this will only display if it is an event
 			cout << "edit this event: edit" << endl << "delete this event: delete " << endl;

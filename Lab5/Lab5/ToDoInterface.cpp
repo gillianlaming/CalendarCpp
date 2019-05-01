@@ -38,7 +38,7 @@ void ToDoInterface::run() {
 		currentDisplay->display(depth);
 		cout << endl; //make this ish more readable
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
-		int numKids = kids.size();
+		size_t numKids = kids.size();
 
 		cout << "add task: add" << endl << "mark a task as complete: complete" << endl << "quit: q" << endl;
 
