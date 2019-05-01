@@ -37,7 +37,7 @@ std::shared_ptr<DisplayableComponent> ToDoList::addComponent(std::shared_ptr<Dis
 	return apple;
 }
 
-
+/*
 bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableComponent> t2) {
 	Task *task1 = dynamic_cast<Task*>(t1.get());
 	Task *task2 = dynamic_cast<Task*>(t2.get());
@@ -66,4 +66,5 @@ bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableCompon
 	}
 	return false;
 }
+*/
 

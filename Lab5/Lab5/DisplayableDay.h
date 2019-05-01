@@ -27,7 +27,7 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> addComponent(std::shared_ptr<DisplayableComponent> e);
 	//void sort(iterator it, iterator it2, bool g)
 	// currently a leaf class, so no need to override addComponent()
-	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
+//	bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
 };
-inline
+
 bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
