@@ -19,8 +19,6 @@
 #include "DisplayableMonth.h"
 #include "DisplayableDay.h"
 
-
-
 using namespace std;
 
 CalendarInterface::CalendarInterface(std::string builderType, std::string calendarName, size_t years) : builder(nullptr),cal(nullptr),currentDisplay(nullptr) {
@@ -54,16 +52,25 @@ void CalendarInterface::run() {
 		string in;
 		cin >> in;
 		if (in == "in") {
-			if (currentDisplay->children.size() > 0) {
-				cout << "index? (0-" << currentDisplay->children.size() - 1 << ")" << endl;
-				int index = 0;
-				cin >> index;
-				zoomIn(index);
+			bool goodinput = false;
+			int index = 0;
+			while (!goodinput) {
+				if (currentDisplay->children.size() > 0) {
+					std::cout << "index? (0-" << currentDisplay->children.size() - 1 << ")" << endl;
+					cin >> index;
+					if (index <= currentDisplay->children.size() - 1) {
+						goodinput = true;
+					}
+				}
+				else {
+					std::cout << "Nothing to zoom in on" << endl;
+				}
+			}
+					zoomIn(index);
+
 				
-			}
-			else {
-				cout << "Nothing to zoom in on" << endl;
-			}
+				
+			
 		}
 		else if (in == "out") {
 			zoomOut();
@@ -72,7 +79,7 @@ void CalendarInterface::run() {
 		else if (in == "add") {
 			bool goodInput = true;
 			while (goodInput) {
-			    cout << "mm/dd/yyyy,hh:mm,name" << endl;
+			    std::cout << "mm/dd/yyyy,hh:mm,name" << endl;
 				string line;
 				cin >> line;
 				istringstream iss(line);
