@@ -79,17 +79,24 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(
 		int newYear = d.tm_year;
 		//ADD THAT YEAR
 		year = addYears(curYear, newYear, currentCalendar);
+		year->parent = cal;
+		currentCalendar->addComponent(year);
 		//return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon); //index of the month of the event
 	if (month == NULL) {
 		cout << "need to add month" << endl;
-		return nullptr; //return null pointer so code does break later
+		month = buildMonth(d, currentCalendar);
+		month->parent = year;
+		currentCalendar->addComponent(month);
+		//return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday); //index of the day of the event
 	if (day == NULL) {
 		cout << "Day doesn't exist in this cal, sry dude" << endl;
-		return nullptr; //return null pointer so code does break later
+		day = buildDay(d, currentCalendar);
+		day->parent = month;
+		currentCalendar->addComponent(day);
 	}
 	if (granularity == "day") {
 		return day;
@@ -113,17 +120,12 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::buildDay(std::tm d,
 shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildMonth(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	int index = d.tm_mon;
 	shared_ptr<DisplayableComponent> m = make_shared<DisplayableMonth>(d, p, CalendarComponent::months[index], CalendarComponent::days[index]);
-	for (int i = 0; i < CalendarComponent::days[index]; ++i) { // for each day in the month
-		m->addComponent(buildDay(d, m)); // construct day and add as a child of the month
-		++(d.tm_mday); // increment day of the month
-		d.tm_wday = (d.tm_wday + 1) % CalendarComponent::DAYSINAWEEK; // increment weekday, reset to 0 if needed
-	}
 	return m;
 }
 shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> y = make_shared<DisplayableYear>(d, p, false);
-	int mon = d.tm_mon;
-	y->addComponent(buildMonth(d, y));
+	//int mon = d.tm_mon;
+	//y->addComponent(buildMonth(d, y));
 	// construct each month and add it as a child of the year
 	/*
 	for (unsigned int i = 0; i < CalendarComponent::MONTHS; ++i) {
