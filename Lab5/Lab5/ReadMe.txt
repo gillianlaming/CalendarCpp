@@ -16,6 +16,8 @@ ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 4. Error with defining operator< again to sort tasks in todo. It would not build with two definitions and we couldn't override so I had to move the implementation for both into one. I check if I can dynamically cast the param into a DisplayableEvent vs a Task and based on that, do proper sorting.
 5. When restoring a calendar from a file, we had to iterate over the multimap of events, but we couldnt delete events in the for loop because that wreaked havoc on our iterative process. Instead we pushed all the events onto a vector, and then went through the vector and deleted each event.
 
+TEST CASES:
+
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 
@@ -106,3 +108,5 @@ How does using the builder pattern contribute to easily being able to change how
 is represented?
 
 This was definitely the hardest of the three implementations because of the changes we had to make to the foundation code for building a calendar. We decided to make a new builder called "IncrementalCalendarBuilder" which attempted to implement this part. We had to change the way buildDay, buildMonth, buildYear and getCOmponentByDate worked, and had to change the constructor. Something particularily challenging about this part was trying to figure out what components were null and what had to be built and when. The builder pattern made changing how an object is represented because it allowed for flexibility in constructing the calendar. This is what allowed to create two separate implementations of building the calendar.
+
+**EXTRA CREDIT NOTE** The ToDoList and Merge were completed fully as components of this project. We implemented the IncrementalBuilder for extra credit. It is not fully implemented, however all of the structure and most of the code works for the Incremental Builder.
