@@ -156,7 +156,7 @@ void CalendarInterface::run() {
 			istringstream iss(line);
 			int month = 0;int day = 0;int year = 0;char backslash;
 			if (iss >> month >> backslash >> day >> backslash >> year) {
-				cout << "Please enter a granularity: ";
+				cout << "Please enter a granularity (month, day, year): ";
 				cin >> granularity;
 				if (granularity == "day") {
 					cal->depth = 1;
