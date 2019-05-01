@@ -377,6 +377,7 @@ void CalendarInterface::zoomIn(unsigned int index) {
 			currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
 
 
+
 		}
 		if (cal->depth == 3) {
 		
