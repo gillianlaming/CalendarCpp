@@ -16,6 +16,8 @@
 #include <fstream>
 #include <iterator>
 #include <algorithm>
+#include "DisplayableMonth.h"
+#include "DisplayableDay.h"
 
 
 
@@ -365,12 +367,62 @@ void CalendarInterface::zoomIn(unsigned int index) {
 	}
 	else {
 		//DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay->);
-		tm newTime;
+		if (cal->depth == 4) {
+			cout << "need to build month " << endl;
+			DisplayableYear* a = dynamic_cast<DisplayableYear*>(currentDisplay.get());
+			tm thetime; //= a->dateInfo;
+			thetime.tm_mon = a->dateInfo.tm_mon;
+			thetime.tm_mday = a->dateInfo.tm_mday;
+			thetime.tm_year = a->dateInfo.tm_year;
+			currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
+
+
+		}
+		if (cal->depth == 3) {
 		
+			cout << "need to build month " << endl;
+			DisplayableYear* a = dynamic_cast<DisplayableYear*>(currentDisplay.get());
+			tm thetime; //= a->dateInfo;
+			thetime.tm_mon = a->dateInfo.tm_mon;
+			thetime.tm_mday = a->dateInfo.tm_mday;
+			thetime.tm_year = a->dateInfo.tm_year;
+			//currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
+														
+			cout << "need to build day " << endl;
+			DisplayableMonth* b = dynamic_cast<DisplayableMonth*>(currentDisplay.get());
+			tm thetime1; //= a->dateInfo;
+			thetime1.tm_mon = a->dateInfo.tm_mon;
+			thetime1.tm_mday = a->dateInfo.tm_mday;
+			thetime1.tm_year = a->dateInfo.tm_year;
+			currentDisplay = builder->buildDay(thetime,cal); //unclear what i want to pass as the second param here
+																
+		}
+		if (cal->depth == 2) {
+			cout << "need to build month " << endl;
+			DisplayableYear* a = dynamic_cast<DisplayableYear*>(currentDisplay.get());
+			tm thetime; //= a->dateInfo;
+			thetime.tm_mon = a->dateInfo.tm_mon;
+			thetime.tm_mday = a->dateInfo.tm_mday;
+			thetime.tm_year = a->dateInfo.tm_year;
+			//currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
+
+			cout << "need to build day " << endl;
+			DisplayableMonth* b = dynamic_cast<DisplayableMonth*>(currentDisplay.get());
+			tm thetime1; //= a->dateInfo;
+			thetime1.tm_mon = a->dateInfo.tm_mon;
+			thetime1.tm_mday = a->dateInfo.tm_mday;
+			thetime1.tm_year = a->dateInfo.tm_year;
+			currentDisplay = builder->buildDay(thetime, cal); //unclear what i want to pass as the second param here
+
+			cout << "need to build event " << endl;
+			DisplayableDay* c = dynamic_cast<DisplayableDay*>(currentDisplay.get());
+			tm thetime2; //= a->dateInfo;
+			thetime2.tm_mon = a->dateInfo.tm_mon;
+			thetime2.tm_mday = a->dateInfo.tm_mday;
+			thetime2.tm_year = a->dateInfo.tm_year;
+			//builder->buildEvent; //unclear what i want to pass as the second param here
+		}
 		
-		newTime.tm_mon = index;   // month of year from 0 to 11
-	
-		builder->buildYear(newTime, currentDisplay);
 	}
 	cal->depth--;
 	cout << "------------------------------------------------------------------" << endl;

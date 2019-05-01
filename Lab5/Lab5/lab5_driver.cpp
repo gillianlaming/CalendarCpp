@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char * argv[]) {
 	CalendarInterface ci("full", "test", 3);
-//	CalendarInterface ci("incremental", "test", 3);
+	//CalendarInterface ci("incremental", "test", 3);
 	ci.run();
 	return 0;
 }
