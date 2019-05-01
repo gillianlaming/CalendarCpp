@@ -1,7 +1,8 @@
 Lab 5 Readme.
 
 Group members: Gillian Laming, Natalie Stollman
-
+Division of work: Gillian handled issues with events and Natalie handled interfaces. 
+Note: We did most of the work together, bouncing ideas off of each other, debugging together etc. 
 
 NOTES:
 1. Our implementation of the calendar uses military time. All times are assumed to be military time.
@@ -17,9 +18,19 @@ ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 5. When restoring a calendar from a file, we had to iterate over the multimap of events, but we couldnt delete events in the for loop because that wreaked havoc on our iterative process. Instead we pushed all the events onto a vector, and then went through the vector and deleted each event.
 
 TEST CASES:
-1. 
+1. add event. a correctly formatted input line results in an event being added and successfully displayed.
+2. restoring. the orginal calendar's events are all deleted and replaced by the restored calendar's events (from a file).
+3. save. a calendar is successfully saved to a file in the same directory as Lab5.exe with all of the events contained in that calendar. That calendar file can be used to restore the calendar that was saved.
+4. merge. when you merge 2+ calendars, the merged events contain the name of the calendar they are coming. All events, both orginal and merged, are sorted, and can be edited or deleted.
+5. delete. after adding an event to the calendar, you can navigate to that event by using the zoom option. when you are currently viewing the event (and ONLY when you are viewing the event), you are given the options to edit or delete. if you chose to delete the event, it removes the event from the calendar, and the day, and updates the display accordingly. 
+6. edit. again, if you are viewing a single event, you are given the option to edit it. All events are resorted after being edited. for instance, if you changed the date of an event, it will be resorted correctly on the day on which you move it. The display is also correctly updated.
+7. poorly formatted input string. whenever we prompt the user for input, we explicitly state how their input should be formatted. if they do not format their input correctly, we print an appropriate error message. for instance, if a user wants to add an event but their input is incorrectly formatted, we print "Incorrect input", and the user is reprompted. 
+8. the todolist. the user can navigate to a todolist by inputting "todo". they are then presented with the option to add a todo or mark a todo as completed.
+9. search. a user can search for an event by name, and then choose to view that event. if there are multiple events with the same name in the given calendar, the user will be displayed with all of the events and their date, and can choose from that list the event they would like to display.
+10. jump. a user can specify the date to which they would like to jump and they then choose the granularity (month, day, or year) and the appropriate display for that date will be shown.
+11. note on more poorly formatted input: If users put in a month, day, year, time etc that does not exist, an appropriate error message is written to the output and users are reprompted. (more ex. searching for event that does not exist, jumping to date outside of calendar, zooming in or out too far)
 
-// answer the following questions
+
 1. Part 2.1: Adding events to the calendar
 Think about the separation of concerns in the project. 
 What class/classes is responsible for the user interface of the Calendar?
@@ -32,9 +43,11 @@ What class/classes is responsible for managing the representation and constructi
 CalendarBuilder and FullCalendarBuilder deal with the construction of the Calendar. The Calendar class is the object that is actually built from the FullCalendarBuilder. 
 
 Which class should handle collecting information from the user about an event?
+
 Calendarinterface.cpp - takes in information about an event from the user input and uses the info to call addEvent().
 
 Which class should handle constructing and adding the event to the Calendar?
+
 FullCalendarBuilder handles cosntructing/building the event, and calendar iterface handles adding the event to the calendar itself.
 
 2. Part 2.2 Make the calendar interactive
@@ -68,14 +81,10 @@ refactor the code to match this change?
 We changed the display functions quite a bit. We even added a parameter to this function, but it was not especially hard
 to implement this change. Many of the others remained similar, with perhaps minor changes. Addtionally, since most of the functions we changed were overloaded, it made it particularily easy to change function parameters.
 
-
-
 How does your implementation maintain flexibility and extensibility of the project? Compare this with other designs you considered.
 
 Our implememntation's use of shared pointers allows for us to access children and parents and could be easily extended because of this. Additionally, we did not hardcode. Instead, we used variables and typedefs that were declared in header files to represent constants. This makes our project adaptable to different types. We saw firsthand how adaptable and extensible our project is when we implemented the ToDOList and the new calendar builder (IncrementalCalendarBuilder).
 We also considered other implementations before realizing hoe useful shared pointers would be here, and our current implementation proved to maintain flexibility and extensibility.
-
-
 
 Part 3 (only answer the questions pertaining to the functionality you chose to implement)
 3.1: Merging calendars
@@ -87,20 +96,15 @@ The decorator pattern is helpful because it allowed us to add additional fucntio
 
 If you chose not to use the decorator pattern, how does your design compare with it when 
 considering flexibility and extensibility of the design? 
+
 n/a, we used the decorator pattern.
-
-
-
 
 3.2 ToDo List
 Describe your implementation? How does it support easy extensibility of the project in the future?
 How is the singleton pattern used to enforce only a sigle TODO list instance?
 
-For our ToDo List, we created an entirely separate interface. Essentially, a Task is a displayable component and is a child of a todo list (a calendar componenet). 
-In our calendar interface, if the user switches to ToDo view, a ToDoListInterface is created and they are brought to their options of addidng or completing tasks. 
-It uses the same operator< as events do for sorting (see error explanantion) and the singleton pattern ensures that there is only one todo list at a time because
+For our ToDo List, we created an entirely separate interface. Essentially, a Task is a displayable component and is a child of a todo list (a calendar componenet). In our calendar interface, if the user switches to ToDo view, a ToDoListInterface is created and they are brought to their options of addidng or completing tasks. It uses the same operator< as events do for sorting (see error explanantion) and the singleton pattern ensures that there is only one todo list at a time because
 the build todo function will only build if one does not already exist. 
-
 
 
 3.3 Incremental Builder
