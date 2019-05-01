@@ -17,6 +17,7 @@ ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 5. When restoring a calendar from a file, we had to iterate over the multimap of events, but we couldnt delete events in the for loop because that wreaked havoc on our iterative process. Instead we pushed all the events onto a vector, and then went through the vector and deleted each event.
 
 TEST CASES:
+1. 
 
 // answer the following questions
 1. Part 2.1: Adding events to the calendar
