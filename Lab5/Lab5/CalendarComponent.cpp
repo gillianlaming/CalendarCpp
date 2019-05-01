@@ -34,5 +34,4 @@ const unsigned int CalendarComponent::DAYSINAYEAR = 365;
 
 // CalendarComponent
 CalendarComponent::CalendarComponent(std::tm d, std::shared_ptr<DisplayableComponent> p) : DisplayableComponent(p), dateInfo(d){
-	//cout << "d " << d.tm_year << " date info (d) " << dateInfo.tm_year << endl;
 }

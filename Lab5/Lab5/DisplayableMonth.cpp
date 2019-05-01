@@ -12,45 +12,28 @@ DisplayableMonth::DisplayableMonth(std::tm d, std::shared_ptr<DisplayableCompone
 		children.push_back(nullptr);
 	}
 }
-
-//TODO: put asterisk after days with events
+//use setw here
 void DisplayableMonth::display(int depth) {
 	cout << "\t\t" << name  << endl;
 		if (depth == 2) {
 		cout << "Sunday     " << "Monday     " << "Tuesday    " << "Wednesday  " << "Thursday   " << "Friday     " << "Saturday   " << endl;
-		
+			//add space for first week depending on what day of the week the first of the month is
 			for (int i = 0; i < 7; ++i) {
 				if (i < dateInfo.tm_wday) {
-					//cout <<setw(11) << "";
 					cout << "           ";
 				}
 			}
 		
 			for (int i = 0; i < children.size(); ++i) {
-			
 					children[i]->display(depth);
-				
 			}
-
 	}
-		if (depth == 3) {
+		if (depth == 3) { //year
 
 			for (int i = 0; i < children.size(); ++i) {
-
 				children[i]->display(depth);
-
 			}
 		}
-		//else {
-			//if (depth == 3) {
-				//for (int i = 0; i < children.size(); ++i) {
-
-					//children[i]->display(depth);
-
-				//}
-
-			//}
-		//}
 		
 		
 }

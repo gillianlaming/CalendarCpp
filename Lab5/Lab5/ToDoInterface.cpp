@@ -23,7 +23,7 @@
 
 using namespace std;
 
-
+//construct 
 ToDoInterface::ToDoInterface(std::string builderType) : builder(nullptr), todo(nullptr), currentDisplay(nullptr) {
 	if (builderType == "todo") {
 		builder = make_shared<ToDoListBuilder>();
@@ -36,11 +36,11 @@ ToDoInterface::ToDoInterface(std::string builderType) : builder(nullptr), todo(n
 void ToDoInterface::run() {
 	while (1) { 	// run until the user quits
 		currentDisplay->display(depth);
-		cout << endl; //make this ish more readable
+		cout << endl; 
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		size_t numKids = kids.size();
 
-		cout << "add task: add" << endl << "mark a task as complete: complete" << endl << "quit: q" << endl;
+		cout << "add task: add" << endl << "mark a task as complete: complete" << endl << "back to calendar: q" << endl;
 
 		string in;
 		cin >> in;
@@ -53,7 +53,7 @@ void ToDoInterface::run() {
 				istringstream iss(line);
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
-					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+					
 						addTask(name, month, day, year, hour, minute);
 					goodInput = false;
 				}
@@ -82,6 +82,7 @@ void ToDoInterface::run() {
 }
 
 	void ToDoInterface::addTask(string name, int& month, int& day, int& year, int& hour, int& minute) {
+		//pack struct tm
 		tm time;
 		time.tm_hour = hour;
 		time.tm_min = minute;
@@ -93,14 +94,12 @@ void ToDoInterface::run() {
 		}
 		else {
 			builder->buildTasks(todo, name, time, false);
-			//todo->myTasks.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newTask)); //add to multimap
 			cout << "task added" << endl;
 		}
 	}
 
 	void ToDoInterface::completeTask(string name) {
 		ToDoList* t1 = dynamic_cast<ToDoList*>(currentDisplay.get());
-		//shared_ptr<DisplayableComponent> rent = t1->getParent().lock();
 		vector < shared_ptr<DisplayableComponent>>  a = t1->children;
 		int index = 0;
 		bool exists = false;

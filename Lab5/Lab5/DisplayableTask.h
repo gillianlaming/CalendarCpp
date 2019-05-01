@@ -11,16 +11,14 @@ class calendarInterface;
 class FullCalendarBuilder;
 class ToDoList;
 class ToDoListBuilder;
-//class DisplayableComponent;
+
 
 using namespace std;
 
 class Task :public CalendarComponent {
 	friend CalendarInterface;
 	friend ToDoList;
-	//friend DisplayableComponent;
-	friend class ToDoListBuilder;
-	
+	friend class ToDoListBuilder;	
 	
 public:
 	virtual void display(int depth) override;
@@ -31,6 +29,5 @@ public:
 
 protected:
 	std::weak_ptr<DisplayableComponent> parent; // weak_ptr to avoid cycles, does not contribute to reference count
-
 	
 };

@@ -77,11 +77,10 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(
 		cout << "Adding new year to cal" << endl;
 		int curYear = a->dateInfo.tm_year;
 		int newYear = d.tm_year;
-		//ADD THAT YEAR
 		year = addYears(curYear, newYear, currentCalendar);
 		year->parent = cal;
 		currentCalendar->addComponent(year);
-		//return nullptr; //return null pointer so code does break later
+		
 	}
 	shared_ptr <DisplayableComponent> month = year->getChild(d.tm_mon); //index of the month of the event
 	if (month == NULL) {
@@ -89,7 +88,6 @@ shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::getComponentByDate(
 		month = buildMonth(d, currentCalendar);
 		month->parent = year;
 		currentCalendar->addComponent(month);
-		//return nullptr; //return null pointer so code does break later
 	}
 	shared_ptr <DisplayableComponent> day = month->getChild(d.tm_mday); //index of the day of the event
 	if (day == NULL) {
@@ -124,17 +122,7 @@ shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildMonth(std::tm
 }
 shared_ptr<DisplayableComponent>  IncrementalCalendarBuilder::buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> y = make_shared<DisplayableYear>(d, p, false);
-	//int mon = d.tm_mon;
-	//y->addComponent(buildMonth(d, y));
-	// construct each month and add it as a child of the year
-	/*
-	for (unsigned int i = 0; i < CalendarComponent::MONTHS; ++i) {
-		d.tm_mon = i;
-		y->addComponent(buildMonth(d, y));
-		// set week day of first day of the next month
-		d.tm_wday = (d.tm_wday + CalendarComponent::days[i]) % CalendarComponent::DAYSINAWEEK;
-	}
-	*/
+	
 	return y;
 }
 shared_ptr<DisplayableComponent> IncrementalCalendarBuilder::addYears(int curYear, int newYear, shared_ptr<Calendar> currentCalendar) {

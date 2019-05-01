@@ -9,8 +9,10 @@ using namespace std;
 DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> p) : CalendarComponent(d, p) { }
 
 
-
+//sorts for both events, and tasks on todo list. checks which dynamic cast is possible, which tells us if we're in a todolist or day
+//compare 2 at a time
 bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
+	//if events on day
 	if (DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get())) {
 		DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
 		if (event1->when.tm_hour < event2->when.tm_hour) {
@@ -23,6 +25,7 @@ bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableCompon
 		}
 		return false;
 	}
+	//else if tasks in todo list
 	else if (Task *task1 = dynamic_cast<Task*>(e1.get())) {
 		Task *task2 = dynamic_cast<Task*>(e2.get());
 		if (task1->deadline.tm_year < task2->deadline.tm_year) {
@@ -54,24 +57,21 @@ bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableCompon
 }
 
 std::shared_ptr<DisplayableComponent> DisplayableDay::addComponent(std::shared_ptr<DisplayableComponent> e) {
-	
+
 	children.push_back(e);
-	//not sure if we need to do more here
 	return e;
 }
 
 
 void DisplayableDay::display(int depth) {
-	//sort(children.begin(), children.end());
-	//cout << " +++++++++++++++++++++++++++++++++" << endl;
+	//year
 	if (depth == 3) {
 		for (int i = 0; i < children.size(); ++i) {
 			cout << '\t';
 			children[i]->display(depth);
-
 		}
 	}
-	else if (depth == 1) {
+	else if (depth == 1) {//day
 		cout << daysoftheweek[dateInfo.tm_wday] << " ";
 		cout << dateInfo.tm_mon + 1 << "/" << dateInfo.tm_mday << "/" << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
 		for (int i = 0; i < children.size(); ++i) {
@@ -80,13 +80,11 @@ void DisplayableDay::display(int depth) {
 
 		}
 	}
-	else if (depth == 0) {
-		cout << "hi";
+	else if (depth == 0) {//event
 		cout << daysoftheweek[dateInfo.tm_wday];
 		
 	}
 	else {
-		//cout << "HERE" << endl;
 		int spacing = 11;
 		string stars = "";
 		for (unsigned int i = 0; i < children.size(); ++i) {

@@ -12,7 +12,7 @@ void DisplayableEvent::display(int depth) {
 	int yr = when.tm_year + 1900;
 	int mon = when.tm_mon + 1;
 	
-	if (depth == 3) {
+	if (depth == 3) { //year
 		if (calNum == "") {
 			if (when.tm_min == 0) {
 				cout << mon << "/" << when.tm_mday << "/" << yr << " " << when.tm_hour << ":" << "00" << " "  << name << endl;
@@ -31,7 +31,7 @@ void DisplayableEvent::display(int depth) {
 		}
 		
 	}
-	if (depth == 1) {
+	if (depth == 1) { //day
 		if (calNum == "") {
 			if (when.tm_min == 0) {
 				cout << when.tm_hour << ":" << "00" << " "  << name << endl;
@@ -50,7 +50,7 @@ void DisplayableEvent::display(int depth) {
 		}
 		
 	}
-	if (depth == 0 || depth == 2) {
+	if (depth == 0 || depth == 2) {//event display for event view or month view
 		if (calNum == "") {
 			if (when.tm_min == 0) {
 				cout << mon << "/" << when.tm_mday << "/" << yr << endl;

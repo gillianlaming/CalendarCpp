@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+//constructor, task has name, deadline, and whether or not it is completed
 Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool completed) : CalendarComponent(deadline, ptr) {
 	Task::name = name;
 	Task::deadline = deadline;
@@ -15,7 +15,7 @@ Task::Task(string name, shared_ptr<DisplayableComponent> ptr, tm deadline, bool 
 }
 
 void Task::display(int depth) {
-
+	//for ease of cout
 	int yr = deadline.tm_year;
 	int mon = deadline.tm_mon;
 
@@ -26,7 +26,6 @@ void Task::display(int depth) {
 		else {
 			cout << name << ": " << mon << "/" << deadline.tm_mday << "/" << yr << " " << deadline.tm_hour << ":" << deadline.tm_min << " TODO" << endl;
 		}
-	
 	}
 	else {
 		if (deadline.tm_min == 0) {

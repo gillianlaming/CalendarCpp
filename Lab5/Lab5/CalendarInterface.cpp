@@ -39,7 +39,7 @@ CalendarInterface::CalendarInterface(std::string builderType, std::string calend
 void CalendarInterface::run() {
 	while (1) { 	// run until the user quits
 		currentDisplay->display(cal->depth); 
-		cout << endl; //make this ish more readable
+		cout << endl; 
 		vector<shared_ptr<DisplayableComponent>> kids = currentDisplay->children;
 		size_t numKids = kids.size();
 		
@@ -85,7 +85,7 @@ void CalendarInterface::run() {
 				istringstream iss(line);
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
-					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
+					
 					addEvent(name, month, day, year, hour, minute);
 					goodInput = false;
 				} 
@@ -99,7 +99,7 @@ void CalendarInterface::run() {
 			cout << "What is the name of the calendar you would like to merge with: ";
 			
 			if (mergeMeBb()) {
-				cout << "mergemebb worked" << endl;
+				cout << "merge worked" << endl;
 			}
 			else {
 				cout << "Merge unsuccessful" << endl;
@@ -122,7 +122,7 @@ void CalendarInterface::run() {
 				for (temp::iterator it1 = range.first; it1 != range.second; ++it1) { //iterate across all the events with the same name
 					cout << "Index " << i << ": ";
 					shared_ptr<DisplayableEvent> event = it1->second;
-					//event->when.tm_mday = event->when.tm_mday - 1;
+					
 					sameName.push_back(event);
 					i++;
 					int z = cal->depth;
@@ -135,14 +135,13 @@ void CalendarInterface::run() {
 					int index;
 					cout << "Of the above events, which one would you like to display? Type in the index: ";
 					cin >> index;
-					//TODO: fix this display
-					//TODO this now
+					
 					int z = cal->depth;
 
 					cal->depth = 3;
 					
 					
-					sameName[index]->display(cal->depth); //this is not the proper way to be displaying, but works for the time being.
+					sameName[index]->display(cal->depth); 
 					cal->depth = z;
 				}
 			}	
@@ -168,9 +167,8 @@ void CalendarInterface::run() {
 				if (granularity == "year") {
 					cal->depth = 3;
 				}
-				//need to build a struct tm
 				tm time;
-				time.tm_mday = day - 1; //weird bug where if granularity is day it was taking us to wrong index.
+				time.tm_mday = day - 1; 
 				time.tm_mon = month-1;
 				time.tm_year = year-CalendarComponent::BASEYEAR;
 				shared_ptr<DisplayableComponent> a = builder->getComponentByDate(cal, time, granularity);
@@ -245,12 +243,10 @@ void CalendarInterface::run() {
 			cout << "------------------------------------------------------------------" << endl << endl;
 		}
 
-		//TODO: todoLIst
 		else if (in == "todo") {
 			//call todo interface
 			ToDoInterface tdi("todo");
 			tdi.run();
-
 		}
 
 		else if (in == "edit") {
@@ -264,19 +260,16 @@ void CalendarInterface::run() {
 				istringstream iss(line);
 				string name;int month = 0;int day = 0;int year = 0;int hour = 0;char comma;char backslash;char colon;int minute = 0;
 				if (iss >> month >> backslash >> day >> backslash >> year >> comma >> hour >> colon >> minute >> comma >> name) {
-					//month = month - 1; //shift month over by 1 bc indexes run from 0-11, not 1-12
 					shared_ptr<DisplayableComponent> oldDay = event1->getParent().lock();
 					vector < shared_ptr<DisplayableComponent>>  a = oldDay->children;
 					int index = 0;
 					for (int i = 0; i < a.size(); ++i) {
 						DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
 						if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
-							//cout << "got here yay" << endl;
 							index = i;
 							break;
 						}
 					}
-					//oldDay->removeComponent(index);
 					oldDay->children.erase(oldDay->children.begin() + index);
 
 					event1->when.tm_hour = hour;
@@ -287,18 +280,7 @@ void CalendarInterface::run() {
 					event1->name = name;
 					shared_ptr<DisplayableComponent> day = event1->getParent().lock();
 					builder->buildEvent(cal, event1->name, event1->when, 0, 0, false);
-					/*
-					event1->parent = day;
 					
-				//	day->addComponent(event1);
-					sort(day->children.begin(), day->children.end()); //need to re-sort children vectors now
-					
-					cal->depth = 1;
-					//cout << "year " << event1->when.tm_year << endl;
-					//shared_ptr<DisplayableComponent> newDisplay = builder->getComponentByDate(cal, event1->when, "day");
-					
-					//currentDisplay = newDisplay;
-					*/
 					goodInput = false;
 				}
 				else {
@@ -309,12 +291,12 @@ void CalendarInterface::run() {
 			
 		}
 		else if (in == "delete") {
-
+			//remove an event
 			DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay.get());
 			shared_ptr<DisplayableComponent> rent = event1->getParent().lock();
 			vector < shared_ptr<DisplayableComponent>>  a = rent->children;
 			int index = 0;
-			for (int i = 0; i < a.size(); ++i) {
+			for (int i = 0; i < a.size(); ++i) { //find it
 				DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[i].get());
 				if (event2->name == event1->name && event1->when.tm_mon == event2->when.tm_mon) {
 					index = i;
@@ -323,22 +305,22 @@ void CalendarInterface::run() {
 			}
 			DisplayableEvent* event2 = dynamic_cast<DisplayableEvent*>(a[index].get());
 			string key = event2->name;
-			cal->myEvents.erase(key);
+			cal->myEvents.erase(key); 
 			
 			rent->children.erase(rent->children.begin() + index);
 
 			cout << "------------------------------------------------------------------" << endl << endl;
 		
 		}
+		//quit
 		else if (in == "q") {
 			break;
 		}	
 	}
 
 }
-
+//merge helper
 bool CalendarInterface::mergeMeBb() {
-	
 	string calName;
 	cin >> calName;
 	string fileName = calName + ".txt";
@@ -373,34 +355,33 @@ void CalendarInterface::zoomIn(unsigned int index) {
 		currentDisplay = temp;
 	}
 	else {
-		//DisplayableEvent* event1 = dynamic_cast<DisplayableEvent*>(currentDisplay->);
+	
 		if (cal->depth == 4) {
 			cout << "need to build month " << endl;
 			DisplayableYear* a = dynamic_cast<DisplayableYear*>(currentDisplay.get());
-			tm thetime; //= a->dateInfo;
+			tm thetime; 
 			thetime.tm_mon = a->dateInfo.tm_mon;
 			thetime.tm_mday = a->dateInfo.tm_mday;
 			thetime.tm_year = a->dateInfo.tm_year;
-			currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
+			currentDisplay = builder->buildMonth(thetime, cal); 
 
 		}
 		if (cal->depth == 3) {
 		
 			cout << "need to build month " << endl;
 			DisplayableYear* a = dynamic_cast<DisplayableYear*>(currentDisplay.get());
-			tm thetime; //= a->dateInfo;
+			tm thetime; 
 			thetime.tm_mon = a->dateInfo.tm_mon;
 			thetime.tm_mday = a->dateInfo.tm_mday;
 			thetime.tm_year = a->dateInfo.tm_year;
-			//currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
 														
 			cout << "need to build day " << endl;
 			DisplayableMonth* b = dynamic_cast<DisplayableMonth*>(currentDisplay.get());
-			tm thetime1; //= a->dateInfo;
+			tm thetime1; 
 			thetime1.tm_mon = a->dateInfo.tm_mon;
 			thetime1.tm_mday = a->dateInfo.tm_mday;
 			thetime1.tm_year = a->dateInfo.tm_year;
-			currentDisplay = builder->buildDay(thetime,cal); //unclear what i want to pass as the second param here
+			currentDisplay = builder->buildDay(thetime,cal); 
 																
 		}
 		if (cal->depth == 2) {
@@ -410,7 +391,6 @@ void CalendarInterface::zoomIn(unsigned int index) {
 			thetime.tm_mon = a->dateInfo.tm_mon;
 			thetime.tm_mday = a->dateInfo.tm_mday;
 			thetime.tm_year = a->dateInfo.tm_year;
-			//currentDisplay = builder->buildMonth(thetime, cal); //unclear what i want to pass as the second param here
 
 			cout << "need to build day " << endl;
 			DisplayableMonth* b = dynamic_cast<DisplayableMonth*>(currentDisplay.get());
@@ -418,7 +398,7 @@ void CalendarInterface::zoomIn(unsigned int index) {
 			thetime1.tm_mon = a->dateInfo.tm_mon;
 			thetime1.tm_mday = a->dateInfo.tm_mday;
 			thetime1.tm_year = a->dateInfo.tm_year;
-			currentDisplay = builder->buildDay(thetime, cal); //unclear what i want to pass as the second param here
+			currentDisplay = builder->buildDay(thetime, cal); 
 
 			cout << "need to build event " << endl;
 			DisplayableDay* c = dynamic_cast<DisplayableDay*>(currentDisplay.get());
@@ -426,7 +406,6 @@ void CalendarInterface::zoomIn(unsigned int index) {
 			thetime2.tm_mon = a->dateInfo.tm_mon;
 			thetime2.tm_mday = a->dateInfo.tm_mday;
 			thetime2.tm_year = a->dateInfo.tm_year;
-			//builder->buildEvent; //unclear what i want to pass as the second param here
 		}
 		
 	}
@@ -496,21 +475,6 @@ void CalendarInterface::addEvent2(string name, int& month, int& day, int& year, 
 	builder->buildEvent(cal, name, time, recurrEvery, recurrFor, false);
 }
 
-//addtodo
-/*
-void CalendarInterface::addTask(string name, int& month, int& day, int& year, int& hour, int& minute) {
-	
-	//need to make new struct tm object
-	tm time;
-	time.tm_hour = hour;
-	time.tm_min = minute;
-	time.tm_mday = day;
-	time.tm_mon = month;
-	time.tm_year = year;
-	tdbuilder->buildTasks(todo, name, time, false);
-	cout << "task added" << endl;
-}
-*/
 
 //merge
 void CalendarInterface::addEvent3(string name, int& month, int& day, int& year, int& hour, int& minute) {

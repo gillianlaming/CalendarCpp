@@ -36,8 +36,6 @@ void Calendar::display(int depth) {
 			children[i]->display(depth);
 		}
 	}
-	//TODO: fix display to do years initially with indices with ability to zoom in on year, then month etc.
-
 
 }
 

@@ -15,7 +15,6 @@ public:
 	virtual std::shared_ptr<DisplayableComponent> getComponentByDate(std::shared_ptr<DisplayableComponent> cal, std::tm d, std::string granularity) = 0;
 	virtual std::shared_ptr<Calendar> buildCalendar(std::string name, size_t years) = 0;
 	CalendarBuilder() {};
-	//virtual std::shared_ptr<ToDoList>buildToDo() =0;
 	virtual std::shared_ptr<DisplayableComponent> buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 	virtual std::shared_ptr<DisplayableComponent> buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 	virtual std::shared_ptr<DisplayableComponent> buildMonth(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
@@ -26,8 +25,6 @@ protected:
 
 	// functions to build components of the calendar
 	// these will be used internally only, so keep encapsulated
-	//virtual std::shared_ptr<DisplayableComponent> buildYear(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 	
-	//virtual std::shared_ptr<DisplayableComponent> buildEvent(std::tm d, std::shared_ptr<DisplayableComponent> p) = 0;
 };
 

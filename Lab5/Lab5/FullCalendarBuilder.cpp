@@ -47,11 +47,11 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 
 	when.tm_mday -= 1;
 	shared_ptr <DisplayableComponent> day = getComponentByDate(cal, when, "day"); //USE THIS to call getComponentbyDate
-	when.tm_mday += 1; //bad fix to problem but works
+	when.tm_mday += 1; 
 
 	for (int i = 0; i < recurrFor; ++i) {
 		int index = i* recurrEvery;
-		tm newTime1 = addDays(newTime, index); //is this correct
+		tm newTime1 = addDays(newTime, index); 
 		day = getComponentByDate(cal, newTime1, "day");
 		if (day == nullptr) {
 			return nullptr;
@@ -80,9 +80,8 @@ shared_ptr<DisplayableEvent> FullCalendarBuilder::buildEvent(shared_ptr<Displaya
 		sort(day->children.begin(), day->children.end());
 		currentCalendar->myEvents.insert(pair<string, shared_ptr<DisplayableEvent>>(name, newEvent));//add to multimap
 	}
-	return make_shared<DisplayableEvent>(when, cal, name); //do we need to return the new event thing we made
+	return make_shared<DisplayableEvent>(when, cal, name); 
 }
-//TODO: breaks upon adding event when not at depth of 4
 shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_ptr<DisplayableComponent> cal, tm d, string granularity) {
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,7 +117,6 @@ shared_ptr<DisplayableComponent> FullCalendarBuilder::getComponentByDate(shared_
 
 shared_ptr<DisplayableComponent> FullCalendarBuilder::buildDay(std::tm d, std::shared_ptr<DisplayableComponent> p) {
 	shared_ptr<DisplayableComponent> day = make_shared<DisplayableDay>(d, p);
-
 	return day;
 }
 

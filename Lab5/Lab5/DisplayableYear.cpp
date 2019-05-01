@@ -3,7 +3,6 @@
 #include <iostream>
 #include "DisplayableMonth.h"
 
-
 using namespace std;
 
 DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent> p, bool l) : CalendarComponent(d, p), leap(l) {
@@ -11,11 +10,10 @@ DisplayableYear::DisplayableYear(std::tm d, std::shared_ptr<DisplayableComponent
 		children.push_back(nullptr);
 	}
 }
-//TODO: display events under corresponding months
+//display events under corresponding months
 void DisplayableYear::display(int depth) {
 	cout << "\tYear " << dateInfo.tm_year + CalendarComponent::BASEYEAR << endl;
-	//cout << "depth from displayable year " << depth << endl;
-	if (depth == 3) {
+	if (depth == 3) { //year
 		for (size_t i = 0; i < children.size(); ++i) { // forward request to all children
 			if (children[i] != nullptr) {
 				cout << i;
@@ -31,7 +29,6 @@ void DisplayableYear::display(int depth) {
 
 		}
 	}
-	
 	
 	
 }

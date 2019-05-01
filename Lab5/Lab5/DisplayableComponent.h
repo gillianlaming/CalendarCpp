@@ -30,7 +30,6 @@ class DisplayableComponent {
 public:
 	// defined by concrete classes deriving from DisplayableComponent
 	virtual void display(int depth) = 0;
-	//multimap <string, shared_ptr<Task>> myTasks;
 	
 	
 protected:
@@ -42,8 +41,7 @@ protected:
 	DisplayableComponent(std::shared_ptr<DisplayableComponent>);
 	DisplayableComponent() {};
 	virtual ~DisplayableComponent();
-	//bool sortMe(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2);
-
+	
 	// composite and traversal functions
 	virtual std::weak_ptr<DisplayableComponent> getParent();
 	virtual std::shared_ptr<DisplayableComponent> getChild(unsigned int);
