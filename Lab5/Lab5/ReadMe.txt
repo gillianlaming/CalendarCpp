@@ -114,4 +114,6 @@ is represented?
 
 This was definitely the hardest of the three implementations because of the changes we had to make to the foundation code for building a calendar. We decided to make a new builder called "IncrementalCalendarBuilder" which attempted to implement this part. We had to change the way buildDay, buildMonth, buildYear and getCOmponentByDate worked, and had to change the constructor. Something particularily challenging about this part was trying to figure out what components were null and what had to be built and when. The builder pattern made changing how an object is represented because it allowed for flexibility in constructing the calendar. This is what allowed to create two separate implementations of building the calendar.
 
-**EXTRA CREDIT NOTE** The ToDoList and Merge were completed fully as components of this project. We implemented the IncrementalBuilder for extra credit. It is not fully implemented, however all of the structure and most of the code works for the Incremental Builder.
+To view the calendar with the incremental builder, go to the file Lab5_driver.cpp and uncomment the line 13 and comment out line 12. 
+
+**EXTRA CREDIT NOTE** The ToDoList and Merge were completed fully as components of this project. We implemented the IncrementalBuilder for extra credit. It is not fully implemented, however all of the structure and most of the code works for the Incremental Builder. We also turned this in before the orginial deadline (4/30/19), so should +5 for that.
