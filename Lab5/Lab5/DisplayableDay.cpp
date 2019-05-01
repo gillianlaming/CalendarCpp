@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DisplayableDay.h"
+#include "DisplayableTask.h"
 #include <iostream>
 #include <algorithm>
 
@@ -10,15 +11,44 @@ DisplayableDay::DisplayableDay(std::tm d, std::shared_ptr<DisplayableComponent> 
 
 
 bool operator<(shared_ptr<DisplayableComponent> e1, shared_ptr<DisplayableComponent> e2) {
-	DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get());
-	DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
-	if (event1->when.tm_hour < event2->when.tm_hour) {
-		return true;
-	}
-	else if (event1->when.tm_hour == event2->when.tm_hour) {
-		if (event1->when.tm_min < event2->when.tm_min) {
+	if (DisplayableEvent *event1 = dynamic_cast<DisplayableEvent*>(e1.get())) {
+		DisplayableEvent *event2 = dynamic_cast<DisplayableEvent*>(e2.get());
+		if (event1->when.tm_hour < event2->when.tm_hour) {
 			return true;
 		}
+		else if (event1->when.tm_hour == event2->when.tm_hour) {
+			if (event1->when.tm_min < event2->when.tm_min) {
+				return true;
+			}
+		}
+		return false;
+	}
+	else if (Task *task1 = dynamic_cast<Task*>(e1.get())) {
+		Task *task2 = dynamic_cast<Task*>(e2.get());
+		if (task1->deadline.tm_year < task2->deadline.tm_year) {
+			return true;
+		}
+		else if (task1->deadline.tm_year == task2->deadline.tm_year) {
+			if (task1->deadline.tm_mon < task2->deadline.tm_mon) {
+				return true;
+			}
+			else if (task1->deadline.tm_mon == task2->deadline.tm_mon) {
+				if (task1->deadline.tm_mday < task2->deadline.tm_mday) {
+					return true;
+				}
+				else if (task1->deadline.tm_mday == task2->deadline.tm_mday) {
+					if (task1->deadline.tm_hour < task2->deadline.tm_hour) {
+						return true;
+					}
+					else if (task1->deadline.tm_hour == task2->deadline.tm_hour) {
+						if (task1->deadline.tm_min < task2->deadline.tm_min) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 	return false;
 }

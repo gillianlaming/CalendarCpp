@@ -13,6 +13,8 @@ ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 1. non-standard syntax, use '&" to create a pointer to member. this happened when i didn't include () behind a method. eg vector a; a.size; --> a.size();
 2. Error with recurring events starting on wrong date - fixed by fully packing the struct tm
 3. we had an issue adding events if users were not on the calendar view (couldn't have zoomed in) - fixed by
+4. error with defining operator< again to sort tasks in todo. Would not build with two definitions and we couldn't override so I had to move the implementation for both into one.
+I check if I can dynamically cast the param into a DisplayableEvent vs a Task and based on that, do proper sorting.
 
 
 // answer the following questions
@@ -111,10 +113,10 @@ considering flexibility and extensibility of the design?
 Describe your implementation? How does it support easy extensibility of the project in the future?
 How is the singleton pattern used to enforce only a sigle TODO list instance?
 
-
-
-
-
+For our ToDo List, we created an entirely separate interface. Essentially, a Task is a displayable component and is a child of a todo list (a calendar componenet). 
+In our calendar interface, if the user switches to ToDo view, a ToDoListInterface is created and they are brought to their options of addidng or completing tasks. 
+It uses the same operator< as events do for sorting (see error explanantion) and the singleton pattern ensures that there is only one todo list at a time because
+the build todo function will only build if one does not already exist. 
 
 
 
