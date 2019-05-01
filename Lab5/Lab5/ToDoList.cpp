@@ -66,5 +66,5 @@ bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableCompon
 	}
 	return false;
 }
-*/
 
+*/

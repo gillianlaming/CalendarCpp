@@ -17,7 +17,7 @@ class ToDoList : public CalendarComponent {
 friend FullCalendarBuilder;
 friend CalendarInterface;
 friend ToDoInterface;
-//friend bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableComponent> t2);
+friend bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableComponent> t2);
 protected:
 	//std::string name;
 //ToDoList(string name, shared_ptr<DisplayableComponent>);
@@ -33,4 +33,4 @@ public:
 };
 
 
-//bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableComponent> t2);
+bool operator<(shared_ptr<DisplayableComponent> t1, shared_ptr<DisplayableComponent> t2);
