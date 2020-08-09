@@ -1,16 +1,15 @@
-Calendar
+# Calendar 
 
-Group members: Gillian Laming, Natalie Stollman
-Division of work: Gillian handled issues with events and Natalie handled interfaces. 
-Note: We did most of the work together, bouncing ideas off of each other, debugging together etc. 
-
-NOTES:
+### NOTES:
 1. Our implementation of the calendar uses military time. All times are assumed to be military time.
 2. When adding an event to the calendar, you cannot include spaces in your input line.
-3. I have cited a source in CalendarInterface.cpp. I copied the structure of a portion of my code from a C++ reference guide. Here is the link again: http://www.cplusplus.com/forum/general/102485/
+3. I have cited a source in CalendarInterface.cpp. I copied the structure of a portion of my code from a C++ reference guide. Here is the link again: 
+
+` http://www.cplusplus.com/forum/general/102485/`
+
 4. When zooming into a specific day from the month view, the index for a day is the day of the month -1. For instance, if you want to view January 2, 2019, you would zoom into index 1.
 
-ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
+### ERRORS ENCOUNTERED OVER COURSE OF THE LAB:
 1. non-standard syntax, use '&" to create a pointer to member. This happened when I didn't include () behind a method. eg vector a; a.size; --> a.size();
 2. Error with recurring events starting on wrong date - fixed by fully packing the struct tm, so that the addDays function could convert from time_t to a stuct tm successfully.
 3. We had an issue adding events if users were not on the calendar view (couldn't have zoomed in) - fixed by changing the DisplayableComponent we were passing through to the build methods.
