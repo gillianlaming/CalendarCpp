@@ -5,7 +5,7 @@
 2. When adding an event to the calendar, you cannot include spaces in your input line.
 3. I have cited a source in CalendarInterface.cpp. I copied the structure of a portion of my code from a C++ reference guide. Here is the link again: 
 
-` http://www.cplusplus.com/forum/general/102485/`
+    ` http://www.cplusplus.com/forum/general/102485/`
 
 4. When zooming into a specific day from the month view, the index for a day is the day of the month -1. For instance, if you want to view January 2, 2019, you would zoom into index 1.
 
