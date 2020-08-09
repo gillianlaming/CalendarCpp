@@ -16,7 +16,7 @@
 4. Error with defining operator< again to sort tasks in todo. It would not build with two definitions and we couldn't override so I had to move the implementation for both into one. I check if I can dynamically cast the param into a DisplayableEvent vs a Task and based on that, do proper sorting.
 5. When restoring a calendar from a file, we had to iterate over the multimap of events, but we couldnt delete events in the for loop because that wreaked havoc on our iterative process. Instead we pushed all the events onto a vector, and then went through the vector and deleted each event.
 
-TEST CASES:
+### TEST CASES:
 1. add event. a correctly formatted input line results in an event being added and successfully displayed.
 2. restoring. the orginal calendar's events are all deleted and replaced by the restored calendar's events (from a file).
 3. save. a calendar is successfully saved to a file in the same directory as Lab5.exe with all of the events contained in that calendar. That calendar file can be used to restore the calendar that was saved.
